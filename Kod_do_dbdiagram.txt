@@ -63,7 +63,7 @@ Table Employee {
   employee_phone_number varchar
   employee_auth_id integer
 }
-Table Authorization {
+Table Auth {
   auth_id integer [primary key]
   auth_login varchar
   auth_password varchar
@@ -81,14 +81,14 @@ Table Status {
   status_description varchar
 }
 
-Ref: Order.order_customer_id <> Customer.customer_id // many-to-one
-Ref: Order_detail.order_detail_order_id - Order.order_id // many-to-one
-Ref: Order_detail.order_detail_product_id - Product.product_id // one-to-one
-Ref: Delivery.delivery_driver_id > Driver.driver_id // many-to-one
-Ref: Delivery.delivery_vehicle_id > Vehicle.vehicle_id // many-to-one
-Ref: Delivery.delivery_order_id < Order.order_id
-Ref: Authorization.auth_role < Role.role_id
-Ref: Driver.driver_id - Employee.employee_id
-Ref: Employee.employee_auth_id - Authorization.auth_id
-Ref: Customer.customer_auth_id - Authorization.auth_id
+Ref: Order.order_customer_id <> Customer.customer_id
 Ref: Order.order_status_id < Status.status_id
+Ref: Order_detail.order_detail_order_id - Order.order_id
+Ref: Order_detail.order_detail_product_id - Product.product_id
+Ref: Delivery.delivery_driver_id > Driver.driver_id
+Ref: Delivery.delivery_vehicle_id > Vehicle.vehicle_id
+Ref: Delivery.delivery_order_id < Order.order_id
+Ref: Auth.auth_role < Role.role_id
+Ref: Driver.driver_id - Employee.employee_id
+Ref: Employee.employee_auth_id - Auth.auth_id
+Ref: Customer.customer_auth_id - Auth.auth_id
