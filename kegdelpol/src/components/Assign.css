@@ -1,0 +1,47 @@
+.assigning-driver-to1 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+}
+.divider {
+  height: 7px;
+  flex: 1;
+  position: relative;
+  background-color: #d9d9d9;
+  border-top: 7px solid #b9a00a;
+  box-sizing: border-box;
+}
+.assign1,
+.divider-wrapper {
+  width: 221px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+.assign1 {
+  width: 654px;
+  flex-direction: column;
+  padding: 0 0 18px;
+  gap: 18px;
+  max-width: 100%;
+  text-align: center;
+  font-size: 45px;
+  color: #383928;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 1050px) {
+  .assigning-driver-to1 {
+    font-size: 36px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .assigning-driver-to1 {
+    font-size: 27px;
+  }
+}

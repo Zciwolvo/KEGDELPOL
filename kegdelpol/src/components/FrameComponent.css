@@ -1,0 +1,53 @@
+.login-parent {
+  width: 425px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 23px;
+  max-width: 100%;
+}
+.blend-builder,
+.sign-in-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.blend-builder {
+  align-self: stretch;
+  padding: 0 24px 0 20px;
+  font-size: 25px;
+  color: #42372f;
+  font-family: K2D;
+}
+.sign-in-wrapper {
+  width: 646px;
+  padding: 0 20px;
+  font-size: 50px;
+}
+.welcome-parent {
+  width: 673px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 67px;
+  max-width: 100%;
+  text-align: center;
+  font-size: 45px;
+  color: #383928;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 750px) {
+  .welcome-parent {
+    gap: 33px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .welcome-parent {
+    gap: 17px;
+  }
+}

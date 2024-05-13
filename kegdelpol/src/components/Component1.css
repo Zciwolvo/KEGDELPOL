@@ -1,0 +1,41 @@
+.approve-order {
+  position: absolute;
+  top: 88.95%;
+  left: 21.73%;
+}
+.package-delivery-box-11-svgrep-icon {
+  position: absolute;
+  height: 90.99%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 9.01%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  z-index: 1;
+}
+.component-5 {
+  height: 344px;
+  width: 313px;
+  position: relative;
+  min-width: 313px;
+  text-align: center;
+  font-size: 30px;
+  color: #707163;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 1050px) {
+  .approve-order {
+    font-size: 24px;
+  }
+  .component-5 {
+    flex: 1;
+  }
+}
+@media screen and (max-width: 450px) {
+  .approve-order {
+    font-size: 18px;
+  }
+}

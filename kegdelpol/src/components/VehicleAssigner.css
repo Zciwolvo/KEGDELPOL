@@ -1,0 +1,58 @@
+.vector-icon7 {
+  position: absolute;
+  height: 87.51%;
+  width: 77.93%;
+  top: 6.25%;
+  right: 12.6%;
+  bottom: 6.25%;
+  left: 9.47%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.truck-svgrepo-com-1 {
+  align-self: stretch;
+  height: 293px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.add-vehicle {
+  position: relative;
+}
+.add-vehicle-wrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 72px 0 79px;
+}
+.vehicle-assigner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 2px;
+  min-width: 195px;
+  text-align: center;
+  font-size: 30px;
+  color: #707163;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 1050px) {
+  .add-vehicle {
+    font-size: 24px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .add-vehicle {
+    font-size: 18px;
+  }
+  .add-vehicle-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+}

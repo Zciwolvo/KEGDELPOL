@@ -1,0 +1,94 @@
+.sign-out3 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+  min-width: 122px;
+}
+.vector-icon16 {
+  width: 30px;
+  height: 30px;
+  position: relative;
+}
+.footer-background9,
+.sign-out2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 4px 0 0;
+}
+.sign-out2 {
+  width: 170px;
+  border-radius: 5px;
+  background-color: #e5d7bd;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  flex-direction: row;
+  padding: 3px 4px;
+  gap: 6px;
+}
+.did-you-know1 {
+  flex: 1;
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+.quote1 {
+  width: 550px;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.footer-instance,
+.quote1,
+.sign-out-instance {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.footer-instance {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+  font-size: 20px;
+  color: #000;
+  font-family: Antic;
+}
+.sign-out-instance {
+  width: 854px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 41px;
+}
+.orders-component {
+  width: 1166px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 20px 9px;
+  box-sizing: border-box;
+  max-width: 100%;
+  text-align: center;
+  font-size: 30px;
+  color: #42372f;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 1050px) {
+  .sign-out3 {
+    font-size: 24px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .sign-out3 {
+    font-size: 18px;
+  }
+  .did-you-know1 {
+    font-size: 16px;
+  }
+  .sign-out-instance {
+    gap: 20px;
+  }
+}
