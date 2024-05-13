@@ -1,0 +1,165 @@
+.usertoupdate-child2 {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f2f0e4;
+}
+.user-13 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  z-index: 1;
+}
+.instance-content {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1px 0 0;
+  box-sizing: border-box;
+}
+.phonenumber3,
+.surname3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.surname3 {
+  width: 137px;
+  position: relative;
+  flex-shrink: 0;
+}
+.phonenumber3 {
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  left: -140px;
+  height: 100%;
+}
+.license3 {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.address3 {
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: -120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  z-index: 1;
+}
+.contact-details,
+.surname-group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.contact-details {
+  width: 203px;
+  margin: 0 !important;
+  position: absolute;
+  top: 0;
+  left: 234px;
+}
+.surname-group {
+  align-self: stretch;
+  position: relative;
+}
+.instance-actions,
+.instance-values {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.instance-actions {
+  width: 127px;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: -18px;
+}
+.instance-values {
+  width: 737px;
+  align-items: flex-end;
+  max-width: 100%;
+}
+.instance-attributes {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  max-width: 100%;
+}
+.name5 {
+  width: 84px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  margin-top: -25px;
+}
+.instance-details,
+.usertoupdate3 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.instance-details {
+  flex: 1;
+  flex-direction: column;
+  min-width: 524px;
+  font-size: 20px;
+}
+.usertoupdate3 {
+  align-self: stretch;
+  flex-direction: row;
+  padding: 16px 9px 66px 0;
+  box-sizing: border-box;
+  position: relative;
+  gap: 14px;
+  text-align: center;
+  font-size: 30px;
+  color: #000;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 825px) {
+  .user-13 {
+    font-size: 24px;
+  }
+  .instance-details {
+    min-width: 100%;
+  }
+  .usertoupdate3 {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 450px) {
+  .user-13 {
+    font-size: 18px;
+  }
+  .address3,
+  .license3,
+  .name5,
+  .phonenumber3,
+  .surname3 {
+    font-size: 16px;
+  }
+}

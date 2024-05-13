@@ -1,0 +1,169 @@
+.navbar-background10 {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #f2f0e4;
+}
+.keg-icon10 {
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.navbar-link {
+  height: 75px;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 3px 0 0;
+  box-sizing: border-box;
+}
+.kegdelpol18 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 40px;
+  font-weight: 400;
+  font-family: inherit;
+}
+.we-deliver-your18 {
+  flex: 1;
+  position: relative;
+  white-space: nowrap;
+}
+.sign-out-button {
+  width: 261px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 39px;
+  box-sizing: border-box;
+  text-align: right;
+  font-size: 13.5px;
+}
+.logo-text10 {
+  flex: 1;
+  flex-direction: column;
+  padding: 0 0 26px;
+  box-sizing: border-box;
+  gap: 3px;
+}
+.logo-container1,
+.logo-text10,
+.logo19 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.logo19 {
+  align-self: stretch;
+  flex-direction: row;
+  gap: 15px;
+  z-index: 1;
+}
+.logo-container1 {
+  width: 439px;
+  flex-direction: column;
+  padding: 26px 0 0;
+  box-sizing: border-box;
+}
+.about-us10,
+.home10 {
+  width: 170px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.home10 {
+  line-height: 119.84%;
+}
+.about-us10 {
+  margin-left: -28px;
+  white-space: nowrap;
+}
+.about-us-wrapper1 {
+  width: 142px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+}
+.contact11 {
+  margin-left: -28px;
+  width: 170px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.contact-wrapper1,
+.navbar-links10,
+.navbar12 {
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+.contact-wrapper1 {
+  width: 142px;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0;
+}
+.navbar-links10,
+.navbar12 {
+  flex-direction: row;
+  max-width: 100%;
+}
+.navbar-links10 {
+  width: 567px;
+  justify-content: flex-start;
+  padding: 44px 0 50px;
+  z-index: 1;
+  text-align: center;
+  font-size: 20px;
+  color: #42372f;
+  font-family: "Inria Serif";
+}
+.navbar12 {
+  margin-right: -4px;
+  align-self: stretch;
+  height: 139px;
+  justify-content: space-between;
+  padding: 4px 0 23px 160px;
+  position: relative;
+  gap: 20px;
+  text-align: left;
+  font-size: 40px;
+  color: #3d3028;
+  font-family: "Abyssinica SIL";
+}
+@media screen and (max-width: 750px) {
+  .navbar12 {
+    padding-left: 80px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 450px) {
+  .navbar12 {
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+}

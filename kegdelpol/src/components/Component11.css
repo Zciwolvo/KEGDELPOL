@@ -1,0 +1,42 @@
+.basket-svgrepo-com-1-icon {
+  width: 190px;
+  height: 190px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.create-orders {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+}
+.component-1,
+.create-ordersvgrepocom-instanc {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.create-ordersvgrepocom-instanc {
+  flex-direction: row;
+  padding: 0 6px;
+}
+.component-1 {
+  flex-direction: column;
+  gap: 19px;
+  text-align: center;
+  font-size: 30px;
+  color: #707163;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 1050px) {
+  .create-orders {
+    font-size: 24px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .create-orders {
+    font-size: 18px;
+  }
+}

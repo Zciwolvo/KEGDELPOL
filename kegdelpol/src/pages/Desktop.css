@@ -1,0 +1,33 @@
+.desktop-1-inner {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 20px 0 27px;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.desktop-1 {
+  width: 100%;
+  position: relative;
+  background-color: #e5d7bd;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 95px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 750px) {
+  .desktop-1 {
+    gap: 47px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .desktop-1 {
+    gap: 24px;
+  }
+}

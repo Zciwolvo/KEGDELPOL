@@ -1,0 +1,51 @@
+.order-1-svgrepo-com-1-icon {
+  height: 191px;
+  width: 191px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.order-1-svgrepo-com-1-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 33px 0 36px;
+}
+.change-order-status {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+}
+.order-status-component {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 34px;
+  min-width: 260px;
+  text-align: center;
+  font-size: 30px;
+  color: #707163;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 1050px) {
+  .change-order-status {
+    font-size: 24px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .order-status-component {
+    flex: 1;
+  }
+}
+@media screen and (max-width: 450px) {
+  .change-order-status {
+    font-size: 18px;
+  }
+  .order-status-component {
+    gap: 17px;
+  }
+}

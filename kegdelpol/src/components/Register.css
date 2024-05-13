@@ -1,0 +1,50 @@
+.register-new-account {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+}
+.icon-linkedin {
+  height: 7px;
+  width: 186px;
+  position: relative;
+  background-color: #d9d9d9;
+  border-top: 7px solid #b9a00a;
+  box-sizing: border-box;
+}
+.icon-linkedin-wrapper,
+.register {
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.icon-linkedin-wrapper {
+  width: 387px;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0 20px;
+}
+.register {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0 0 5px;
+  gap: 5px;
+  text-align: center;
+  font-size: 45px;
+  color: #383928;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 1050px) {
+  .register-new-account {
+    font-size: 36px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .register-new-account {
+    font-size: 27px;
+  }
+}

@@ -1,0 +1,198 @@
+.navbar-background7 {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #f2f0e4;
+}
+.keg-icon7 {
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.logo-image-container {
+  height: 75px;
+  width: 59.8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 3px 0 0;
+  box-sizing: border-box;
+}
+.kegdelpol12 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 40px;
+  font-weight: 400;
+  font-family: inherit;
+}
+.we-deliver-your12 {
+  flex: 1;
+  position: relative;
+  white-space: nowrap;
+}
+.logo-slogan-container {
+  width: 261px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 39px;
+  box-sizing: border-box;
+  text-align: right;
+  font-size: 13.5px;
+}
+.logo-text7 {
+  flex: 1;
+  flex-direction: column;
+  padding: 0 0 26px;
+  box-sizing: border-box;
+  gap: 3px;
+}
+.logo-text7,
+.logo13,
+.navbar-content1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.logo13 {
+  align-self: stretch;
+  flex-direction: row;
+  gap: 14.9px;
+  z-index: 1;
+}
+.navbar-content1 {
+  width: 437.8px;
+  flex-direction: column;
+  padding: 26px 0 0;
+  box-sizing: border-box;
+}
+.about-us7,
+.home7 {
+  width: 170px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.home7 {
+  line-height: 119.84%;
+}
+.about-us7 {
+  margin-left: -28px;
+  white-space: nowrap;
+}
+.navigation-items {
+  width: 142px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+}
+.contact8 {
+  margin-left: -28px;
+  width: 170px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.navbar-links7,
+.navbar9,
+.navigation-items1 {
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+.navigation-items1 {
+  width: 142px;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0;
+}
+.navbar-links7,
+.navbar9 {
+  flex-direction: row;
+  max-width: 100%;
+}
+.navbar-links7 {
+  width: 565.4px;
+  justify-content: flex-start;
+  padding: 44px 0 50px;
+  z-index: 1;
+  text-align: center;
+  font-size: 20px;
+  color: #42372f;
+  font-family: "Inria Serif";
+}
+.navbar9 {
+  height: 139px;
+  flex: 1;
+  justify-content: space-between;
+  padding: 4px 0 23px 159.6px;
+  position: relative;
+  gap: 20px;
+  text-align: left;
+  font-size: 40px;
+  color: #3d3028;
+  font-family: "Abyssinica SIL";
+}
+.add-new-vehicle,
+.main1 {
+  display: flex;
+  justify-content: flex-start;
+}
+.main1 {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0 0 47.5px;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.add-new-vehicle {
+  width: 100%;
+  position: relative;
+  background-color: #e5d7bd;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 75.5px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 750px) {
+  .navbar9 {
+    padding-left: 80px;
+    box-sizing: border-box;
+  }
+  .add-new-vehicle {
+    gap: 38px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .navbar9 {
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+  .add-new-vehicle {
+    gap: 19px;
+  }
+}

@@ -1,0 +1,54 @@
+.confirm-item {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: -6px;
+  bottom: -6px;
+  left: 0;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #f2f0e4;
+  border: 3px solid rgba(174, 110, 110, 0.5);
+  box-sizing: border-box;
+}
+.confirm7 {
+  margin: 0;
+  flex: 1;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  z-index: 1;
+}
+.confirm6,
+.confirmation-message {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.confirm6 {
+  flex: 1;
+  padding: 0 0 29px;
+  position: relative;
+}
+.confirmation-message {
+  width: 251px;
+  padding: 0 39px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 35px;
+  color: #383928;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 1050px) {
+  .confirm7 {
+    font-size: 28px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .confirm7 {
+    font-size: 21px;
+  }
+}

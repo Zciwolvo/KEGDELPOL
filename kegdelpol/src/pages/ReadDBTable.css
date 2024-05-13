@@ -1,0 +1,61 @@
+.login-child,
+.login1 {
+  position: absolute;
+  display: none;
+}
+.login1 {
+  top: -0.84%;
+  left: 0.47%;
+  font-weight: 300;
+  mix-blend-mode: darken;
+}
+.login-child {
+  height: 71.43%;
+  width: 101.42%;
+  top: 31.09%;
+  right: -0.71%;
+  bottom: -2.52%;
+  left: -0.71%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) inset;
+  border-radius: 7px;
+  background-color: #f2f0e4;
+  border: 3px solid rgba(174, 110, 110, 0.5);
+  box-sizing: border-box;
+}
+.login {
+  width: 424px;
+  height: 119px;
+  position: relative;
+  display: none;
+  max-width: 100%;
+}
+.read-db-table {
+  width: 100%;
+  position: relative;
+  background-color: #e5d7bd;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 91px;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  font-size: 25px;
+  color: #42372f;
+  font-family: K2D;
+}
+@media screen and (max-width: 750px) {
+  .read-db-table {
+    gap: 45px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .login1 {
+    font-size: 20px;
+  }
+  .read-db-table {
+    gap: 23px;
+  }
+}

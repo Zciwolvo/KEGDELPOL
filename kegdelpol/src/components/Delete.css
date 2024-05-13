@@ -1,0 +1,42 @@
+.delete-child1 {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  background-color: #f2f0e4;
+  border: 2px solid #ce6f6f;
+  box-sizing: border-box;
+}
+.delete3,
+.employee13 {
+  align-self: stretch;
+  display: flex;
+  position: relative;
+}
+.employee13 {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.delete3 {
+  height: 35px;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: center;
+  font-size: 25px;
+  color: #ce6f6f;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 450px) {
+  .employee13 {
+    font-size: 20px;
+  }
+}

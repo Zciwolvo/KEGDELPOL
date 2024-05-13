@@ -1,0 +1,486 @@
+.navbar-background6 {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #f2f0e4;
+}
+.keg-icon6 {
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.keg-container1 {
+  height: 75px;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 3px 0 0;
+  box-sizing: border-box;
+}
+.kegdelpol10 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 40px;
+  font-weight: 400;
+  font-family: inherit;
+}
+.we-deliver-your10 {
+  flex: 1;
+  position: relative;
+  white-space: nowrap;
+}
+.slogan-container {
+  width: 261px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 39px;
+  box-sizing: border-box;
+  text-align: right;
+  font-size: 13.5px;
+}
+.logo-text6 {
+  flex: 1;
+  flex-direction: column;
+  padding: 0 0 26px;
+  box-sizing: border-box;
+  gap: 3px;
+}
+.logo-text6,
+.logo-wrapper2,
+.logo11 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.logo11 {
+  align-self: stretch;
+  flex-direction: row;
+  gap: 15px;
+  z-index: 1;
+}
+.logo-wrapper2 {
+  width: 439px;
+  flex-direction: column;
+  padding: 26px 0 0;
+  box-sizing: border-box;
+}
+.about-us6,
+.home6 {
+  width: 170px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.home6 {
+  line-height: 119.84%;
+}
+.about-us6 {
+  margin-left: -28px;
+  white-space: nowrap;
+}
+.pages {
+  width: 142px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+}
+.contact7 {
+  margin-left: -28px;
+  width: 170px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.navbar-links6,
+.pages1 {
+  justify-content: flex-start;
+}
+.pages1 {
+  width: 142px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+}
+.navbar-links6 {
+  width: 567px;
+  padding: 44px 0 50px;
+  z-index: 1;
+  text-align: center;
+  font-size: 20px;
+  color: #42372f;
+  font-family: "Inria Serif";
+}
+.main,
+.navbar-links6,
+.navbar8 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.navbar8 {
+  height: 139px;
+  flex: 1;
+  justify-content: space-between;
+  padding: 4px 0 23px 160px;
+  position: relative;
+  gap: 20px;
+  text-align: left;
+  font-size: 40px;
+  color: #3d3028;
+  font-family: "Abyssinica SIL";
+}
+.main {
+  align-self: stretch;
+  justify-content: flex-start;
+  padding: 0 0 65px;
+}
+.searchbar-icon1 {
+  width: 475px;
+  position: relative;
+  max-height: 100%;
+  max-width: 100%;
+}
+.search-container {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0 30px 0 20px;
+  box-sizing: border-box;
+}
+.search-container,
+.user-controls,
+.user-controls-wrapper {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.user-controls {
+  width: 673px;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 54px;
+}
+.user-controls-wrapper {
+  width: 977px;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.employee-actions-instance,
+.user-display {
+  flex-direction: column;
+  flex-shrink: 0;
+  debug_commit: 1de1738;
+}
+.user-display {
+  width: 969px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 22px;
+  max-width: 100%;
+}
+.employee-actions-instance {
+  align-self: stretch;
+  gap: 7px;
+}
+.action-buttons-instance,
+.content,
+.employee-actions-instance,
+.user-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.action-buttons-instance {
+  width: 127px;
+  flex-direction: column;
+  padding: 23px 0 0;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.content,
+.user-info {
+  max-width: 100%;
+}
+.user-info {
+  align-self: stretch;
+  flex-direction: row;
+  gap: 930px;
+}
+.content {
+  width: 1225px;
+  flex-direction: column;
+  padding: 0 0 0 20px;
+  box-sizing: border-box;
+  gap: 75px;
+}
+.rectangle-div {
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+  background-color: #f2f0e4;
+  max-width: 100%;
+}
+.footer10 {
+  width: 92px;
+  position: relative;
+  display: none;
+}
+.footer-background5 {
+  height: 100%;
+  width: 100%;
+  margin: 0 !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.iconmonstr-linkedin-3-14 {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.icon-set,
+.icon-set1,
+.icon-set2,
+.icon-set3 {
+  height: 25px;
+  width: 25px;
+  position: relative;
+}
+.icons8 {
+  margin: 0 !important;
+  position: absolute;
+  right: 160px;
+  bottom: 31px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  z-index: 1;
+}
+.logo-icon4 {
+  width: 30px;
+  height: 36px;
+  position: relative;
+}
+.footer-logo-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 2px 0 0;
+}
+.kegdelpol11 {
+  margin-left: -0.2999999999999545px;
+  height: 68px;
+  width: 226px;
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  debug_commit: 1de1738;
+}
+.we-deliver-your11 {
+  width: 183px;
+  position: absolute;
+  margin: 0 !important;
+  bottom: 21px;
+  left: -70px;
+  font-size: 7.3px;
+  text-align: right;
+  display: inline-block;
+}
+.kegdelpol-parent1,
+.logo12 {
+  height: 52px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+.kegdelpol-parent1 {
+  padding: 0;
+  position: relative;
+}
+.logo12 {
+  padding: 10px 6px 4px 0;
+  gap: 9px;
+  z-index: 1;
+}
+.privacy-policy4 {
+  position: relative;
+  display: inline-block;
+  min-width: 98px;
+  z-index: 1;
+}
+.policy-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 0 16px;
+  text-align: center;
+  font-size: 15px;
+  color: #000;
+  font-family: Inter;
+}
+.footer-content1 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 16px;
+  max-width: 100%;
+  text-align: left;
+  font-size: 20px;
+  color: #3d3028;
+  font-family: "Abyssinica SIL";
+}
+.copyright-20244 {
+  position: relative;
+  z-index: 1;
+}
+.copyright-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 16px 0 0;
+  box-sizing: border-box;
+  max-width: 100%;
+  font-size: 15px;
+}
+.footer9,
+.update-user1 {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+}
+.footer9 {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 24px 160px;
+  box-sizing: border-box;
+  gap: 81px;
+  max-width: 100%;
+  text-align: center;
+  font-size: 30px;
+  color: #000;
+  font-family: Inter;
+}
+.update-user1 {
+  width: 100%;
+  background-color: #e5d7bd;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 58px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 1400px) {
+  .user-info {
+    flex-wrap: wrap;
+    gap: 465px;
+    justify-content: center;
+  }
+  .footer9 {
+    gap: 40px;
+    padding-left: 80px;
+    padding-right: 80px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 1125px) {
+  .footer9 {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 825px) {
+  .navbar8 {
+    padding-left: 80px;
+    box-sizing: border-box;
+  }
+  .user-controls {
+    gap: 27px;
+  }
+  .user-info {
+    gap: 232px;
+  }
+  .content {
+    gap: 37px;
+  }
+  .footer10 {
+    font-size: 24px;
+  }
+  .footer9 {
+    gap: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+  }
+  .update-user1 {
+    gap: 29px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .navbar8 {
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+  .user-info {
+    gap: 116px;
+  }
+  .content {
+    gap: 19px;
+  }
+  .footer10 {
+    font-size: 18px;
+  }
+  .kegdelpol11 {
+    font-size: 16px;
+  }
+  .footer-content1 {
+    flex-wrap: wrap;
+  }
+}

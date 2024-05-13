@@ -1,0 +1,235 @@
+.usertoupdate-child {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f2f0e4;
+}
+.user-1 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  z-index: 1;
+}
+.user-1-wrapper {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1px 0 0;
+  box-sizing: border-box;
+}
+.phonenumber,
+.surname {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.surname {
+  width: 137px;
+  position: relative;
+  flex-shrink: 0;
+}
+.phonenumber {
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  left: -140px;
+  height: 100%;
+}
+.license {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.address {
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: -120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  z-index: 1;
+}
+.phonenumber-parent,
+.surname-parent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.phonenumber-parent {
+  width: 203px;
+  margin: 0 !important;
+  position: absolute;
+  top: 0;
+  left: 234px;
+}
+.surname-parent {
+  align-self: stretch;
+  position: relative;
+}
+.update-child {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  background-color: #f2f0e4;
+  border: 2px solid #c2b11d;
+  box-sizing: border-box;
+}
+.employee3,
+.update1 {
+  position: relative;
+  z-index: 1;
+}
+.employee3 {
+  flex: 1;
+}
+.update1 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.delete-child {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  background-color: #f2f0e4;
+  border: 2px solid #ce6f6f;
+  box-sizing: border-box;
+}
+.employee4 {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.delete,
+.frame-parent4,
+.update-parent {
+  display: flex;
+  justify-content: flex-start;
+}
+.delete {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+  color: #ce6f6f;
+}
+.frame-parent4,
+.update-parent {
+  flex-direction: column;
+}
+.update-parent {
+  width: 127px;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: -18px;
+  font-size: 25px;
+  color: #c2b11d;
+}
+.frame-parent4 {
+  width: 737px;
+  align-items: flex-end;
+  max-width: 100%;
+}
+.frame-wrapper1 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  max-width: 100%;
+}
+.name {
+  width: 84px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  margin-top: -25px;
+}
+.frame-parent3,
+.usertoupdate {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.frame-parent3 {
+  flex: 1;
+  flex-direction: column;
+  min-width: 524px;
+  font-size: 20px;
+}
+.usertoupdate {
+  align-self: stretch;
+  flex-direction: row;
+  padding: 16px 9px 66px 0;
+  box-sizing: border-box;
+  position: relative;
+  gap: 14px;
+  text-align: center;
+  font-size: 30px;
+  color: #000;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 825px) {
+  .user-1 {
+    font-size: 24px;
+  }
+  .frame-parent3 {
+    min-width: 100%;
+  }
+  .usertoupdate {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 450px) {
+  .user-1 {
+    font-size: 18px;
+  }
+  .address,
+  .license,
+  .phonenumber,
+  .surname {
+    font-size: 16px;
+  }
+  .employee3,
+  .employee4 {
+    font-size: 20px;
+  }
+  .name {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,46 @@
+.update4 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+}
+.line-icon {
+  height: 7px;
+  width: 154px;
+  position: relative;
+}
+.choose-the-user-child,
+.choose-the-user1 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 54px;
+}
+.choose-the-user1 {
+  align-self: stretch;
+  flex-direction: column;
+  padding: 0 0 5px;
+  gap: 5px;
+  text-align: center;
+  font-size: 45px;
+  color: #383928;
+  font-family: Alatsi;
+}
+@media screen and (max-width: 825px) {
+  .update4 {
+    font-size: 36px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .update4 {
+    font-size: 27px;
+  }
+  .choose-the-user-child {
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+}
