@@ -1,13 +1,15 @@
-.update-user-container {
+.assign-the-driver-ui-container {
     display: flex;
     flex-direction: column;
   }
   
-  .container {
+  .content-assign-the-driver-ui {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 180px;
+    flex-grow: 1;
+    padding: 80px;
     position: relative;
   }
   
@@ -21,7 +23,7 @@
   }
   
   @media (max-width: 768px) {
-    .container {
+    .content-assign-the-driver-ui {
       padding-top: 150px;
     }
   

@@ -1,192 +1,119 @@
-.footer-background-child1 {
-  align-self: stretch;
-  flex: 1;
-  position: relative;
-  background-color: #f2f0e4;
-  max-width: 100%;
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 7%;
+    padding: 10px 5%;
+    background: #F2F0E4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    margin-top: auto;
 }
-.footer12 {
-  width: 92px;
-  position: relative;
-  display: none;
+
+.footer-logo1 {
+    display: flex;
+    align-items: center;
 }
-.footer-background6 {
-  height: 100%;
-  width: 100%;
-  margin: 0 !important;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  max-width: 100%;
+
+.keg-image1 {
+    height: 35px;
+    margin-right: 7px;
 }
-.iconmonstr-linkedin-3-15 {
-  height: 30px;
-  width: 30px;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
+
+.logo-text1 {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
 }
-.vector-icon,
-.vector-icon1,
-.vector-icon2,
-.vector-icon3 {
-  height: 25px;
-  width: 25px;
-  position: relative;
+
+.main-title1 {
+    font-size: 28px;
+    font-weight: bold;
 }
-.icons9 {
-  margin: 0 !important;
-  position: absolute;
-  right: 160px;
-  bottom: 31px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 10px;
-  z-index: 1;
+
+.sub-title1 {
+    font-size: 9.5px;
+    position: absolute;
+    top: 28px;
+    left: 24.5px;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
 }
-.logo-icon5 {
-  width: 30px;
-  height: 36px;
-  position: relative;
+
+.privacy-policy {
+    margin: 0 14px;
+    text-decoration: none;
+    color: #000;
+    font-size: 15px;
 }
-.logo-wrapper3 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 2px 0 0;
+
+.privacy-policy:hover {
+    text-decoration: underline;
 }
-.kegdelpol14 {
-  margin-left: -0.2999999999999545px;
-  height: 68px;
-  width: 226px;
-  position: relative;
-  display: inline-block;
-  flex-shrink: 0;
-  debug_commit: 1de1738;
+
+.copyright {
+    font-size: 15px;
+    color: #555;
 }
-.we-deliver-your14 {
-  width: 183px;
-  position: absolute;
-  margin: 0 !important;
-  bottom: 21px;
-  left: -70px;
-  font-size: 7.3px;
-  text-align: right;
-  display: inline-block;
+
+.social-icons {
+    display: flex;
+    gap: 7px;
 }
-.kegdelpol-parent2,
-.logo15 {
-  height: 52px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  box-sizing: border-box;
+
+.social-icon {
+    height: 25px;
+    width: 25px;
 }
-.kegdelpol-parent2 {
-  padding: 0;
-  position: relative;
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 20px 5%;
+    }
+
+    .footer-logo1 {
+        margin-bottom: 10px;
+    }
+
+    .privacy-policy {
+        margin: 10px 0;
+    }
 }
-.logo15 {
-  padding: 10px 6px 4px 0;
-  gap: 9px;
-  z-index: 1;
-}
-.privacy-policy5 {
-  position: relative;
-  display: inline-block;
-  min-width: 98px;
-  z-index: 1;
-}
-.privacy-policy-wrapper1 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 0 0 16px;
-  text-align: center;
-  font-size: 15px;
-  color: #000;
-  font-family: Inter;
-}
-.logo-parent2 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 16px;
-  max-width: 100%;
-  text-align: left;
-  font-size: 20px;
-  color: #3d3028;
-  font-family: "Abyssinica SIL";
-}
-.copyright-20245 {
-  position: relative;
-  z-index: 1;
-}
-.copyright-2024-kegdelpol-sp-frame,
-.footer11 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 16px 0 0;
-  box-sizing: border-box;
-  max-width: 100%;
-  font-size: 15px;
-}
-.footer11 {
-  align-self: stretch;
-  flex-direction: row;
-  padding: 24px 160px;
-  position: relative;
-  gap: 81px;
-  text-align: center;
-  font-size: 30px;
-  color: #000;
-  font-family: Inter;
-}
-@media screen and (max-width: 1200px) {
-  .footer11 {
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: center;
-    padding-left: 80px;
-    padding-right: 80px;
-    box-sizing: border-box;
-  }
-}
-@media screen and (max-width: 1050px) {
-  .footer12 {
-    font-size: 24px;
-  }
-}
-@media screen and (max-width: 750px) {
-  .footer11 {
-    gap: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
-    box-sizing: border-box;
-  }
-}
-@media screen and (max-width: 450px) {
-  .footer12 {
-    font-size: 18px;
-  }
-  .kegdelpol14 {
-    font-size: 16px;
-  }
-  .logo-parent2 {
-    flex-wrap: wrap;
-  }
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 15px 5%;
+    }
+
+    .keg-image1 {
+        height: 20px;
+    }
+
+    .main-title1 {
+        font-size: 18px;
+    }
+
+    .sub-title1 {
+        font-size: 8px;
+    }
+
+    .privacy-policy {
+        font-size: 10px;
+    }
+
+    .copyright {
+        font-size: 10px;
+    }
+
+    .social-icon {
+        height: 15px;
+        width: 15px;
+    }
 }
