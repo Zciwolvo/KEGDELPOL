@@ -1,2 +1,3 @@
-Architecture, front, docker, mikroserwisy
-06.05. 
+Jakie funkcjonalności będą (guziki itp)
+@auth_microservice.route('/register', methods=['POST']), później funckjel, musi się odwoływać do serwisów a serwisy do repo
+TODO: Client, employee, order

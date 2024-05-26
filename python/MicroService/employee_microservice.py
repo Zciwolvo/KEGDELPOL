@@ -1,56 +1,40 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
+from Service import employee_service
+from Model import customer, vehicle
 
 # Dodawać, modyfikować oraz usuwać użytkowników
 employee_microservice = Blueprint('employee_microservice', __name__)
+employee_service = employee_service()
 
-@employee_microservice.route('/users', methods=['POST'])
-def add_user():
-    # Code to add a new user
-    return jsonify({'message': 'User added successfully'})
-
-@employee_microservice.route('/users/<user_id>', methods=['PUT'])
-def modify_user(user_id):
-    # Code to modify an existing user
-    return jsonify({'message': 'User modified successfully'})
-
-@employee_microservice.route('/users/<user_id>', methods=['DELETE'])
-def delete_user(user_id):
-    # Code to delete an existing user
-    return jsonify({'message': 'User deleted successfully'})
-
+# add vehicle
 @employee_microservice.route('/vehicles', methods=['POST'])
 def add_vehicle():
-    # Code to add a new vehicle
-    return jsonify({'message': 'Vehicle added successfully'})
+     # Walidacja wymaganych pól
+        data = request.get_json()  # Define the variable "data" by getting the JSON data
+        
+        required_fields = ['vehicle_id', 'type', 'capacity', 'registration_info']
+        for field in required_fields:
+            if field not in data:
+                return jsonify({'error': f'Missing required field: {field}'}), 400
 
-@employee_microservice.route('/orders/<order_id>', methods=['PUT'])
-def modify_order(order_id):
-    # Code to modify an existing order
-    return jsonify({'message': 'Order modified successfully'})
+        # Utworzenie nowego obiektu Vehicle przy użyciu danych
+        new_vehicle = vehicle.Vehicle(
+            vehicle_id=data['vehicle_id'],
+            type=data['make'],
+            model=data['type'],
+            capacity=data['capacity'],
+            registration_info=data['registration_info']
+        )
 
-@employee_microservice.route('/orders', methods=['GET'])
-def get_orders():
-    # Code to retrieve all orders
-    return jsonify({'message': 'Orders retrieved successfully'})
+        # Dodanie nowego pojazdu do bazy danych przy użyciu serwisu
+        employee_service.add_vehicle(new_vehicle)
 
-@employee_microservice.route('/orders/<order_id>', methods=['GET'])
-def get_order_details(order_id):
-    # Code to retrieve order details
-    return jsonify({'message': 'Order details retrieved successfully'})
+        return jsonify({'message': 'Vehicle added successfully'}), 201
 
-@employee_microservice.route('/database', methods=['GET'])
-def get_database():
-    # Code to retrieve full database access
-    return jsonify({'message': 'Full database access granted'})
 
-@employee_microservice.route('/admin', methods=['GET'])
-def admin_access():
-    # Code to grant admin access
-    return jsonify({'message': 'Admin access granted'})
-# Dodawać, modyfikować oraz usuwać pojazdy
-# Modyfikacja zamówień
-# Wyświetlanie zamówień, oraz ich szczegółów
-# Wyświetlanie wszystkiego z bazy danych pełen dostęp
-# Jest adminem, więc ma dostęp do wszystkiego i może wszystko modyfikować 
 
-employee_microservice = Blueprint('employee_microservice', __name__)
+
+
+
+
+
