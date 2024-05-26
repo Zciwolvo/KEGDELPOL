@@ -1,170 +1,123 @@
-.navbar-background8 {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  margin: 0 !important;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #f2f0e4;
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    padding: 10px 5%;
+    background: #F2F0E4;
+    display: flex;
+    justify-content: space-between;
+    min-height: 80px; /* Minimalna wysokość navbaru */
+    align-items: center;
+    z-index: 100;
 }
-.keg-icon8 {
-  align-self: stretch;
-  flex: 1;
-  position: relative;
-  max-width: 100%;
-  overflow: hidden;
-  max-height: 100%;
+
+.navbar {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
 }
-.login-area {
-  height: 75px;
-  width: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 3px 0 0;
-  box-sizing: border-box;
+
+.navbar a {
+    font-size: 18px;
+    color: #000;
+    font-weight: 500;
+    margin-left: 40px;
 }
-.kegdelpol13 {
-  margin: 0;
-  position: relative;
-  font-size: inherit;
-  line-height: 40px;
-  font-weight: 400;
-  font-family: inherit;
+
+.navbar a:first-child {
+    margin-left: 0;
 }
-.we-deliver-your13 {
-  flex: 1;
-  position: relative;
-  white-space: nowrap;
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
 }
-.we-deliver-your-beer-wrapper1 {
-  width: 261px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 0 39px;
-  box-sizing: border-box;
-  text-align: right;
-  font-size: 13.5px;
+
+.keg-image {
+    height: 50px;
+    margin-right: 10px;
 }
-.logo-text8 {
-  flex: 1;
-  flex-direction: column;
-  padding: 0 0 26px;
-  box-sizing: border-box;
-  gap: 3px;
+
+.logo-text {
+    display: inline-block;
+    vertical-align: middle;
 }
-.links,
-.logo-text8,
-.logo14 {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  max-width: 100%;
+
+.main-title {
+    font-size: 40px;
+    font-weight: bold;
 }
-.logo14 {
-  align-self: stretch;
-  flex-direction: row;
-  gap: 15px;
-  z-index: 1;
+
+.sub-title {
+    font-size: 13.5px;
+    position: relative;
+    top: 0px;
+    left: 5px;
 }
-.links {
-  width: 439px;
-  flex-direction: column;
-  padding: 26px 0 0;
-  box-sizing: border-box;
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 20px 5%;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .keg-image {
+        height: 45px;
+    }
+
+    .main-title {
+        font-size: 20px;
+    }
+
+    .sub-title {
+        font-size: 10px;
+    }
+
+    .navbar {
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .navbar a {
+        margin: 5px 10px;
+    }
 }
-.about-us8,
-.home8 {
-  width: 170px;
-  height: 45px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.home8 {
-  line-height: 119.84%;
-}
-.about-us8 {
-  margin-left: -28px;
-  white-space: nowrap;
-}
-.login-form {
-  width: 142px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 0;
-  box-sizing: border-box;
-}
-.contact9 {
-  margin-left: -28px;
-  width: 170px;
-  height: 45px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.login-form1,
-.navbar-links8,
-.navbar10 {
-  display: flex;
-  align-items: flex-start;
-  box-sizing: border-box;
-}
-.login-form1 {
-  width: 142px;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 0;
-}
-.navbar-links8,
-.navbar10 {
-  flex-direction: row;
-  max-width: 100%;
-}
-.navbar-links8 {
-  width: 567px;
-  justify-content: flex-start;
-  padding: 44px 0 50px;
-  z-index: 1;
-  text-align: center;
-  font-size: 20px;
-  color: #42372f;
-  font-family: "Inria Serif";
-}
-.navbar10 {
-  margin-right: -4px;
-  margin-bottom: 28px;
-  align-self: stretch;
-  height: 139px;
-  justify-content: space-between;
-  padding: 4px 0 23px 160px;
-  position: relative;
-  gap: 20px;
-  text-align: left;
-  font-size: 40px;
-  color: #3d3028;
-  font-family: "Abyssinica SIL";
-}
-@media screen and (max-width: 750px) {
-  .navbar10 {
-    padding-left: 80px;
-    box-sizing: border-box;
-  }
-}
-@media screen and (max-width: 450px) {
-  .navbar10 {
-    padding-left: 20px;
-    box-sizing: border-box;
-  }
+
+@media (max-width: 480px) {
+    .header {
+        padding: 15px 5%;
+    }
+
+    .keg-image {
+        height: 40px;
+    }
+
+    .main-title {
+        font-size: 18px;
+    }
+
+    .sub-title {
+        font-size: 8px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar a {
+        margin: 5px 0;
+    }
 }

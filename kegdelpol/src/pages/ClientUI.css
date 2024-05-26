@@ -1,5 +1,5 @@
 
-.content-driver-ui {
+.content-client-ui {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -9,12 +9,12 @@
   position: relative;
 }
 
-.choose-action-driver {
+.choose-action-client {
   font-size: 50px; /* Dostosuj rozmiar czcionki według potrzeb */
   margin-bottom: 30px; /* Zmniejsz odległość między napisem a obrazkami */
 }
 
-.centered-images-driver {
+.centered-images-client {
   display: flex;
   justify-content: center;
   gap: 50px; /* Dodaj odstęp między obrazkami */
@@ -23,16 +23,16 @@
 }
 
 @media (max-width: 768px) {
-  .content-driver-ui {
+  .content-client-ui {
     padding-top: 150px; /* Zwiększenie odstępu na mniejszych ekranach */
   }
 
-  .choose-action-driver {
+  .choose-action-client {
     font-size: 30px; /* Dostosuj rozmiar czcionki dla mniejszych ekranów */
     margin-bottom: 20px; /* Dostosuj odstęp dla mniejszych ekranów */
   }
   
-  .centered-images-driver {
+  .centered-images-client {
     flex-direction: column; /* Ustaw układ pionowy na mniejszych ekranach */
     gap: 20px; /* Dodaj odstęp między obrazkami */
     align-items: center; /* Wyśrodkuj obrazy w pionie */

@@ -38,4 +38,3 @@ class OrderService:
     def get_orders(self):
         return self.order_repo.get_all_orders()
         
-    
