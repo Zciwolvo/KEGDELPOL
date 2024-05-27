@@ -10,7 +10,7 @@ const Main = () => {
       <Navbar />
       <div className="content-wrap">
         <div className="main-container">
-          <h1>Log in to your account</h1>
+          <h1>LOG IN TO YOUR ACCOUNT</h1>
           <form className="login-form">
             <div className="input-container">
               <label htmlFor="login">Login</label>
