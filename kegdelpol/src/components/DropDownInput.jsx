@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import './DropdownInput.css'; // Zaimportuj plik stylów CSS
+import './DropDownInput.css'; // Zaimportuj plik stylów CSS
 
+
+const DropdownInput = ({ label, options }) => {
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+    
 const DropDownInput = ({ label, options }) => {
   const [inputValue, setInputValue] = useState('');
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -33,6 +40,16 @@ const DropDownInput = ({ label, options }) => {
   return (
     <div className="dropdown-input-container mb-3">
       <label>{label}</label>
+      <select
+        value={selectedOption}
+        onChange={handleOptionChange}
+        className="dropdown-select"
+      >
+        <option value="">Choose an option</option>
+        {options.map((option, index) => (
+          <option key={index} value={option}>{option}</option>
+        ))}
+      </select>
       <div className="dropdown-input">
         <input
           type="text"
