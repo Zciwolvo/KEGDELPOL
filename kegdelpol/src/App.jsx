@@ -11,6 +11,8 @@ import "./App.css";
 import DriverUI from "./Pages/DriverUI";
 import AssignTheDriverUI from "./Pages/AssignTheDriverUI";
 import UpdateUser from "./Pages/UpdateUser";
+import AddNewVehicle from "./Pages/AddNewVehicle";
+import ReadDbTable from "./Pages/ReadDbTable";
 
 
 
@@ -28,6 +30,8 @@ const App = () => {
           <Route path="/DriverUI" element={<DriverUI />} />
           <Route path="/AssignTheDriverUI" element={<AssignTheDriverUI />} />
           <Route path="/UpdateUser" element={<UpdateUser />} />
+          <Route path="/AddNewVehicle" element={<AddNewVehicle />} />
+          <Route path="/ReadDbTable" element={<ReadDbTable />} />
         </Routes>
       </div>
     </Router>

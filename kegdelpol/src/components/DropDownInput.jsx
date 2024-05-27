@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './DropdownInput.css'; // Zaimportuj plik stylów CSS
 
-const DropdownInput = ({ label, options }) => {
+const DropDownInput = ({ label, options }) => {
   const [inputValue, setInputValue] = useState('');
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [isListVisible, setIsListVisible] = useState(false);
@@ -22,7 +22,6 @@ const DropdownInput = ({ label, options }) => {
 
   const handleOptionSelect = (value) => {
     setInputValue(value);
-    
     setIsListVisible(false);
     console.log(value);
   };
@@ -32,7 +31,7 @@ const DropdownInput = ({ label, options }) => {
   };
 
   return (
-    <div className="dropdown-input-container">
+    <div className="dropdown-input-container mb-3">
       <label>{label}</label>
       <div className="dropdown-input">
         <input
@@ -41,13 +40,13 @@ const DropdownInput = ({ label, options }) => {
           onChange={handleInputChange}
           onBlur={handleInputBlur}
           placeholder="Type here..."
-          style={{ borderColor: 'black', backgroundColor: '#F2F0E4' }}
+          className="form-control"
         />
         {isListVisible && (
           <div className="options-dropdown">
-            <ul className="options-list">
+            <ul className="options-list list-group">
               {filteredOptions.map((option, index) => (
-                <li key={index} onMouseDown={() => handleOptionSelect(option)}>
+                <li key={index} className="list-group-item" onMouseDown={() => handleOptionSelect(option)}>
                   {option}
                 </li>
               ))}
@@ -59,4 +58,4 @@ const DropdownInput = ({ label, options }) => {
   );
 };
 
-export default DropdownInput;
+export default DropDownInput;

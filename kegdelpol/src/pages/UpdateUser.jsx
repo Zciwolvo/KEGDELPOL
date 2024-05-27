@@ -57,6 +57,7 @@ const UpdateUser = () => {
           value={searchTerm}
           onChange={handleInputChange}
           onClick={handleConfirm}
+          placeholder="Type User name"
         />
         {/* Wyświetlamy tabelę tylko jeśli showTable jest true */}
         {showTable && (
