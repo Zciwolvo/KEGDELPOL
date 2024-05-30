@@ -1,0 +1,40 @@
+
+.content-client-ui {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px; /* Dodaj padding, aby uniknąć nachodzenia na navbar */
+  position: relative;
+}
+
+.choose-action-client {
+  font-size: 50px; /* Dostosuj rozmiar czcionki według potrzeb */
+  margin-bottom: 30px; /* Zmniejsz odległość między napisem a obrazkami */
+}
+
+.centered-images-client {
+  display: flex;
+  justify-content: center;
+  gap: 50px; /* Dodaj odstęp między obrazkami */
+  flex-wrap: wrap; /* Pozwól na zawijanie się elementów na mniejszych ekranach */
+  width: 100%; /* Upewnij się, że obrazy są wyśrodkowane */
+}
+
+@media (max-width: 768px) {
+  .content-client-ui {
+    padding-top: 150px; /* Zwiększenie odstępu na mniejszych ekranach */
+  }
+
+  .choose-action-client {
+    font-size: 30px; /* Dostosuj rozmiar czcionki dla mniejszych ekranów */
+    margin-bottom: 20px; /* Dostosuj odstęp dla mniejszych ekranów */
+  }
+  
+  .centered-images-client {
+    flex-direction: column; /* Ustaw układ pionowy na mniejszych ekranach */
+    gap: 20px; /* Dodaj odstęp między obrazkami */
+    align-items: center; /* Wyśrodkuj obrazy w pionie */
+  }
+}

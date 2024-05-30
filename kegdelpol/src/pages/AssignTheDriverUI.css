@@ -1,0 +1,35 @@
+.assign-the-driver-ui-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content-assign-the-driver-ui {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 80px;
+    position: relative;
+  }
+  
+  .choose-action-assign-driver {
+    font-size: 50px;
+    margin-bottom: 30px;
+  }
+  
+  .inputs-container {
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .content-assign-the-driver-ui {
+      padding-top: 150px;
+    }
+  
+    .choose-action-assign-driver {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+  }
+  

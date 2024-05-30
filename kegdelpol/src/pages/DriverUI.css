@@ -1,32 +1,40 @@
-.driver-ui,
-.navbar-group {
+
+.content-driver-ui {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-}
-.navbar-group {
-  align-self: stretch;
-  align-items: flex-end;
-  gap: 26px;
-  max-width: 100%;
-}
-.driver-ui {
-  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 80px; /* Dodaj padding, aby uniknąć nachodzenia na navbar */
   position: relative;
-  background-color: #e5d7bd;
-  overflow: hidden;
-  align-items: flex-start;
-  gap: 137px;
-  line-height: normal;
-  letter-spacing: normal;
 }
-@media screen and (max-width: 750px) {
-  .driver-ui {
-    gap: 68px;
+
+.choose-action-driver {
+  font-size: 50px; /* Dostosuj rozmiar czcionki według potrzeb */
+  margin-bottom: 30px; /* Zmniejsz odległość między napisem a obrazkami */
+}
+
+.centered-images-driver {
+  display: flex;
+  justify-content: center;
+  gap: 50px; /* Dodaj odstęp między obrazkami */
+  flex-wrap: wrap; /* Pozwól na zawijanie się elementów na mniejszych ekranach */
+  width: 100%; /* Upewnij się, że obrazy są wyśrodkowane */
+}
+
+@media (max-width: 768px) {
+  .content-driver-ui {
+    padding-top: 150px; /* Zwiększenie odstępu na mniejszych ekranach */
   }
-}
-@media screen and (max-width: 450px) {
-  .driver-ui {
-    gap: 34px;
+
+  .choose-action-driver {
+    font-size: 30px; /* Dostosuj rozmiar czcionki dla mniejszych ekranów */
+    margin-bottom: 20px; /* Dostosuj odstęp dla mniejszych ekranów */
+  }
+  
+  .centered-images-driver {
+    flex-direction: column; /* Ustaw układ pionowy na mniejszych ekranach */
+    gap: 20px; /* Dodaj odstęp między obrazkami */
+    align-items: center; /* Wyśrodkuj obrazy w pionie */
   }
 }

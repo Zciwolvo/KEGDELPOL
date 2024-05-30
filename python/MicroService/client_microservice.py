@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify
-from Model import order, product, order_detail, client
+from Model import order, product, order_detail, customer
 from Repository import order_repo, product_repo, customer_repo, order_detail_repo
 from flask import request
-from Repository import client_repo
+from Service import client_service
 
 # Na podstawie ID klienta sprawdza jego zamówienia, można je wyświetlić
 # Klient może dodać zamówienia, które są przypisane do jego ID
@@ -13,70 +13,62 @@ from Repository import client_repo
 
 
 client_microservice = Blueprint('client_microservice', __name__)
+client_service = client_service()
 
-repo = client_repo.ClientRepo()
+#add  user
+@client_microservice.route('/users', methods=['POST'])
+def add_user():
+    
+        # Oczekujemy danych w formacie JSON
+        data = request.get_json()
 
-@client_microservice.route('/client/<int:client_id>', methods=['GET'])
-def get_orders(client_id):
-    orders = repo.get_orders_by_client_id(client_id)
-    return jsonify(orders)
+        if not data:
+            return jsonify({'error': 'Invalid or missing JSON data'}), 400
 
-@client_microservice.route('/orders', methods=['POST'])
-def add_order():
-    # Expecting JSON with data for the new order
-    data = request.get_json()
-    
-    # Create a new Order object using the data
-    new_order = order.Order(data['order_id'], data['client_id'], data['product_id'], data['quantity'])
-    
-    # Add the new order to the database using the repository
-    repo.add_order(new_order)
-    
-    return jsonify({"message": "Order added successfully"})
+        # Walidacja wymaganych pól
+        required_fields = ['customer_id', 'name', 'address', 'phone_number', 'auth_id']
+        for field in required_fields:
+            if field not in data:
+                return jsonify({'error': f'Missing required field: {field}'}), 400
 
-@client_microservice.route('/orders/<order_id>', methods=['DELETE'])
-def delete_order(order_id):
-    # Usuń zamówienie na podstawie jego ID
-    repo.delete_order(order_id)
-    return jsonify({"message": "Order deleted successfully"})
+        # Utworzenie nowego obiektu User przy użyciu danych
+        new_user = customer.Customer(
+            customer_id=data['customer_id'],
+            name=data['name'],
+            address=data['address'],
+            phone_number=data['phone_number'],
+            auth_id=data['auth_id']
+        )
 
-@client_microservice.route('/orders/<order_id>', methods=['PUT'])
-def update_order(order_id):
-    # Expecting JSON with data for the updated order
-    data = request.get_json()
-    
-    # Update the order in the database using the repository
-    repo.update_order(order_id, data)
-    
-    return jsonify({"message": "Order updated successfully"})
+        # Dodanie nowego użytkownika do bazy danych przy użyciu serwisu
+        client_service.add_user(new_user)
 
-@client_microservice.route('/orders/details/<order_id>', methods=['GET'])
-def order_details(order_id):
-    order = repo.get_order_details(order_id)
-    return jsonify(order)
+        return jsonify({'message': 'User added successfully'}), 201
 
-@client_microservice.route('/orders/<order_id>/items', methods=['POST'])
-def add_items(order_id):
-    # Expecting JSON with data for the new items
-    data = request.get_json()
-    
-    # Add the new items to the corresponding order in the database using the repository
-    repo.add_items_to_order(order_id, data)
-    
-    return jsonify({"message": "Items added successfully"})
+#modify user
+@client_microservice.route('/users/<user_id>', methods=['PUT'])
+def modify_user(user_id):
+     # Oczekujemy danych w formacie JSON
+        data = request.get_json()
 
-@client_microservice.route('/orders/<order_id>/items/<item_id>', methods=['DELETE'])
-def delete_item(order_id, item_id):
-    # Usuń przedmiot z zamówienia na podstawie ID zamówienia i ID przedmiotu
-    repo.delete_item(order_id, item_id)
-    return jsonify({"message": "Item deleted successfully"})
+        if not data:
+            return jsonify({'error': 'Invalid or missing JSON data'}), 400
 
-@client_microservice.route('/orders/<order_id>/items/<item_id>', methods=['PUT'])
-def update_item(order_id, item_id):
-    # Expecting JSON with data for the updated item
-    data = request.get_json()
-    
-    # Update the item in the corresponding order in the database using the repository
-    repo.update_item(order_id, item_id, data)
-    
-    return jsonify({"message": "Item updated successfully"})
+        # Użyj serwisu do modyfikacji użytkownika
+        client_service.modify_user(user_id, data)
+
+        return jsonify({'message': 'User modified successfully'}), 200
+
+#delete user
+@client_microservice.route('/users/<user_id>', methods=['DELETE'])
+def delete_user(user_id):
+        # Użyj serwisu do modyfikacji użytkownika
+        client_service.delete_user(user_id, data)
+
+        return jsonify({'message': 'User modified successfully'}), 200
+
+
+
+
+
+
