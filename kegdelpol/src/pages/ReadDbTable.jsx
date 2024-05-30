@@ -62,7 +62,7 @@ const Page = () => {
           onChange={(e) => setSearchTerm(e.target.value)} 
           placeholder="Search..."
         />
-        {tableData.length > 0 && <Table data={tableData} columns={tableColumns} />}
+        {tableData.length > 0 && <Table data={tableData} columns={tableColumns}   updateButtonText="Update" deleteButtonText="Remove" />}
       </div>
       <Footer />
     </div>

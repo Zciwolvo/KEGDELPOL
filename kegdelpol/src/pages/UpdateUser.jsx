@@ -49,6 +49,8 @@ const UpdateUser = () => {
         <Table
           data={filteredUsers}
           columns={columns}
+          updateButtonText="Update"
+          deleteButtonText="Remove"
         />
       </div>
       <Footer />

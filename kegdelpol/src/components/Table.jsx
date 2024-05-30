@@ -2,7 +2,7 @@ import React from 'react';
 import './Table.css'; // Zaimportuj plik stylów CSS
 import Button from 'react-bootstrap/Button';
 
-const Table = ({ data, columns }) => {
+const Table = ({ data, columns, updateButtonText, deleteButtonText }) => {
   return (
     <table className="table">
       <thead>
@@ -20,8 +20,12 @@ const Table = ({ data, columns }) => {
               <td key={columnIndex}>{value}</td>
             ))}
             <td>
-              <Button variant="primary">Update</Button>{' '}
-              <Button variant="danger">Delete</Button>
+              {updateButtonText && (
+                <Button variant="primary">{updateButtonText}</Button>
+              )}
+              {deleteButtonText && (
+                <Button variant="danger">{deleteButtonText}</Button>
+              )}
             </td>
           </tr>
         ))}
