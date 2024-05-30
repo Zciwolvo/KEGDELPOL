@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import './DropDownInput.css'; // Zaimportuj plik stylów CSS
+import './DropDownInput.css';
 
-const DropdownInput = ({ label, options }) => {
+const DropDownInput = ({ label, options, onChange }) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+    const value = event.target.value;
+    setSelectedOption(value);
+    onChange(value); // Wywołanie przekazanego propsa onChange
   };
 
   return (
@@ -25,4 +27,4 @@ const DropdownInput = ({ label, options }) => {
   );
 };
 
-export default DropdownInput;
+export default DropDownInput;
