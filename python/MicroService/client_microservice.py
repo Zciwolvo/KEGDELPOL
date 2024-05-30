@@ -15,6 +15,7 @@ from Repository import client_repo
 client_microservice = Blueprint('client_microservice', __name__)
 
 repo = client_repo.ClientRepo()
+
 @client_microservice.route('/client/<int:client_id>', methods=['GET'])
 def get_orders(client_id):
     orders = repo.get_orders_by_client_id(client_id)
