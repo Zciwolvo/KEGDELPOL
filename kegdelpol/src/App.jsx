@@ -15,6 +15,7 @@ import Registration from "./Pages/Registration";
 import AddNewVehicle from "./Pages/AddNewVehicle";
 import ReadDbTable from "./Pages/ReadDbTable";
 import ChangeOrderStatus from "./Pages/ChangeOrderStatus";
+import ReadOrders from "./Pages/ReadOrders";
 
 
 
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/AddNewVehicle" element={<AddNewVehicle />} />
           <Route path="/ReadDbTable" element={<ReadDbTable />} />
           <Route path="/ChangeOrderStatus" element={<ChangeOrderStatus />} />
+          <Route path="/ReadOrders" element={<ReadOrders />} />
         </Routes>
       </div>
     </Router>
