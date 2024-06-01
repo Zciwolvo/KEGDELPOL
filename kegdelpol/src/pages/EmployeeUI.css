@@ -1,29 +1,70 @@
-.employee-ui-container {
-  display: flex;
-  flex-direction: column;
+body{
   min-height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
 }
 
+.employee-ui {
+  display: flex;
+  flex-direction: column;
+  padding-top: 150px;
+ 
+}
+
+.logout-button {
+  font-size: 20px; /* Adjust font size as needed */
+}
+
+.grid-elements {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(auto-fit, minmax(auto,1fr, 1fr));
+  gap: 50px; /* Set the gap between rows */
+
+  grid-template-areas:
+    ". item-1 item-2"
+    "item-3 item-4 item-5"
+    "item-6 item-7 item-8";
+}
+
+.item-1 { 
+  grid-area: item-1; 
+  text-align: center; /* Center align text */
+}
+
+.item-2 { 
+  grid-area: item-2;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.item-3 { grid-area: item-3; }
+.item-4 { grid-area: item-4; }
+.item-5 { grid-area: item-5; }
+.item-6 { grid-area: item-6; }
+.item-7 { grid-area: item-7; }
+.item-8 { grid-area: item-8; }
+
 .content {
+  background-color: red;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px; /* Dodaj odstęp między elementami */
-  padding: 20px;
-  padding-top: 7%; /* Upewnij się, że pasuje do wysokości navbar */
-  padding-bottom: 3%; /* Upewnij się, że pasuje do wysokości footer */
-  justify-items: center; /* Wyśrodkuj elementy w komórkach siatki */
+  gap: 20px; /* Add space between elements */
+  margin-top: 0px;
+  padding-bottom: 3%; /* Ensure it matches the footer height */
+  justify-items: center; /* Center items in grid cells */
   padding: 180px;
 }
 
-.choose-action {
-  text-align: center; /* Wyśrodkuj tekst */
-  margin-bottom: 30px; /* Zmniejsz odległość między napisem a obrazkami */
-  font-size: 40px; /* Dostosuj rozmiar czcionki według potrzeb */
-  font-weight: bold; /* Dostosuj wagę czcionki według potrzeb */
-  grid-column: 1 / -1; /* Rozciągnij napis na szerokość całej siatki */
+.item-1 {
+  font-size: 40px; /* Adjust font size as needed */
+  font-weight: bold; /* Adjust font weight as needed */
+  color: #3D3028;
+  text-align: center;
 }
 
-/* Media queries dla responsywności */
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
   .content {
     grid-template-columns: repeat(2, 1fr);
