@@ -11,6 +11,13 @@ import "./App.css";
 import DriverUI from "./Pages/DriverUI";
 import AssignTheDriverUI from "./Pages/AssignTheDriverUI";
 import UpdateUser from "./Pages/UpdateUser";
+import Registration from "./Pages/Registration";
+import AddNewVehicle from "./Pages/AddNewVehicle";
+import ReadDbTable from "./Pages/ReadDbTable";
+import ChangeOrderStatus from "./Pages/ChangeOrderStatus";
+import ReadOrders from "./Pages/ReadOrders";
+import AddNewItem from "./Pages/AddNewItem";
+import CreateOrder from "./Pages/CreateOrder";
 
 
 
@@ -28,6 +35,13 @@ const App = () => {
           <Route path="/DriverUI" element={<DriverUI />} />
           <Route path="/AssignTheDriverUI" element={<AssignTheDriverUI />} />
           <Route path="/UpdateUser" element={<UpdateUser />} />
+          <Route path="/Registration" element={<Registration />} />
+          <Route path="/AddNewVehicle" element={<AddNewVehicle />} />
+          <Route path="/ReadDbTable" element={<ReadDbTable />} />
+          <Route path="/ChangeOrderStatus" element={<ChangeOrderStatus />} />
+          <Route path="/ReadOrders" element={<ReadOrders />} />
+          <Route path="/AddNewItem" element={<AddNewItem />} />
+          <Route path="/CreateOrder" element={<CreateOrder />} />
         </Routes>
       </div>
     </Router>

@@ -1,7 +1,7 @@
 import React from 'react';
-import './UserSearchInput.css'; // Importujemy plik stylów CSS
+import './UserSearchInput.css';
 
-const UserSearchInput = ({ value, onChange, onClick }) => {
+const UserSearchInput = ({ value, onChange, placeholder }) => {
   return (
     <div className="user-search-input-container">
       <div className="user-search-input">
@@ -9,10 +9,9 @@ const UserSearchInput = ({ value, onChange, onClick }) => {
           type="text"
           value={value}
           onChange={onChange}
-          placeholder="Type user name..."
+          placeholder={placeholder}
           className="form-control"
         />
-        <button className="btn btn-primary" onClick={onClick}>Search</button>
       </div>
     </div>
   );

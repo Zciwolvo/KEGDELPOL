@@ -19,5 +19,26 @@ def login():
     else:
         return jsonify({'message': 'Invalid credentials'}), 401
 
-# Jakie funkcjonalności będą (guziki itp)
-# @auth_microservice.route('/register', methods=['POST']), później funckjel, musi się odwoływać do serwisów a serwisy do repo
+@auth_microservice.route('/register', methods=['POST'])
+def register():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+    role = data.get('role')
+
+    if not username or not password or not role:
+        return jsonify({'message': 'Username, password or role is missing'}), 400
+
+    user = auth_service.register_user(username, password, role)
+    return jsonify({'message': 'User registered successfully'}), 201
+
+@auth_microservice.route('/check_authorization', methods=['POST'])
+def check_authorization():
+    token = request.headers.get('Authorization').split()[1]
+    data = jwt.decode(token, auth_service.secret_key, algorithms=['HS256'])
+    required_role = request.get_json().get('role')
+
+    if data['role'] == required_role:
+        return jsonify({'message': 'Authorized'}), 200
+    else:
+        return jsonify({'message': 'Not authorized'}), 403
