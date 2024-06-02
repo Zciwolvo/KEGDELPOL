@@ -24,14 +24,14 @@ const AssignTheDriverUI = () => {
     <div className="assign-the-driver-ui-container d-flex flex-column min-vh-100">
       <Navbar />
       <div className="content-assign-the-driver-ui d-flex flex-column justify-content-center align-items-center flex-grow-1">
-        <div className="choose-action-assign-driver text-center font-weight-bold">
-          Assign the Driver
+        <div className="assign-text">
+          <span>Assign</span> the Driver
         </div>
         <div className="inputs-container">
           <DropDownInput label="Select Driver" options={['Driver 1', 'Driver 2', 'Driver 3']} onChange={handleDriverChange} />
           <DropDownInput label="Select Order" options={['Order 1', 'Order 2', 'Order 3']} onChange={handleOrderChange} />
         </div>
-        <ButtonWithText buttonText="Assign Driver" />
+        <ButtonWithText buttonText="Confirm" />
       </div>
       <Footer />
     </div>
