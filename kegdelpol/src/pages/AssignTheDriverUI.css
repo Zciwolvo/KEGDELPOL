@@ -1,26 +1,36 @@
-.assign-the-driver-ui-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .content-assign-the-driver-ui {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    padding: 80px;
-    position: relative;
-  }
-  
-  .choose-action-assign-driver {
-    font-size: 50px;
-    margin-bottom: 30px;
-  }
-  
-  .inputs-container {
-    margin-bottom: 20px;
-  }
+body{
+  margin:0;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.flexbox-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.assign-driver{
+  font-family: 'Alatsi',sans-serif;
+  font-size: 3.5rem;
+  color: #383928;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+}
+
+.assign-driver span{
+  color: #383928;
+  font-family: 'Alatsi',sans-serif;
+  font-size: 3.5rem;
+  text-decoration: underline;
+  text-decoration-color: #B9A00A;
+  text-underline-offset: 8px;
+}
+
+.button{
+  padding:10px;
+}
   
   @media (max-width: 768px) {
     .content-assign-the-driver-ui {
