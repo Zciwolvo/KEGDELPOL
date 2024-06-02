@@ -40,7 +40,7 @@ const ChangeOrderStatus = () => {
     <div className="change-order-status-container">
       <Navbar />
       <div className="container">
-        <Quote quoteText="Did you that the oldest beer brewery dates back to 1040?" />
+        <Quote quoteText="Did you know that the oldest beer brewery dates back to 1040?" />
         <div className="heading">
           <span>CHANGE</span> ORDER STATUS
         </div>

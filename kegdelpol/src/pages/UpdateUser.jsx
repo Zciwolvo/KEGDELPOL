@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import Table from '../Components/Table';
+import Quote from '../Components/Quote';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './UpdateUser.css';
 import UserSearchInput from '../Components/UserSearchInput'; // Importujemy komponent UserSearchInput
@@ -38,14 +39,17 @@ const UpdateUser = () => {
     <div className="update-user-container">
       <Navbar />
       <div className="container">
-        <h2>Choose the user to update</h2>
-        {/* Użyjemy naszego nowego komponentu UserSearchInput */}
+      <Quote quoteText="Do you know that Budweiser is the world’s most famous beer?" />
+      <div className="heading">
+        <span>CHOOSE</span> THE USER TO UPDATE
+      </div>
+      <div className="update-user-search-container">
         <UserSearchInput
           value={searchTerm}
           onChange={handleInputChange}
           placeholder="Type User name"
         />
-        {/* Wyświetlamy tabelę */}
+        </div>
         <Table
           data={filteredUsers}
           columns={columns}
