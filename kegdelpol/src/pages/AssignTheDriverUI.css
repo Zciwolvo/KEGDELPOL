@@ -11,7 +11,7 @@ body{
   align-items: center;
 }
 
-.assign-driver{
+.heading{
   font-family: 'Alatsi',sans-serif;
   font-size: 3.5rem;
   color: #383928;
@@ -19,7 +19,7 @@ body{
   margin-bottom: 10vh;
 }
 
-.assign-driver span{
+.heading span{
   color: #383928;
   font-family: 'Alatsi',sans-serif;
   font-size: 3.5rem;

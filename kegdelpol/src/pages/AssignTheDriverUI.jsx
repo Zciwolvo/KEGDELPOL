@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import DropDownInput from '../Components/DropDownInput';
-import ButtonWithText from '../Components/ConfirmButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AssignTheDriverUI.css';
 import ConfirmButton from '../Components/ConfirmButton';
@@ -25,7 +24,7 @@ const AssignTheDriverUI = () => {
     <div className="container">
       <Navbar />
         <div className="flexbox-container">
-        <div className="assign-driver">
+        <div className="heading">
         <span>ASSIGN</span> THE DRIVER
         </div>
         <div className="inputs-container">
