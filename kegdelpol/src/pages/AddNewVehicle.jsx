@@ -6,6 +6,7 @@ import DropDownInput from '../Components/DropDownInput';
 import ConfirmButton from '../Components/ConfirmButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AddNewVehicle.css';
+import Quote from '../Components/Quote';
 
 const AddNewVehicle = () => {
   const [vehicleType, setVehicleType] = useState('');
@@ -25,14 +26,17 @@ const AddNewVehicle = () => {
   };
 
   return (
-    <div className="client-ui-container d-flex flex-column min-vh-100">
+    <div className="add-new-vehicle-container">
       <Navbar />
-      <div className="container flex-grow-1 d-flex flex-column justify-content-center align-items-center">
-        <h1 className="mb-4">Add New Vehicle</h1>
-        <DropDownInput label="Vehicle Type" options={['Car', 'Truck', 'Motorcycle']} onChange={handleVehicleTypeChange} />
-        <InputField label="Capacity" id="capacity" placeholder="Enter capacity" onChange={handleCapacityChange} />
-        <InputField label="Registration Info" id="registrationInfo" placeholder="Enter registration info" onChange={handleRegistrationInfoChange} />
-        <ConfirmButton buttonText="Confirm" onClick={() => console.log('Vehicle Added')} />
+      <div className="container">
+        <Quote quoteText="Did you know that most successful beer brands offer Pilsner?" />
+        <div className="heading"><span>ADD</span> NEW VEHICLE</div>
+        <div className="vehicle-flex">
+            <div className="vehicle-type"><DropDownInput label="Vehicle Type" options={['Car', 'Truck', 'Motorcycle']} onChange={handleVehicleTypeChange} /></div>
+            <InputField label="Capacity" id="capacity" placeholder="Enter capacity" onChange={handleCapacityChange} />
+            <InputField label="Registration Info" id="registrationInfo" placeholder="Enter registration info" onChange={handleRegistrationInfoChange} />
+        </div>
+        <ConfirmButton buttonText="CONFIRM" onClick={() => console.log('Vehicle Added')} />
       </div>
       <Footer />
     </div>
