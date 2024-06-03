@@ -1,40 +1,33 @@
-
-.content-driver-ui {
-  flex-grow: 1;
+.driver-ui {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 80px; /* Dodaj padding, aby uniknąć nachodzenia na navbar */
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.order-list {
+  margin-top: 20px;
+}
+
+.order-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.status-button-container {
   position: relative;
+  display: inline-block;
 }
 
-.choose-action-driver {
-  font-size: 50px; /* Dostosuj rozmiar czcionki według potrzeb */
-  margin-bottom: 30px; /* Zmniejsz odległość między napisem a obrazkami */
-}
-
-.centered-images-driver {
-  display: flex;
-  justify-content: center;
-  gap: 50px; /* Dodaj odstęp między obrazkami */
-  flex-wrap: wrap; /* Pozwól na zawijanie się elementów na mniejszych ekranach */
-  width: 100%; /* Upewnij się, że obrazy są wyśrodkowane */
-}
-
-@media (max-width: 768px) {
-  .content-driver-ui {
-    padding-top: 150px; /* Zwiększenie odstępu na mniejszych ekranach */
-  }
-
-  .choose-action-driver {
-    font-size: 30px; /* Dostosuj rozmiar czcionki dla mniejszych ekranów */
-    margin-bottom: 20px; /* Dostosuj odstęp dla mniejszych ekranów */
-  }
-  
-  .centered-images-driver {
-    flex-direction: column; /* Ustaw układ pionowy na mniejszych ekranach */
-    gap: 20px; /* Dodaj odstęp między obrazkami */
-    align-items: center; /* Wyśrodkuj obrazy w pionie */
-  }
+.status-dropdown-menu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 1000;
+  display: block;
 }
