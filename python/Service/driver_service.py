@@ -1,8 +1,8 @@
-from order_service import OrderService
+from Service.order_service import OrderService
 
 class DriverService:
-    def __init__(self):
-        self.order_service = OrderService()
+    def __init__(self, db):
+        self.order_service = OrderService(db)
 
     def get_orders_for_driver(self, driver_username):
         return self.order_service.get_orders_for_driver(driver_username)

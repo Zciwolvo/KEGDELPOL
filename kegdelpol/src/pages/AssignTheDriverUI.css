@@ -1,3 +1,4 @@
+
 body{
   margin:0;
   box-sizing: border-box;
@@ -31,6 +32,36 @@ body{
 .button{
   padding:10px;
 }
+=======
+.assign-the-driver-ui-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content-assign-the-driver-ui {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 80px;
+    position: relative;
+  }
+  
+  .assign-text{
+    font-size: 4rem;
+    margin-bottom: 60px;
+  }
+
+  span{
+    text-decoration: underline 2px solid black;
+    
+  }
+
+  
+  .inputs-container {
+    margin-bottom: 20px;
+  }
   
   @media (max-width: 768px) {
     .content-assign-the-driver-ui {

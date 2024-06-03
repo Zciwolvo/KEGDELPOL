@@ -1,9 +1,22 @@
-from flask import Blueprint, jsonify, request
-from jwt_util import decode_jwt_token
-from driver_service import DriverService
+from flask import Blueprint, jsonify, request, current_app
+from Service.driver_service import DriverService
+import jwt
 
 driver_microservice = Blueprint('driver_microservice', __name__)
-driver_service = DriverService()
+
+def decode_jwt_token(token):
+    try:
+        decoded = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"])
+        return decoded
+    except jwt.ExpiredSignatureError:
+        raise Exception("Token expired")
+    except jwt.InvalidTokenError:
+        raise Exception("Invalid token")
+
+@driver_microservice.before_app_request
+def create_driver_service():
+    db = current_app.config['db']
+    driver_microservice.driver_service = DriverService(db)
 
 @driver_microservice.route('/orders', methods=['GET'])
 def get_orders():
@@ -17,6 +30,7 @@ def get_orders():
     except Exception as e:
         return jsonify({'message': 'Invalid token'}), 401
 
+    driver_service = driver_microservice.driver_service
     orders = driver_service.get_orders_for_driver(username)
     return jsonify({'orders': orders}), 200
 
@@ -37,6 +51,7 @@ def update_order_status(order_id):
     if not new_status:
         return jsonify({'message': 'Missing status in request body'}), 400
 
+    driver_service = driver_microservice.driver_service
     success = driver_service.update_order_status(order_id, username, new_status)
     if success:
         return jsonify({'message': 'Order status updated successfully'}), 200

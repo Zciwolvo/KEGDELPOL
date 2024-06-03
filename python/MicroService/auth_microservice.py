@@ -1,11 +1,18 @@
-from flask import Blueprint, jsonify, request
-from Service import AuthService
+from flask import Blueprint, jsonify, request, current_app
+from Service.auth_service import AuthService
+from flask_sqlalchemy import SQLAlchemy
+import jwt
 
 auth_microservice = Blueprint('auth_microservice', __name__)
-auth_service = AuthService()
+
+@auth_microservice.before_app_request
+def create_auth_service():
+    db = current_app.config['db']
+    auth_microservice.auth_service = AuthService(db)
 
 @auth_microservice.route('/login', methods=['POST'])
 def login():
+    auth_service = auth_microservice.auth_service
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
@@ -21,6 +28,7 @@ def login():
 
 @auth_microservice.route('/register', methods=['POST'])
 def register():
+    auth_service = auth_microservice.auth_service
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
@@ -34,6 +42,7 @@ def register():
 
 @auth_microservice.route('/check_authorization', methods=['POST'])
 def check_authorization():
+    auth_service = auth_microservice.auth_service
     token = request.headers.get('Authorization').split()[1]
     data = jwt.decode(token, auth_service.secret_key, algorithms=['HS256'])
     required_role = request.get_json().get('role')
