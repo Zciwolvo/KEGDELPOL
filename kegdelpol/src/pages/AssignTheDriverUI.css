@@ -13,10 +13,16 @@
     position: relative;
   }
   
-  .choose-action-assign-driver {
-    font-size: 50px;
-    margin-bottom: 30px;
+  .assign-text{
+    font-size: 4rem;
+    margin-bottom: 60px;
   }
+
+  span{
+    text-decoration: underline 2px solid black;
+    
+  }
+
   
   .inputs-container {
     margin-bottom: 20px;
