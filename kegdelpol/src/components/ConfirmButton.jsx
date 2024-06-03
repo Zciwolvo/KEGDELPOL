@@ -1,5 +1,5 @@
 import React from 'react';
-import './ConfirmButton.css'; // Zaimportuj plik stylów CSS
+import './ConfirmButton.css';
 
 const ConfirmButton = ({ buttonText, onClick }) => {
   return (

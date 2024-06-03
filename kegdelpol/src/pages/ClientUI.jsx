@@ -15,7 +15,7 @@ const ClientUI = () => {
         </div>
         <div className="centered-images-client d-flex justify-content-center flex-wrap gap-5">
           <MoveTo imageSrc="/shoppingcart.svg" title="Create orders" to="/CreateOrder" />
-          <MoveTo imageSrc="/order.svg" title="Orders" to="/orders" />
+          <MoveTo imageSrc="/order.svg" title="Orders" to="/ReadOrders" />
         </div>
       </div>
       <Footer />

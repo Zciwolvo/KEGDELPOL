@@ -1,6 +1,8 @@
-.client-ui-container {
+.add-new-vehicle-container {
     display: flex;
     flex-direction: column;
+    margin:0;
+    box-sizing: border-box;
     min-height: 100vh;
   }
   
@@ -16,4 +18,17 @@
     margin-top: 20px;
     width: 100%;
   }
+
+  .vehicle-flex{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .add-new-vehicle-container .dropdown-select {
+    padding:7px;
+  }
   
+  .add-new-vehicle-container .dropdown-input-container{
+    margin-bottom: 10px;
+  }

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import DropDownInput from '../Components/DropDownInput';
-import ButtonWithText from '../Components/ConfirmButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AssignTheDriverUI.css';
+import ConfirmButton from '../Components/ConfirmButton';
 
 const AssignTheDriverUI = () => {
   const [selectedDriver, setSelectedDriver] = useState('');
@@ -21,20 +21,21 @@ const AssignTheDriverUI = () => {
   };
 
   return (
-    <div className="assign-the-driver-ui-container d-flex flex-column min-vh-100">
+    <div className="container">
       <Navbar />
-      <div className="content-assign-the-driver-ui d-flex flex-column justify-content-center align-items-center flex-grow-1">
-        <div className="assign-text">
-          <span>Assign</span> the Driver
+        <div className="flexbox-container">
+        <div className="heading">
+        <span>ASSIGN</span> THE DRIVER
         </div>
         <div className="inputs-container">
           <DropDownInput label="Select Driver" options={['Driver 1', 'Driver 2', 'Driver 3']} onChange={handleDriverChange} />
           <DropDownInput label="Select Order" options={['Order 1', 'Order 2', 'Order 3']} onChange={handleOrderChange} />
         </div>
-        <ButtonWithText buttonText="Confirm" />
-      </div>
+        <ConfirmButton buttonText="CONFIRM" />
+
+     </div>
       <Footer />
-    </div>
+      </div>
   );
 };
 

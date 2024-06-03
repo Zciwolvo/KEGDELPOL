@@ -5,6 +5,7 @@ import Table from '../Components/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ChangeOrderStatus.css'; // Importujemy styl CSS dla ChangeOrderStatus
 import UserSearchInput from '../Components/UserSearchInput'; // Importujemy komponent UserSearchInput
+import Quote from '../Components/Quote';
 
 const ChangeOrderStatus = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,6 +16,7 @@ const ChangeOrderStatus = () => {
     { id: 1, orderID: 'ORD123', orderDate: '2024-05-01', deliveryDate: '2024-05-10', orderStatus: 'Pending' },
     { id: 2, orderID: 'ORD456', orderDate: '2024-05-02', deliveryDate: '2024-05-12', orderStatus: 'Completed' },
     { id: 3, orderID: 'ORD789', orderDate: '2024-05-03', deliveryDate: '2024-05-15', orderStatus: 'Processing' },
+    
     // Dodaj więcej zamówień...
   ];
 
@@ -38,7 +40,10 @@ const ChangeOrderStatus = () => {
     <div className="change-order-status-container">
       <Navbar />
       <div className="container">
-        <h2>Change Order Status</h2>
+        <Quote quoteText="Did you know that the oldest beer brewery dates back to 1040?" />
+        <div className="heading">
+          <span>CHANGE</span> ORDER STATUS
+        </div>
         {/* Użyjemy naszego nowego komponentu UserSearchInput */}
         <UserSearchInput
           value={searchTerm}

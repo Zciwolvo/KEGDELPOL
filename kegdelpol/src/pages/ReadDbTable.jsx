@@ -9,6 +9,7 @@ import './ReadDbTable.css';
 
 // Importuj dane
 import { usersData, ordersData } from './data'; // Upewnij się, że ścieżka jest poprawna
+import Quote from '../Components/Quote';
 
 const Page = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -56,6 +57,10 @@ const Page = () => {
     <div className="page">
       <Navbar />
       <div className="container">
+      <Quote quoteText="Did you know that China consumes the most beer as a whole?" />
+      <div className="heading">
+        <span>READ</span> THE DATABASE
+        </div>
         <ButtonSelect onSelect={handleButtonSelect} />
         <UserSearchInput 
           value={searchTerm} 
