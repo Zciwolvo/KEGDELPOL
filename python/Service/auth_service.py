@@ -1,11 +1,11 @@
 import jwt
 from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
-from Repository import AuthRepository
+from Repository.auth_repo import AuthRepository
 
 class AuthService:
-    def __init__(self):
-        self.auth_repo = AuthRepository()
+    def __init__(self, db):
+        self.auth_repo = AuthRepository(db)
         self.secret_key = 'secret'
 
     def authenticate_user(self, username, password):
@@ -27,4 +27,3 @@ class AuthService:
     def register_user(self, username, password, role):
         hashed_password = generate_password_hash(password)
         return self.auth_repo.create_user(username, hashed_password, role)
-

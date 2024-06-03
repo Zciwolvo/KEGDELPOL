@@ -1,4 +1,5 @@
-from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, Decimal, ForeignKey
+from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy.types import DECIMAL as Decimal
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
