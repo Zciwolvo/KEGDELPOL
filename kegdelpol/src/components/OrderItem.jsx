@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import StatusButton from './StatusButton';
 import { ListGroupItem, Row, Col } from 'react-bootstrap';
 import './OrderItem.css';
 
-const OrderItem = ({ order }) => {
+const OrderItem = ({ order, onUpdateOrder }) => {
   const [status, setStatus] = useState(order.status);
 
   const handleStatusChange = (newStatus) => {
     setStatus(newStatus);
+    onUpdateOrder({ ...order, status: newStatus });
   };
+
+  useEffect(() => {
+    setStatus(order.status); // Ensure status sync when order changes
+  }, [order]);
 
   return (
     <ListGroupItem className="order-item">
@@ -25,7 +30,7 @@ const OrderItem = ({ order }) => {
         <Col md={3}>
           <Row>
             <Col md={6}>
-              <div>Status: {status} </div>
+              <div>Status: {status}</div>
             </Col>
             <Col md={6}>
               <div className="status-button">

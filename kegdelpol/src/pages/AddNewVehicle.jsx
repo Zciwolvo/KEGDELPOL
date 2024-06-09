@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './AddNewVehicle.css';
 import Quote from '../Components/Quote';
 
+//DODAC METODE PUT która doda vehicle do serwera (tak jak w driverUI)
 const AddNewVehicle = () => {
   const [vehicleType, setVehicleType] = useState('');
   const [capacity, setCapacity] = useState('');
