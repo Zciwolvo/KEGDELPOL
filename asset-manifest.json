@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/KEGDELPOL/static/css/main.46ad40fb.css",
-    "main.js": "/KEGDELPOL/static/js/main.eefd35f6.js",
+    "main.js": "/KEGDELPOL/static/js/main.2c747778.js",
     "static/js/453.f1716e3c.chunk.js": "/KEGDELPOL/static/js/453.f1716e3c.chunk.js",
     "static/media/out.png": "/KEGDELPOL/static/media/out.d65c83c6c90e4ae69d9d.png",
     "index.html": "/KEGDELPOL/index.html",
     "main.46ad40fb.css.map": "/KEGDELPOL/static/css/main.46ad40fb.css.map",
-    "main.eefd35f6.js.map": "/KEGDELPOL/static/js/main.eefd35f6.js.map",
+    "main.2c747778.js.map": "/KEGDELPOL/static/js/main.2c747778.js.map",
     "453.f1716e3c.chunk.js.map": "/KEGDELPOL/static/js/453.f1716e3c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.46ad40fb.css",
-    "static/js/main.eefd35f6.js"
+    "static/js/main.2c747778.js"
   ]
 }
