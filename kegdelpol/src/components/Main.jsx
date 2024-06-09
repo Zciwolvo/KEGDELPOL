@@ -14,11 +14,21 @@ const Main = () => {
           <form className="login-form">
             <div className="input-container">
               <label htmlFor="login">Login</label>
-              <input type="text" id="login" placeholder="Login" className="input-field" />
+              <input
+                type="text"
+                id="login"
+                placeholder="Login"
+                className="input-field"
+              />
             </div>
             <div className="input-container">
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" placeholder="Password" className="input-field" />
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                className="input-field"
+              />
             </div>
             <ConfirmButton buttonText="Sign in" />
           </form>

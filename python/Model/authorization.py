@@ -4,9 +4,9 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-class Authentication(Base):
+class Authorization(Base):
     """
-    Authentication model class
+    Authorization model class
     """
     __tablename__ = 'authorization'
 
@@ -14,3 +14,5 @@ class Authentication(Base):
     login = Column(String)
     password = Column(String)
     role = Column(String)
+    
+

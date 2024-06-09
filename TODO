@@ -1,3 +1,15 @@
-Jakie funkcjonalności będą (guziki itp)
-@auth_microservice.route('/register', methods=['POST']), później funckjel, musi się odwoływać do serwisów a serwisy do repo
-TODO: Client, employee, order
+Coś jest nie tak z logowaniem
+
+do autoryzacji potrzebujemy metody która na podstawie jwt zróci id 
+
+order/orders nie działa po dodaniu recordów
+
+serwis dla produktów
+
+microserwis który zwraca listę kierowców, pracowników i klientów, pojazdów
+
+Wypisać wszystkie fetchowalne dane z tabel
+
+Naprawić to co się dzieje złego przy testach
+
+dodanie funkcji logoutu

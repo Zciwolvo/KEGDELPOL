@@ -33,7 +33,7 @@ def add_order():
 @order_microservice.route('/client/<int:client_id>', methods=['GET'])
 def get_orders(client_id):
     order_service = order_microservice.order_service
-    orders = order_service.get_orders_by_client_id(client_id)
+    orders = order_service.get_orders(client_id)
     return jsonify(orders), 200
 
 # Delete order

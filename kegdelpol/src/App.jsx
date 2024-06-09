@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./Pages/Home";
 import Contact from "./Pages/Contact";
 import About from "./Pages/About";
@@ -19,14 +19,12 @@ import ReadOrders from "./Pages/ReadOrders";
 import AddNewItem from "./Pages/AddNewItem";
 import CreateOrder from "./Pages/CreateOrder";
 
-
-
 const App = () => {
   return (
     <Router>
       <div className="app-container">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/KEGDELPOL" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />

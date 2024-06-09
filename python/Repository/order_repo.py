@@ -32,3 +32,9 @@ class OrderRepository:
             self.db.session.commit()
             return True
         return False
+
+    def get_orders_by_client_id(self, client_id):
+        return self.db.session.query(Order).filter(Order.client_id == client_id).all()
+
+    def get_order_details(self, order_id):
+        return self.db.session.query(Order).filter(Order.order_id == order_id).first()

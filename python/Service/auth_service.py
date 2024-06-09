@@ -22,7 +22,7 @@ class AuthService:
             'exp': datetime.utcnow() + timedelta(days=1)
         }
         token = jwt.encode(payload, self.secret_key, algorithm='HS256')
-        return token.decode('utf-8')
+        return token
 
     def register_user(self, username, password, role):
         hashed_password = generate_password_hash(password)
