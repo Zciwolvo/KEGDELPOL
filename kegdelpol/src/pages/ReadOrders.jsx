@@ -6,7 +6,7 @@ import ButtonSelect from '../Components/ButtonsOrders';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
-
+//DODAC TO SAMO CO PRZY DRIVERS ORDER DriverUI czyli pobieranie z bazy danych orderów
 const getTotalPrice = (order) => {
   return order.items.reduce((total, item) => total + item.quantity * item.price, 0);
 };

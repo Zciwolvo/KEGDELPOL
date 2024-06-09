@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import DropDownInput from '../Components/DropDownInput';
@@ -8,15 +8,35 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './DriverUI.css';
 import SubmitButton from '../Components/SubmitButton';
 
-const ordersData = [
-  { name: 'Order 1', orderDate: '2024-06-01', deliveryDate: '2024-06-03', status: 'Pending' },
-  { name: 'Order 2', orderDate: '2024-06-02', deliveryDate: '2024-06-04', status: 'Delivered' },
-  // Dodaj więcej zamówień według potrzeby
-];
-
+const ordersData = [];
+//ORDER LIST ZMIENIĆ DODAĆ ID 
 const DriverUI = () => {
   const [filteredOrders, setFilteredOrders] = useState(ordersData);
-  const [updatedOrders, setUpdatedOrders] = useState(ordersData); // Przechowuje zaktualizowane zamówienia
+  const [updatedOrders, setUpdatedOrders] = useState(ordersData);
+
+  useEffect(() => {
+    fetchOrders();
+  }, []); // Empty dependency array ensures it runs only once on mount
+
+  const fetchOrders = () => {
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Orders:', data);
+        ordersData = data;
+        // Assuming data is an array of orders, you can set it to state
+        setFilteredOrders(data);
+        setUpdatedOrders(data);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  };
 
   const handleOrderChange = (orderName) => {
     if (orderName) {
@@ -26,10 +46,38 @@ const DriverUI = () => {
     }
   };
 
+  const handleUpdateOrder = (updatedOrder) => {
+    setUpdatedOrders(prevOrders => prevOrders.map(order => 
+      order.name === updatedOrder.name ? updatedOrder : order
+    ));
+  };
+
   const handleSubmitChanges = () => {
-    // Tutaj można przesłać zaktualizowane zamówienia do serwera i bazy danych
+    const orderID = 123; // ID zamówienia do zaktualizowania
+
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedOrders) // Wysyłamy zaktualizowane zamówienia
+    };
+  
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/order/orders/${orderID}`, requestOptions)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Response:', data);
+        // Tutaj możesz obsłużyć odpowiedź, jeśli to konieczne
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
     console.log('Updated orders:', updatedOrders);
-    // Przykładowo można wywołać tutaj funkcję API do przesyłania danych
   };
 
   return (
@@ -37,7 +85,7 @@ const DriverUI = () => {
       <Navbar />
       <Container className="content">
         <DropDownInput label="Select Order" options={ordersData.map(order => order.name)} onChange={handleOrderChange} />
-        <OrderList orders={filteredOrders} onUpdateOrder={(updatedOrder) => setUpdatedOrders(updatedOrders.map(order => (order.name === updatedOrder.name ? updatedOrder : order)))} />
+        <OrderList orders={filteredOrders} onUpdateOrder={handleUpdateOrder} />
         <SubmitButton buttonText="Submit" onClick={handleSubmitChanges} />
       </Container>
       <Footer />
