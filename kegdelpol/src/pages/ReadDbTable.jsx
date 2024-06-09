@@ -6,7 +6,7 @@ import UserSearchInput from '../Components/UserSearchInput';
 import Table from '../Components/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ReadDbTable.css';
-
+//DO KAŻDEGO PRZYCISKU PODPIAC INNE FETCHOWANIE TAK ABY POBIERDAC DANE Z BAZY DANYCH, USYAWIC NA SZTYWNO KOLUMNY
 // Importuj dane
 import { usersData, ordersData } from './data'; // Upewnij się, że ścieżka jest poprawna
 import Quote from '../Components/Quote';
