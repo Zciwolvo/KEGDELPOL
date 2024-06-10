@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/kegdelpol/static/css/main.fc84eddb.css",
-    "main.js": "/kegdelpol/static/js/main.a9eb1169.js",
-    "static/js/453.f1716e3c.chunk.js": "/kegdelpol/static/js/453.f1716e3c.chunk.js",
-    "static/media/out.png": "/kegdelpol/static/media/out.d65c83c6c90e4ae69d9d.png",
-    "index.html": "/kegdelpol/index.html",
-    "main.fc84eddb.css.map": "/kegdelpol/static/css/main.fc84eddb.css.map",
-    "main.a9eb1169.js.map": "/kegdelpol/static/js/main.a9eb1169.js.map",
-    "453.f1716e3c.chunk.js.map": "/kegdelpol/static/js/453.f1716e3c.chunk.js.map"
+    "main.css": "/KEGDELPOL/static/css/main.fc84eddb.css",
+    "main.js": "/KEGDELPOL/static/js/main.ec80051f.js",
+    "static/js/453.47c4dd62.chunk.js": "/KEGDELPOL/static/js/453.47c4dd62.chunk.js",
+    "static/media/out.png": "/KEGDELPOL/static/media/out.d65c83c6c90e4ae69d9d.png",
+    "index.html": "/KEGDELPOL/index.html",
+    "main.fc84eddb.css.map": "/KEGDELPOL/static/css/main.fc84eddb.css.map",
+    "main.ec80051f.js.map": "/KEGDELPOL/static/js/main.ec80051f.js.map",
+    "453.47c4dd62.chunk.js.map": "/KEGDELPOL/static/js/453.47c4dd62.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fc84eddb.css",
-    "static/js/main.a9eb1169.js"
+    "static/js/main.ec80051f.js"
   ]
 }
