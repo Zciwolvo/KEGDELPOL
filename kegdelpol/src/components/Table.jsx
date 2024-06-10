@@ -3,6 +3,10 @@ import './Table.css'; // Zaimportuj plik stylów CSS
 import Button from 'react-bootstrap/Button';
 
 const Table = ({ data, columns, updateButtonText, deleteButtonText }) => {
+  if (!data || data.length === 0) {
+    return <p>No data available</p>; // Obsługa braku danych
+  }
+
   return (
     <table className="table">
       <thead>

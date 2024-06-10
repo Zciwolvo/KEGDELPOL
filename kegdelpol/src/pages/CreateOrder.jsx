@@ -4,48 +4,41 @@ import Footer from '../Components/Footer';
 import DropDownInput from '../Components/DropDownInput';
 import SubmitButton from '../Components/SubmitButton';
 import InputQuantity from '../Components/InputQuantity';
-import ItemList from '../Components/ItemList'; // Import komponentu ItemList
+import ItemList from '../Components/ItemList'; 
 
 const CreateOrder = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [totalCost, setTotalCost] = useState(0);
-  const [itemsList, setItemsList] = useState([]); // Stan przechowujący listę dodanych przedmiotów
-  const [addItemClicked, setAddItemClicked] = useState(false); // Stan określający, czy przycisk "Add Item" został kliknięty
-  const [availableItems, setAvailableItems] = useState([]); // Stan przechowujący dostępne przedmioty
+  const [itemsList, setItemsList] = useState([]);
+  const [addItemClicked, setAddItemClicked] = useState(false);
+  const [availableItems, setAvailableItems] = useState([
+    { name: "piwo", price: 2.5 },
+    { name: "wino", price: 15 },
+    { name: "skrzynia", price: 100 }
+  ]); // Dostępne przedmioty z cenami
 
   useEffect(() => {
-    // Fetchowanie listy przedmiotów z serwera
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders')
-      .then(response => response.json())
-      .then(data => {
-        setAvailableItems(data);
-      })
-      .catch(error => console.error('Error fetching items:', error));
-  }, []);
-
-  const handleItemChange = (item) => {
-    setSelectedItem(item);
-    const selectedItemPrice = availableItems.find((i) => i.name === item)?.price;
+    const selectedItemPrice = availableItems.find(item => item.name === selectedItem)?.price;
     if (selectedItemPrice !== undefined) {
       setTotalCost(selectedItemPrice * quantity);
     }
+  }, [selectedItem, quantity, availableItems]);
+
+  const handleItemChange = (item) => {
+    setSelectedItem(item);
   };
 
   const handleQuantityChange = (value) => {
     setQuantity(parseInt(value));
-    const selectedItemPrice = availableItems.find((i) => i.name === selectedItem)?.price;
-    if (selectedItemPrice !== undefined) {
-      setTotalCost(selectedItemPrice * parseInt(value));
-    }
   };
 
   const handleAddItem = () => {
-    const selectedItemPrice = availableItems.find((i) => i.name === selectedItem)?.price;
+    const selectedItemPrice = availableItems.find(item => item.name === selectedItem)?.price;
     if (selectedItemPrice !== undefined) {
       const newItem = { name: selectedItem, quantity: quantity, price: selectedItemPrice };
       setItemsList([...itemsList, newItem]);
-      setAddItemClicked(true); // Ustawienie, że przycisk "Add Item" został kliknięty
+      setAddItemClicked(true);
     }
   };
 
@@ -56,29 +49,7 @@ const CreateOrder = () => {
   };
 
   const handleSendItemsList = () => {
-    const requestOptions = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(itemsList),
-    };
-
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders', requestOptions)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Response:', data);
-        // Tutaj możesz obsłużyć odpowiedź, jeśli to konieczne
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-      });
-    console.log('Updated orders:', itemsList);  
+    console.log('Sending items list:', itemsList); // Tutaj możesz dodać kod wysyłający zamówienie do bazy danych
   };
 
   return (
@@ -89,7 +60,7 @@ const CreateOrder = () => {
         <div className="mb-3">
           <DropDownInput
             label="Select Item"
-            options={availableItems.map((item) => item.name)}
+            options={availableItems.map(item => item.name)}
             onChange={handleItemChange}
           />
           <InputQuantity

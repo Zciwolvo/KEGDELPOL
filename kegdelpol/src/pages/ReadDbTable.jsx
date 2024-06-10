@@ -34,7 +34,7 @@ const Page = () => {
       .then(response => response.json())
       .then(data => {
         setTableData(data);
-        setTableColumns(['Id', 'OrderDate', 'DeliveryDate']);
+        setTableColumns(['CustomerID', 'DeliveryDate', 'OrderDate','OrderId','status','weight']);
       })
       .catch(error => console.error('Error fetching orders:', error));
   };

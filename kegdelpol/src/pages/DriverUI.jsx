@@ -8,11 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./DriverUI.css";
 import SubmitButton from "../Components/SubmitButton";
 
-const ordersData = [];
-//ORDER LIST ZMIENIĆ DODAĆ ID
 const DriverUI = () => {
-  const [filteredOrders, setFilteredOrders] = useState(ordersData);
-  const [updatedOrders, setUpdatedOrders] = useState(ordersData);
+  const [ordersData, setOrdersData] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
+  const [updatedOrders, setUpdatedOrders] = useState([]);
 
   useEffect(() => {
     fetchOrders();
@@ -28,8 +27,7 @@ const DriverUI = () => {
       })
       .then((data) => {
         console.log("Orders:", data);
-        ordersData = data;
-        // Assuming data is an array of orders, you can set it to state
+        setOrdersData(data);
         setFilteredOrders(data);
         setUpdatedOrders(data);
       })
@@ -38,9 +36,9 @@ const DriverUI = () => {
       });
   };
 
-  const handleOrderChange = (orderName) => {
-    if (orderName) {
-      setFilteredOrders(ordersData.filter((order) => order.name === orderName));
+  const handleOrderChange = (orderId) => {
+    if (orderId) {
+      setFilteredOrders(ordersData.filter((order) => order.order_id === orderId));
     } else {
       setFilteredOrders(ordersData);
     }
@@ -49,14 +47,12 @@ const DriverUI = () => {
   const handleUpdateOrder = (updatedOrder) => {
     setUpdatedOrders((prevOrders) =>
       prevOrders.map((order) =>
-        order.name === updatedOrder.name ? updatedOrder : order
+        order.order_id === updatedOrder.order_id ? updatedOrder : order
       )
     );
   };
 
   const handleSubmitChanges = () => {
-    const orderID = 123; // ID zamówienia do zaktualizowania
-
     const requestOptions = {
       method: "PUT",
       headers: {
@@ -65,10 +61,7 @@ const DriverUI = () => {
       body: JSON.stringify(updatedOrders), // Wysyłamy zaktualizowane zamówienia
     };
 
-    fetch(
-      `https://www.igorgawlowicz.pl/kegdelpol/order/orders/${orderID}`,
-      requestOptions
-    )
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/order/orders`, requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -91,7 +84,7 @@ const DriverUI = () => {
       <Container className="content">
         <DropDownInput
           label="Select Order"
-          options={ordersData.map((order) => order.name)}
+          options={ordersData.map((order) => order.order_id)}
           onChange={handleOrderChange}
         />
         <OrderList orders={filteredOrders} onUpdateOrder={handleUpdateOrder} />

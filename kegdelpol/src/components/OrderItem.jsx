@@ -19,13 +19,13 @@ const OrderItem = ({ order, onUpdateOrder }) => {
     <ListGroupItem className="order-item">
       <Row>
         <Col md={3}>
-          <div><strong>{order.name}</strong></div>
+          <div>Customer ID: <br />{order.customer_id}</div>
         </Col>
         <Col md={3}>
-          <div>Order Date: <br /> {order.orderDate}</div>
+          <div>Order Date: <br /> {order.order_date}</div>
         </Col>
         <Col md={3}>
-          <div>Delivery Date: <br /> {order.deliveryDate}</div>
+          <div>Delivery Date: <br /> {order.delivery_date}</div>
         </Col>
         <Col md={3}>
           <Row>
