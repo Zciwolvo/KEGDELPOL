@@ -43,3 +43,4 @@ def delete_user(user_id):
     client_service = client_microservice.client_service
     client_service.delete_user(user_id)
     return jsonify({'message': 'User deleted successfully'}), 200
+
