@@ -51,3 +51,4 @@ def check_authorization():
         return jsonify({'message': 'Authorized'}), 200
     else:
         return jsonify({'message': 'Not authorized'}), 403
+
