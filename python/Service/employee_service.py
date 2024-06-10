@@ -13,3 +13,8 @@ class EmployeeService:
 
     def get_order_details(self, order_id):
         return self.order_repo.get_order_details(order_id)
+    
+    def get_all_products(self):
+        return self.product_repo.get_all_products()
+    def get_all_employees(self):
+        return self.employee_repo.get_all_employees()

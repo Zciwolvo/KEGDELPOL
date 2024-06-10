@@ -19,5 +19,4 @@ def login():
     else:
         return jsonify({'message': 'Invalid credentials'}), 401
 
-# Jakie funkcjonalności będą (guziki itp)
-# @auth_microservice.route('/register', methods=['POST']), później funckjel, musi się odwoływać do serwisów a serwisy do repo
+ 

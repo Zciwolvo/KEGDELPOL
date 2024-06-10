@@ -44,6 +44,12 @@ def add_user():
         client_service.add_user(new_user)
 
         return jsonify({'message': 'User added successfully'}), 201
+    
+#Pobieranie wszystkich produktów
+@client_microservice.route('/products', methods=['GET'])
+def get_all_products():
+    products = product_repo.get_all_products()
+    return jsonify(products), 200
 
 #modify user
 @client_microservice.route('/users/<user_id>', methods=['PUT'])

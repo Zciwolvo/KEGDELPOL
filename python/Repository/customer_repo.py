@@ -23,3 +23,5 @@ class CustomerRepository:
         user = self.db.query(customer).filter(customer.id == user_id).first()
         self.db.delete(user)
         self.db.commit()
+    def get_all_users(self):
+        return self.db.query(customer).all()

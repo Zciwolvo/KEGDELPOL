@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from Service import employee_service
 from Model import customer, vehicle
+from Repository import customer_repo, driver_repo, employee_repo, vehicle_repo, product_repo
 
 # Dodawać, modyfikować oraz usuwać użytkowników
 employee_microservice = Blueprint('employee_microservice', __name__)
@@ -31,7 +32,20 @@ def add_vehicle():
 
         return jsonify({'message': 'Vehicle added successfully'}), 201
 
+@employee_microservice.route('/products', methods=['GET'])
+def get_all_products():
+    products = product_repo.get_all_products()
+    return jsonify(products), 200
 
+@employee_microservice.route('/users', methods=['GET'])
+def get_all_users():
+    customers = customer_repo.get_all_customers()
+    drivers = driver_repo.get_all_drivers()
+    employees = employee_repo.get_all_employees()
+
+    all_users = customers + drivers + employees
+
+    return jsonify(all_users), 200
 
 
 

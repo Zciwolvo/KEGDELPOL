@@ -18,4 +18,7 @@ class ClientService:
     
     def delete_user(self, user_id):
         self.customer_repo.delete_user(user_id)
+    
+    def get_all_users(self):
+        return self.product_repo.get_all_users()
 

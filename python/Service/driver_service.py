@@ -9,3 +9,5 @@ class DriverService:
 
     def update_order_status(self, order_id, driver_username, new_status):
         return self.order_service.update_order_status(order_id, driver_username, new_status)
+    def get_all_drivers(self):
+        return self.driver_repo.get_all_drivers()
