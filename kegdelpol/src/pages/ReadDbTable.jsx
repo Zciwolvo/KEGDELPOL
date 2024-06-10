@@ -6,9 +6,6 @@ import UserSearchInput from '../Components/UserSearchInput';
 import Table from '../Components/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ReadDbTable.css';
-//DO KAŻDEGO PRZYCISKU PODPIAC INNE FETCHOWANIE TAK ABY POBIERDAC DANE Z BAZY DANYCH, USYAWIC NA SZTYWNO KOLUMNY
-// Importuj dane
-import { usersData, ordersData } from './data'; // Upewnij się, że ścieżka jest poprawna
 import Quote from '../Components/Quote';
 
 const Page = () => {
@@ -22,34 +19,69 @@ const Page = () => {
     setSearchTerm(''); // Reset search term when category changes
   };
 
+  const fetchUsers = () => {
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/users/users')
+      .then(response => response.json())
+      .then(data => {
+        setTableData(data);
+        setTableColumns(['Id', 'Username', 'Role']);
+      })
+      .catch(error => console.error('Error fetching users:', error));
+  };
+
+  const fetchOrders = () => {
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders')
+      .then(response => response.json())
+      .then(data => {
+        setTableData(data);
+        setTableColumns(['Id', 'OrderDate', 'DeliveryDate']);
+      })
+      .catch(error => console.error('Error fetching orders:', error));
+  };
+
+  const fetchVehicles = () => {
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/vehicle/vehicles')
+      .then(response => response.json())
+      .then(data => {
+        setTableData(data);
+        setTableColumns(['Id', 'VehicleType', 'Capacity', 'Registration']);
+      })
+      .catch(error => console.error('Error fetching vehicles:', error));
+  };
+
   useEffect(() => {
-    if (selectedCategory) {
-      let data = [];
-      if (selectedCategory === 'users') {
-        data = usersData;
-        setTableColumns(['ID', 'Name', 'Email', 'Role']);
-      } else if (selectedCategory === 'orders') {
-        data = ordersData;
-        setTableColumns(['ID', 'Product', 'Quantity', 'Status']);
-      }
-      setTableData(data);
+    if (selectedCategory === 'users') {
+      fetchUsers();
+    } else if (selectedCategory === 'orders') {
+      fetchOrders();
+    } else if (selectedCategory === 'vehicle') {
+      fetchVehicles();
     }
   }, [selectedCategory]);
 
   useEffect(() => {
-    if (selectedCategory) {
-      let data = selectedCategory === 'users' ? usersData : ordersData;
-      if (searchTerm !== '') {
-        data = data.filter(item => {
-          if (selectedCategory === 'users') {
-            return item.name.toLowerCase().includes(searchTerm.toLowerCase());
-          }
-          if (selectedCategory === 'orders') {
-            return item.product.toLowerCase().includes(searchTerm.toLowerCase());
-          }
-        });
+    if (searchTerm !== '') {
+      const filteredData = tableData.filter(item => {
+        if (selectedCategory === 'users') {
+          return item.username.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        if (selectedCategory === 'orders') {
+          return item.orderDate.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        if (selectedCategory === 'vehicle') {
+          return item.vehicleType.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return false;
+      });
+      setTableData(filteredData);
+    } else {
+      if (selectedCategory === 'users') {
+        fetchUsers();
+      } else if (selectedCategory === 'orders') {
+        fetchOrders();
+      } else if (selectedCategory === 'vehicle') {
+        fetchVehicles();
       }
-      setTableData(data);
     }
   }, [searchTerm, selectedCategory]);
 
@@ -57,9 +89,9 @@ const Page = () => {
     <div className="page">
       <Navbar />
       <div className="container">
-      <Quote quoteText="Did you know that China consumes the most beer as a whole?" />
-      <div className="heading">
-        <span>READ</span> THE DATABASE
+        <Quote quoteText="Did you know that China consumes the most beer as a whole?" />
+        <div className="heading">
+          <span>READ</span> THE DATABASE
         </div>
         <ButtonSelect onSelect={handleButtonSelect} />
         <UserSearchInput 
@@ -67,7 +99,7 @@ const Page = () => {
           onChange={(e) => setSearchTerm(e.target.value)} 
           placeholder="Search..."
         />
-        {tableData.length > 0 && <Table data={tableData} columns={tableColumns}   updateButtonText="Update" deleteButtonText="Remove" />}
+        {tableData.length > 0 && <Table data={tableData} columns={tableColumns} updateButtonText="Update" deleteButtonText="Remove" />}
       </div>
       <Footer />
     </div>

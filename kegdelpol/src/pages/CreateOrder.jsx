@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import DropDownInput from '../Components/DropDownInput';
@@ -12,17 +12,21 @@ const CreateOrder = () => {
   const [totalCost, setTotalCost] = useState(0);
   const [itemsList, setItemsList] = useState([]); // Stan przechowujący listę dodanych przedmiotów
   const [addItemClicked, setAddItemClicked] = useState(false); // Stan określający, czy przycisk "Add Item" został kliknięty
+  const [availableItems, setAvailableItems] = useState([]); // Stan przechowujący dostępne przedmioty
 
-  // Przykładowa lista przedmiotów
-  const availableItems = [
-    { name: 'Item1', price: 10 },
-    { name: 'Item2', price: 20 },
-    { name: 'Item3', price: 30 },
-  ];
+  useEffect(() => {
+    // Fetchowanie listy przedmiotów z serwera
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders')
+      .then(response => response.json())
+      .then(data => {
+        setAvailableItems(data);
+      })
+      .catch(error => console.error('Error fetching items:', error));
+  }, []);
 
   const handleItemChange = (item) => {
     setSelectedItem(item);
-    const selectedItemPrice = availableItems.find((item) => item.name === selectedItem)?.price;
+    const selectedItemPrice = availableItems.find((i) => i.name === item)?.price;
     if (selectedItemPrice !== undefined) {
       setTotalCost(selectedItemPrice * quantity);
     }
@@ -30,14 +34,14 @@ const CreateOrder = () => {
 
   const handleQuantityChange = (value) => {
     setQuantity(parseInt(value));
-    const selectedItemPrice = availableItems.find((item) => item.name === selectedItem)?.price;
+    const selectedItemPrice = availableItems.find((i) => i.name === selectedItem)?.price;
     if (selectedItemPrice !== undefined) {
       setTotalCost(selectedItemPrice * parseInt(value));
     }
   };
 
   const handleAddItem = () => {
-    const selectedItemPrice = availableItems.find((item) => item.name === selectedItem)?.price;
+    const selectedItemPrice = availableItems.find((i) => i.name === selectedItem)?.price;
     if (selectedItemPrice !== undefined) {
       const newItem = { name: selectedItem, quantity: quantity, price: selectedItemPrice };
       setItemsList([...itemsList, newItem]);
@@ -52,7 +56,29 @@ const CreateOrder = () => {
   };
 
   const handleSendItemsList = () => {
-    console.log('Items List:', itemsList); // Przykładowa funkcja, która wyśle listę przedmiotów
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(itemsList),
+    };
+
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders', requestOptions)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Response:', data);
+        // Tutaj możesz obsłużyć odpowiedź, jeśli to konieczne
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+    console.log('Updated orders:', itemsList);  
   };
 
   return (
