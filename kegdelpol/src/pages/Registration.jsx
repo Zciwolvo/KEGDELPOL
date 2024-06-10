@@ -6,6 +6,7 @@ import './Registration.css';
 import InputField from '../Components/InputField';
 import SubmitButton from '../Components/SubmitButton';
 import Footer from '../Components/Footer';
+import Quote from '../Components/Quote';
 
 //DODAĆ METODE PUT GDY SIE NACISNIE PZYCISK TAK ABY WYSLAC DANE NA SERWER TYLKO NAME PASSWORD ROLE
 const RegistrationPage = () => {
@@ -16,12 +17,13 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="registration-container d-flex flex-column min-vh-100">
+    <div className="registration-container">
       <Navbar />
-      <div className="content d-flex flex-column align-items-center flex-grow-1">
-        <h1 className="register-header text-center my-4">
-          Register <span className="highlight">New Account</span>
-        </h1>
+      <div className="container">
+        <Quote quoteText="Did you know that Budweiser is the world’s most famous beer?" />
+        <div className="heading">
+        <span>REGISTER</span> NEW ACCOUNT
+      </div>
         <DropDownInput label="User Type" options={['Employee', 'Driver', 'Customer']} onChange={handleUserTypeChange} />
         
         {userType === 'Employee' && (
@@ -50,7 +52,7 @@ const RegistrationPage = () => {
         )}
 
         <SubmitButton buttonText="Confirm" />
-      </div>
+        </div>
       <Footer />
     </div>
   );
