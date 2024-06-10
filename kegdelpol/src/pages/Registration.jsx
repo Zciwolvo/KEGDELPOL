@@ -7,6 +7,7 @@ import InputField from '../Components/InputField';
 import SubmitButton from '../Components/SubmitButton';
 import Footer from '../Components/Footer';
 
+//DODAĆ METODE PUT GDY SIE NACISNIE PZYCISK TAK ABY WYSLAC DANE NA SERWER TYLKO NAME PASSWORD ROLE
 const RegistrationPage = () => {
   const [userType, setUserType] = useState('');
 

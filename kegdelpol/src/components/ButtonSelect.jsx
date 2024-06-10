@@ -24,6 +24,12 @@ const ButtonSelect = ({ onSelect }) => {
       >
         Users
       </button>
+      <button
+        className={`btn ${activeButton === 'vehicle' ? 'btn-primary' : 'btn-secondary'}`}
+        onClick={() => handleButtonClick('vehicle')}
+      >
+        Vehicle
+      </button>
     </div>
   );
 };
