@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
-import Table from '../Components/UserTable';
+import UserList from '../Components/UserList';
 import Quote from '../Components/Quote';
-import SubmitButton from '../Components/SubmitButton'; // Importujemy komponent SubmitButton
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './UpdateUser.css';
 import UserSearchInput from '../Components/UserSearchInput'; // Importujemy komponent UserSearchInput
@@ -12,21 +11,16 @@ const UpdateUser = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [updatedUsers, setUpdatedUsers] = useState([]); // Stan przechowujący zaktualizowanych użytkowników
 
-  // Fetchowanie użytkowników z serwera
+  // Dodanie przykładowych użytkowników na sztywno
   useEffect(() => {
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/user/users')
-      .then(response => response.json())
-      .then(data => {
-        setUsers(data);
-        setFilteredUsers(data); // Ustawienie początkowego filtrowania
-      })
-      .catch(error => console.error('Error fetching users:', error));
+    const exampleUsers = [
+      { auth_id: 1, login: 'johndoe', role: 'employee' },
+      { auth_id: 2, login: 'janedoe', role: 'client' }
+    ];
+    setUsers(exampleUsers);
+    setFilteredUsers(exampleUsers);
   }, []);
-
-  // Kolumny tabeli
-  const columns = ['ID', 'Name', 'Role'];
 
   // Obsługa zmiany wprowadzonej frazy
   const handleInputChange = (event) => {
@@ -36,33 +30,36 @@ const UpdateUser = () => {
   // Filtrowanie użytkowników na bieżąco
   useEffect(() => {
     const filtered = users.filter(user => 
-      user.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
+      user.login.toLowerCase().includes(searchTerm.trim().toLowerCase())
     );
     setFilteredUsers(filtered);
   }, [searchTerm, users]);
 
   // Obsługa zmiany roli użytkownika
   const handleRoleChange = (id, newRole) => {
+    if (!['employee', 'client', 'driver'].includes(newRole)) {
+      console.error('Invalid role:', newRole);
+      return;
+    }
+    
     const updatedUsersList = users.map(user => 
-      user.id === id ? { ...user, role: newRole } : user
+      user.auth_id === id ? { ...user, role: newRole } : user
     );
     setUsers(updatedUsersList);
     setFilteredUsers(updatedUsersList);
-    const updatedUser = updatedUsersList.find(user => user.id === id);
-    setUpdatedUsers([...updatedUsers, updatedUser]);
-  };
 
-  // Obsługa kliknięcia przycisku Submit
-  const handleSubmit = () => {
+    // Wysyłanie zaktualizowanego użytkownika na serwer
+    const token = localStorage.getItem('jwt');
     const requestOptions = {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(updatedUsers),
+      body: JSON.stringify({ id, role: newRole }), // Przesłanie ID i nowej roli
     };
 
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/user/users', requestOptions)
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/user/users/${id}`, requestOptions) // Dodanie ID do URL
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -76,7 +73,6 @@ const UpdateUser = () => {
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
       });
-      console.log('Updated users:', updatedUsers);  
   };
 
   return (
@@ -94,14 +90,7 @@ const UpdateUser = () => {
             placeholder="Type User name"
           />
         </div>
-        <Table
-          data={filteredUsers}
-          columns={columns}
-          updateButtonText="Update"
-          deleteButtonText="Remove"
-          onRoleChange={handleRoleChange} // Przekazanie funkcji zmiany roli
-        />
-        <SubmitButton buttonText="Submit" onClick={handleSubmit} />
+        <UserList users={filteredUsers} onRoleChange={handleRoleChange} />
       </div>
       <Footer />
     </div>

@@ -1,69 +1,83 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
-import DropDownInput from '../Components/DropDownInput';
+import DropDownInput from '../Components/DropDownInputDriver';
 import SubmitButton from '../Components/SubmitButton';
 import InputQuantity from '../Components/InputQuantity';
-import ItemList from '../Components/ItemList'; // Import komponentu ItemList
+import ItemList from '../Components/ItemList';
 
 const CreateOrder = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [totalCost, setTotalCost] = useState(0);
-  const [itemsList, setItemsList] = useState([]); // Stan przechowujący listę dodanych przedmiotów
-  const [addItemClicked, setAddItemClicked] = useState(false); // Stan określający, czy przycisk "Add Item" został kliknięty
-  const [availableItems, setAvailableItems] = useState([]); // Stan przechowujący dostępne przedmioty
+  const [itemId, setItemId] = useState(null); // Przechowuje tylko id wybranego przedmiotu
+  const [addItemClicked, setAddItemClicked] = useState(false);
+  const [availableItems, setAvailableItems] = useState([]);
 
   useEffect(() => {
-    // Fetchowanie listy przedmiotów z serwera
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders')
-      .then(response => response.json())
-      .then(data => {
-        setAvailableItems(data);
-      })
-      .catch(error => console.error('Error fetching items:', error));
+    // Pobranie przykładowych przedmiotów (tymczasowo, zamiast z serwera)
+    const sampleItems = [
+      { id: 1, name: 'Product 1', price: 10 },
+      { id: 2, name: 'Product 2', price: 20 },
+      { id: 3, name: 'Product 3', price: 15 },
+    ];
+    setAvailableItems(sampleItems);
   }, []);
 
   const handleItemChange = (item) => {
-    setSelectedItem(item);
-    const selectedItemPrice = availableItems.find((i) => i.name === item)?.price;
-    if (selectedItemPrice !== undefined) {
-      setTotalCost(selectedItemPrice * quantity);
+    const selectedItemData = availableItems.find((i) => i.name === item);
+    if (selectedItemData) {
+      setSelectedItem(item);
+      setItemId(selectedItemData.id);
+      // Aktualizacja ceny tylko jeśli selectedItemData istnieje
+      setTotalCost(selectedItemData.price * quantity);
     }
   };
 
   const handleQuantityChange = (value) => {
     setQuantity(parseInt(value));
-    const selectedItemPrice = availableItems.find((i) => i.name === selectedItem)?.price;
-    if (selectedItemPrice !== undefined) {
-      setTotalCost(selectedItemPrice * parseInt(value));
+    // Sprawdź, czy itemId nie jest null przed aktualizacją ceny
+    if (itemId !== null) {
+      const selectedItemData = availableItems.find((i) => i.id === itemId);
+      if (selectedItemData) {
+        setTotalCost(selectedItemData.price * parseInt(value));
+      }
     }
   };
 
   const handleAddItem = () => {
-    const selectedItemPrice = availableItems.find((i) => i.name === selectedItem)?.price;
-    if (selectedItemPrice !== undefined) {
-      const newItem = { name: selectedItem, quantity: quantity, price: selectedItemPrice };
-      setItemsList([...itemsList, newItem]);
-      setAddItemClicked(true); // Ustawienie, że przycisk "Add Item" został kliknięty
+    // Zaktualizuj tylko itemId
+    const selectedItemData = availableItems.find((item) => item.name === selectedItem);
+    if (selectedItemData) {
+      setItemId(selectedItemData.id);
+      setAddItemClicked(true);
     }
   };
 
-  const handleRemoveItem = (index) => {
-    const updatedItemsList = [...itemsList];
-    updatedItemsList.splice(index, 1);
-    setItemsList(updatedItemsList);
+  const handleRemoveItem = () => {
+    // Usuń wybrany przedmiot
+    setItemId(null);
+    setAddItemClicked(false);
   };
 
   const handleSendItemsList = () => {
+    // Przygotowanie danych do wysłania na serwer
+    const createdAt = new Date().toISOString(); // Data utworzenia zamówienia
+    const dataToSend = {
+      createdAt: createdAt,
+      itemId: itemId // Przekazywanie tylko id przedmiotu
+    };
+
     const requestOptions = {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(itemsList),
+      body: JSON.stringify(dataToSend),
     };
+    console.log(JSON.stringify(dataToSend));
 
+    // Wysłanie danych na serwer
     fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders', requestOptions)
       .then(response => {
         if (!response.ok) {
@@ -73,12 +87,11 @@ const CreateOrder = () => {
       })
       .then(data => {
         console.log('Response:', data);
-        // Tutaj możesz obsłużyć odpowiedź, jeśli to konieczne
+        // Możesz obsłużyć odpowiedź serwera tutaj
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
       });
-    console.log('Updated orders:', itemsList);  
   };
 
   return (
@@ -87,11 +100,14 @@ const CreateOrder = () => {
       <div className="container mt-4">
         <h1>Create New Order</h1>
         <div className="mb-3">
-          <DropDownInput
-            label="Select Item"
-            options={availableItems.map((item) => item.name)}
-            onChange={handleItemChange}
-          />
+          {/* Sprawdź, czy availableItems nie jest puste */}
+          {availableItems.length > 0 && (
+            <DropDownInput
+              label="Select Item"
+              options={availableItems.map((item) => item.name)}
+              onChange={handleItemChange}
+            />
+          )}
           <InputQuantity
             value={quantity}
             onChange={(value) => handleQuantityChange(value)}
@@ -100,9 +116,11 @@ const CreateOrder = () => {
           <p>Total: ${totalCost}</p>
           <SubmitButton buttonText="Add Item" onClick={handleAddItem} />
         </div>
-        {addItemClicked && itemsList.length > 0 && (
+        {addItemClicked && itemId !== null && (
           <>
-            <ItemList items={itemsList} onRemoveItem={handleRemoveItem} />
+            {/* Przekazanie tylko itemId do ItemList */}
+            <ItemList items={[{ id: itemId, name: selectedItem, quantity: quantity }]} availableItems={availableItems} onRemoveItem={handleRemoveItem} />
+
             <SubmitButton buttonText="Send Items List" onClick={handleSendItemsList} />
           </>
         )}

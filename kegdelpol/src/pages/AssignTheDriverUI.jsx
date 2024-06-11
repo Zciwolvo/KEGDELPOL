@@ -10,14 +10,11 @@ const AssignTheDriverUI = () => {
   const [selectedDriver, setSelectedDriver] = useState('');
   const [selectedOrder, setSelectedOrder] = useState('');
   const [ordersData, setOrdersData] = useState([]);
-  const [driversData, setDriversData] = useState([
-    { label: 'Driver 1', value: 'Driver 1' },
-    { label: 'Driver 2', value: 'Driver 2' },
-    { label: 'Driver 3', value: 'Driver 3' }
-  ]);
+  const [driversData, setDriversData] = useState([]);
 
   useEffect(() => {
     fetchOrders();
+    fetchDrivers();
   }, []);
 
   const fetchOrders = () => {
@@ -42,6 +39,28 @@ const AssignTheDriverUI = () => {
       });
   };
 
+  const fetchDrivers = () => {
+    fetch("https://www.igorgawlowicz.pl/kegdelpol/driver/get_all_drivers")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Drivers:", data);
+        // Assuming data is an array of drivers
+        const formattedDrivers = data.map(driver => ({
+          label: driver.name,
+          value: driver.driver_id
+        }));
+        setDriversData(formattedDrivers);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  };
+
   const handleDriverChange = (value) => {
     setSelectedDriver(value);
     console.log('Selected Driver:', value);
@@ -60,10 +79,10 @@ const AssignTheDriverUI = () => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ order_id: selectedOrder, driver_id: selectedDriver })
+      body: JSON.stringify({ driver_id: selectedDriver })
     };
 
-    fetch("https://www.igorgawlowicz.pl/kegdelpol/order/assign-driver", requestOptions)
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/order/orders/${selectedOrder}`, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
