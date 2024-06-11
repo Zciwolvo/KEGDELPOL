@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, current_app
 from Model.order import Order
 from Service.order_service import OrderService
+from fastapi.encoders import jsonable_encoder
 
 order_microservice = Blueprint('order_microservice', __name__)
 
@@ -34,7 +35,7 @@ def add_order():
 def get_orders_by_client_id(client_id):
     order_service = order_microservice.order_service
     orders = order_service.get_orders(client_id)
-    return jsonify(orders), 200
+    return jsonable_encoder(orders), 200
 
 # Delete order
 @order_microservice.route('/orders/<order_id>', methods=['DELETE'])
@@ -60,7 +61,7 @@ def update_order(order_id):
 def order_details(order_id):
     order_service = order_microservice.order_service
     order = order_service.get_order_details(order_id)
-    return jsonify(order), 200
+    return jsonable_encoder(order), 200
 
 # Modify order
 @order_microservice.route('/orders/<order_id>', methods=['PUT'])
@@ -79,4 +80,4 @@ def modify_order(order_id):
 def get_all_orders():
     order_service = order_microservice.order_service
     orders = order_service.get_all_orders()
-    return jsonify(orders), 200
+    return jsonable_encoder(orders), 200

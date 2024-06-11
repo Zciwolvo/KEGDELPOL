@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify, request, current_app
 from Service.auth_service import AuthService
-from flask_sqlalchemy import SQLAlchemy
 import jwt
 
 auth_microservice = Blueprint('auth_microservice', __name__)
@@ -52,3 +51,12 @@ def check_authorization():
     else:
         return jsonify({'message': 'Not authorized'}), 403
 
+@auth_microservice.route('/get_auth_id', methods=['POST'])
+def get_auth_id():
+    auth_service = auth_microservice.auth_service
+    token = request.headers.get('Authorization').split()[1]
+    try:
+        auth_id = auth_service.get_auth_id_from_token(token)
+        return jsonify({'auth_id': auth_id}), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 401
