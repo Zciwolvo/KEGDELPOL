@@ -16,3 +16,7 @@ class AuthRepository:
             session.add(new_user)
             session.commit()
             return new_user
+
+    def get_all_users(self):
+        with self.Session() as session:
+            return session.query(Authorization.auth_id, Authorization.login, Authorization.role).all()

@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, current_app
 from Model.order import Order
+from Model.order_detail import OrderDetail
 from Service.order_service import OrderService
 from fastapi.encoders import jsonable_encoder
 
@@ -18,15 +19,24 @@ def add_order():
         return jsonify({'error': 'Invalid or missing JSON data'}), 400
 
     new_order = Order(
-        order_id=data['order_id'],
-        client_id=data['client_id'],
-        product_id=data['product_id'],
-        quantity=data['quantity'],
-        total_price=data['total_price']
+        client_id=data['customer_id'],
     )
+    
+    
 
     order_service = order_microservice.order_service
     order_service.add_order(new_order)
+    
+    order_id = get_order()
+    
+    new_detail = OrderDetail(
+        order_id = order_id,
+        product_id = data['product_id'],
+        quantity = data["quantity"],
+        total_price = data["total_price"]
+    )
+    
+    order_service.add_order_detail(new_detail)
 
     return jsonify({"message": "Order added successfully"}), 201
 
@@ -61,6 +71,12 @@ def update_order(order_id):
 def order_details(order_id):
     order_service = order_microservice.order_service
     order = order_service.get_order_details(order_id)
+    return jsonable_encoder(order), 200
+
+@order_microservice.route('/orders/<order_id>', methods=['GET'])
+def get_order():
+    order_service = order_microservice.order_service
+    order = order_service.get_order()
     return jsonable_encoder(order), 200
 
 # Modify order

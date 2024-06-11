@@ -58,3 +58,13 @@ def update_order_status(order_id):
         return jsonify({'message': 'Order status updated successfully'}), 200
     else:
         return jsonify({'message': 'Failed to update order status'}), 400
+
+
+@driver_microservice.route('/get_all_drivers', methods=['GET'])
+def get_all_drivers():
+    driver_microservice = driver_microservice.driver_service()
+    try:
+        drivers = driver_microservice.get_all_products()
+        return jsonable_encoder(drivers), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500

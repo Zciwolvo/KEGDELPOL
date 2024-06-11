@@ -34,10 +34,13 @@ class AuthService:
             username = data['username']
             user = self.auth_repo.get_user_by_username(username)
             if user:
-                return user.auth_id
+                return user.auth_id, user.role
             else:
                 raise Exception("User not found")
         except jwt.ExpiredSignatureError:
             raise Exception("Token expired")
         except jwt.InvalidTokenError:
             raise Exception("Invalid token")
+        
+    def get_all_users(self):
+        return self.auth_repo.get_all_users()
