@@ -15,9 +15,21 @@ const ReadOrders = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    // Pobranie tokena JWT z localStorage
+    const token = localStorage.getItem('jwt');
+  
     // Pobieranie danych z endpointu "/order/orders"
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders')
-      .then(response => response.json())
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders', {
+      headers: {
+        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         // Filtrujemy i modyfikujemy dane, aby zawierały tylko potrzebne informacje
         const modifiedOrders = data.map(order => ({
@@ -29,15 +41,25 @@ const ReadOrders = () => {
         setOrders(modifiedOrders);
       })
       .catch(error => console.error('Error fetching orders:', error));
-
+  
     // Pobieranie danych z endpointu "/employee/get_all_products"
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/employee/get_all_products')
-      .then(response => response.json())
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/employee/get_all_products', {
+      headers: {
+        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         setProducts(data);
       })
       .catch(error => console.error('Error fetching products:', error));
   }, []);
+  
 
   const getTotalPrice = (order) => {
     return order.items.reduce((total, item) => total + item.quantity * item.price, 0);

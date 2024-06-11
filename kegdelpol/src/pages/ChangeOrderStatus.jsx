@@ -21,23 +21,29 @@ const ChangeOrderStatus = () => {
 
 
   const fetchOrders = () => {
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders')
-      .then((response) => {
+    const token = localStorage.getItem('jwt'); // Pobranie tokena JWT z localStorage
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders', {
+      headers: {
+        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+      }
+    })
+      .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then((data) => {
+      .then(data => {
         console.log('Orders:', data);
         setOrdersData(data);
         setFilteredOrders(data);
         setUpdatedOrders(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
       });
   };
+  
 
   const handleOrderChange = (orderId) => {
     if (orderId) {
@@ -61,7 +67,7 @@ const ChangeOrderStatus = () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(updatedOrders), // Wysyłamy zaktualizowane zamówienia
     };

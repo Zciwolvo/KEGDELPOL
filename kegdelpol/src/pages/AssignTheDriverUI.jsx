@@ -18,7 +18,12 @@ const AssignTheDriverUI = () => {
   }, []);
 
   const fetchOrders = () => {
-    fetch("https://www.igorgawlowicz.pl/kegdelpol/order/orders")
+    const token = localStorage.getItem('jwt'); // Pobranie tokena JWT z localStorage
+    fetch("https://www.igorgawlowicz.pl/kegdelpol/order/orders", {
+      headers: {
+        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+      }
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -28,9 +33,9 @@ const AssignTheDriverUI = () => {
       .then((data) => {
         console.log("Orders:", data);
         // Assuming data is an array of orders
-        const formattedOrders = data.map(order => ({
+        const formattedOrders = data.map((order) => ({
           label: `Order ${order.order_id}`,
-          value: order.order_id
+          value: order.order_id,
         }));
         setOrdersData(formattedOrders);
       })
@@ -38,9 +43,14 @@ const AssignTheDriverUI = () => {
         console.error("There was a problem with the fetch operation:", error);
       });
   };
-
+  
   const fetchDrivers = () => {
-    fetch("https://www.igorgawlowicz.pl/kegdelpol/driver/get_all_drivers")
+    const token = localStorage.getItem('jwt'); // Pobranie tokena JWT z localStorage
+    fetch("https://www.igorgawlowicz.pl/kegdelpol/driver/get_all_drivers", {
+      headers: {
+        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+      }
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -50,9 +60,9 @@ const AssignTheDriverUI = () => {
       .then((data) => {
         console.log("Drivers:", data);
         // Assuming data is an array of drivers
-        const formattedDrivers = data.map(driver => ({
+        const formattedDrivers = data.map((driver) => ({
           label: driver.name,
-          value: driver.driver_id
+          value: driver.driver_id,
         }));
         setDriversData(formattedDrivers);
       })
@@ -60,6 +70,7 @@ const AssignTheDriverUI = () => {
         console.error("There was a problem with the fetch operation:", error);
       });
   };
+  
 
   const handleDriverChange = (value) => {
     setSelectedDriver(value);

@@ -20,8 +20,18 @@ const Page = () => {
   };
 
   const fetchUsers = () => {
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/auth/get_all_users')
-      .then(response => response.json())
+    const token = localStorage.getItem('jwt');
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/auth/get_all_users', {
+      headers: {
+        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         setTableData(data);
         setTableColumns(['Id', 'Login', 'Role']);
@@ -30,8 +40,18 @@ const Page = () => {
   };
 
   const fetchOrders = () => {
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders')
-      .then(response => response.json())
+    const token = localStorage.getItem('jwt');
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders', {
+      headers: {
+        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         setTableData(data);
         setTableColumns(['ClientID', 'DeliveryDate', 'OrderDate', 'OrderID', 'Status', 'Weight']);
@@ -40,11 +60,22 @@ const Page = () => {
   };
 
   const fetchVehicles = () => {
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/employee/get_all_vehicles')
-      .then(response => response.json())
+    const token = localStorage.getItem('jwt');
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/employee/get_all_vehicles', {
+      headers: {
+        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         setTableData(data);
         setTableColumns(['Id', 'VehicleType', 'Capacity', 'Registration']);
+        console.log(data);
       })
       .catch(error => console.error('Error fetching vehicles:', error));
   };

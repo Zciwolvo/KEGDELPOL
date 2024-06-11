@@ -11,6 +11,8 @@ const EmployeeUI = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("jwt");
+    localStorage.removeItem("auth_id");
+    localStorage.removeItem("role");
     navigate("/login");
   };
   return (
