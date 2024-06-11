@@ -13,22 +13,41 @@ const CreateOrder = () => {
   const [itemId, setItemId] = useState(null); // Przechowuje tylko id wybranego przedmiotu
   const [addItemClicked, setAddItemClicked] = useState(false);
   const [availableItems, setAvailableItems] = useState([]);
+  const [customerId, setCustomerId] = useState(null); // Przechowuje id klienta
 
   useEffect(() => {
-    // Pobranie przykładowych przedmiotów (tymczasowo, zamiast z serwera)
-    const sampleItems = [
-      { id: 1, name: 'Product 1', price: 10 },
-      { id: 2, name: 'Product 2', price: 20 },
-      { id: 3, name: 'Product 3', price: 15 },
-    ];
-    setAvailableItems(sampleItems);
+    // Pobranie customer_id z local storage
+    const customerIdFromStorage = localStorage.getItem('auth_id');
+    setCustomerId(customerIdFromStorage);
+  
+    // Pobranie danych z serwera z uwzględnieniem tokena JWT
+    const token = localStorage.getItem('jwt'); // Pobranie tokena JWT z localStorage
+  
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/employee/get_all_products', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      setAvailableItems(data);
+    })
+    .catch(error => console.error('Error fetching items:', error));
   }, []);
+  
 
   const handleItemChange = (item) => {
     const selectedItemData = availableItems.find((i) => i.name === item);
     if (selectedItemData) {
       setSelectedItem(item);
-      setItemId(selectedItemData.id);
+      setItemId(selectedItemData.product_id); // Ustawienie itemId na product_id
       // Aktualizacja ceny tylko jeśli selectedItemData istnieje
       setTotalCost(selectedItemData.price * quantity);
     }
@@ -38,7 +57,7 @@ const CreateOrder = () => {
     setQuantity(parseInt(value));
     // Sprawdź, czy itemId nie jest null przed aktualizacją ceny
     if (itemId !== null) {
-      const selectedItemData = availableItems.find((i) => i.id === itemId);
+      const selectedItemData = availableItems.find((i) => i.product_id === itemId);
       if (selectedItemData) {
         setTotalCost(selectedItemData.price * parseInt(value));
       }
@@ -49,7 +68,7 @@ const CreateOrder = () => {
     // Zaktualizuj tylko itemId
     const selectedItemData = availableItems.find((item) => item.name === selectedItem);
     if (selectedItemData) {
-      setItemId(selectedItemData.id);
+      setItemId(selectedItemData.product_id);
       setAddItemClicked(true);
     }
   };
@@ -62,10 +81,13 @@ const CreateOrder = () => {
 
   const handleSendItemsList = () => {
     // Przygotowanie danych do wysłania na serwer
-    const createdAt = new Date().toISOString(); // Data utworzenia zamówienia
+    const totalPrice = totalCost; // Całkowita cena
+
     const dataToSend = {
-      createdAt: createdAt,
-      itemId: itemId // Przekazywanie tylko id przedmiotu
+      customer_id: customerId, // Przekazanie customer_id
+      product_id: itemId, // Przekazanie itemId
+      quantity: quantity, // Przekazanie quantity
+      total_price: totalPrice // Przekazanie total_price
     };
 
     const requestOptions = {
@@ -75,7 +97,6 @@ const CreateOrder = () => {
       },
       body: JSON.stringify(dataToSend),
     };
-    console.log(JSON.stringify(dataToSend));
 
     // Wysłanie danych na serwer
     fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders', requestOptions)

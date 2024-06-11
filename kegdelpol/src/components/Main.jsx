@@ -4,19 +4,17 @@ import Footer from "./Footer";
 import "./Main.css";
 import ConfirmButton from "./ConfirmButton";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode';
-
 
 const Main = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(
+    // Logowanie użytkownika
+    const loginResponse = await fetch(
       "https://www.igorgawlowicz.pl/kegdelpol/auth/login",
       {
         method: "POST",
@@ -27,30 +25,52 @@ const Main = () => {
       }
     );
 
-    const data = await response.json();
-
-    if (response.status === 200) {
-      const decodedToken = jwtDecode(data.token);
-      const role = decodedToken.role;
-
-      setToken(data.token);
-      localStorage.setItem("jwt", data.token);
-
-      if (role === "employee") {
-        navigate("/employeeUI");
-      } else if (role === "customer") {
-        navigate("/clientUI");
-      } else if (role === "driver") {
-        navigate("/driverUI");
-      } else {
-        console.error("Unknown role");
-      }
-    } else {
-      console.log("fail");
-      console.log(JSON.stringify({ username, password }));
+    if (!loginResponse.ok) {
+      console.error("Login failed");
+      return;
     }
-    
+
+    const loginData = await loginResponse.json();
+    const authToken = loginData.token;
+
+    // Pobranie auth_id i roli
+    const authIdAndRoleResponse = await fetch(
+      "https://www.igorgawlowicz.pl/kegdelpol/auth/get_auth_id_and_role",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`, // Przekazanie JWT tokena
+        },
+        body: JSON.stringify({ token: authToken }),
+      }
+    );
+
+    if (!authIdAndRoleResponse.ok) {
+      console.error("Failed to fetch auth ID and role");
+      return;
+    }
+
+    const authIdAndRoleData = await authIdAndRoleResponse.json();
+    const { role, auth_id } = authIdAndRoleData;
+
+    // Zapisanie danych do localStorage
+    localStorage.setItem("jwt", authToken);
+    localStorage.setItem("auth_id", auth_id);
+    localStorage.setItem("role", role);
+
+    // Przekierowanie na odpowiedni interfejs użytkownika w zależności od roli
+    if (role === "Employee") {
+      navigate("/employeeUI");
+    } else if (role === "Customer") {
+      navigate("/clientUI");
+    } else if (role === "Driver") {
+      navigate("/driverUI");
+    } else {
+      console.error("Unknown role");
+    }
   };
+
   return (
     <div className="page-container">
       <Navbar />

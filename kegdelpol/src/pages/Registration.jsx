@@ -34,10 +34,13 @@ const RegistrationPage = () => {
       password: password,
     };
 
+    const token = localStorage.getItem('jwt');
+
     const response = await fetch('https://www.igorgawlowicz.pl/kegdelpol/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
       },
       body: JSON.stringify(userData),
     });

@@ -12,30 +12,48 @@ const UpdateUser = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
 
-  // Dodanie przykładowych użytkowników na sztywno
   useEffect(() => {
-    const exampleUsers = [
-      { auth_id: 1, login: 'johndoe', role: 'employee' },
-      { auth_id: 2, login: 'janedoe', role: 'client' }
-    ];
-    setUsers(exampleUsers);
-    setFilteredUsers(exampleUsers);
+    const fetchUsers = async () => {
+      try {
+        // Pobranie tokena JWT z localStorage
+        const token = localStorage.getItem('jwt');
+  
+        const response = await fetch('https://www.igorgawlowicz.pl/kegdelpol/auth/get_all_users', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+          }
+        });
+  
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+  
+        const data = await response.json();
+        setUsers(data);
+        setFilteredUsers(data);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+  
+    fetchUsers();
   }, []);
+  
 
-  // Obsługa zmiany wprowadzonej frazy
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  // Filtrowanie użytkowników na bieżąco
   useEffect(() => {
+    // Filtruj użytkowników na bieżąco po zmianie wyszukiwanej frazy
     const filtered = users.filter(user => 
       user.login.toLowerCase().includes(searchTerm.trim().toLowerCase())
     );
     setFilteredUsers(filtered);
   }, [searchTerm, users]);
 
-  // Obsługa zmiany roli użytkownika
   const handleRoleChange = (id, newRole) => {
     if (!['employee', 'client', 'driver'].includes(newRole)) {
       console.error('Invalid role:', newRole);
@@ -48,7 +66,6 @@ const UpdateUser = () => {
     setUsers(updatedUsersList);
     setFilteredUsers(updatedUsersList);
 
-    // Wysyłanie zaktualizowanego użytkownika na serwer
     const token = localStorage.getItem('jwt');
     const requestOptions = {
       method: 'PUT',
@@ -56,10 +73,10 @@ const UpdateUser = () => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ id, role: newRole }), // Przesłanie ID i nowej roli
+      body: JSON.stringify({ id, role: newRole }),
     };
 
-    fetch(`https://www.igorgawlowicz.pl/kegdelpol/user/users/${id}`, requestOptions) // Dodanie ID do URL
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/user/users/${id}`, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -68,7 +85,6 @@ const UpdateUser = () => {
       })
       .then(data => {
         console.log('Response:', data);
-        // Tutaj możesz obsłużyć odpowiedź, jeśli to konieczne
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
