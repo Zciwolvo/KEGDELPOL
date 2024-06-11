@@ -1,62 +1,100 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
-import Table from '../Components/Table';
+import DropDownInput from '../Components/DropDownInput'; // Użyjemy tego samego komponentu DropDownInput co w DriverUI
+import OrderList from '../Components/OrderList';
+import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ChangeOrderStatus.css'; // Importujemy styl CSS dla ChangeOrderStatus
-import UserSearchInput from '../Components/UserSearchInput'; // Importujemy komponent UserSearchInput
-import Quote from '../Components/Quote';
+import SubmitButton from '../Components/SubmitButton';
+
 
 const ChangeOrderStatus = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [ordersData, setOrdersData] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
+  const [updatedOrders, setUpdatedOrders] = useState([]);
 
-  // Dane zamówień
-  const orders = [
-    { id: 1, orderID: 'ORD123', orderDate: '2024-05-01', deliveryDate: '2024-05-10', orderStatus: 'Pending' },
-    { id: 2, orderID: 'ORD456', orderDate: '2024-05-02', deliveryDate: '2024-05-12', orderStatus: 'Completed' },
-    { id: 3, orderID: 'ORD789', orderDate: '2024-05-03', deliveryDate: '2024-05-15', orderStatus: 'Processing' },
-    
-    // Dodaj więcej zamówień...
-  ];
+  useEffect(() => {
+    fetchOrders();
+  }, []); // Empty dependency array ensures it runs only once on mount
 
-  // Kolumny tabeli
-  const columns = ['ID', 'OrderID', 'OrderDate', 'DeliveryDate', 'OrderStatus'];
 
-  // Obsługa zmiany wprowadzonej frazy
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
+
+  const fetchOrders = () => {
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Orders:', data);
+        setOrdersData(data);
+        setFilteredOrders(data);
+        setUpdatedOrders(data);
+      })
+      .catch((error) => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
   };
 
-  // Filtrowanie zamówień na bieżąco
-  useEffect(() => {
-    const filtered = orders.filter(order => 
-      order.orderID.toLowerCase().includes(searchTerm.trim().toLowerCase())
+  const handleOrderChange = (orderId) => {
+    if (orderId) {
+      setFilteredOrders(ordersData.filter((order) => order.order_id === parseInt(orderId)));
+    } else {
+      setFilteredOrders(ordersData);
+    }
+  };
+
+  const handleUpdateOrder = (updatedOrder) => {
+    setUpdatedOrders((prevOrders) =>
+      prevOrders.map((order) =>
+        order.order_id === updatedOrder.order_id ? updatedOrder : order
+      )
     );
-    setFilteredOrders(filtered);
-  }, [searchTerm]);
+  };
+
+  const handleSubmitChanges = () => {
+    const token = localStorage.getItem('jwt');
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(updatedOrders), // Wysyłamy zaktualizowane zamówienia
+    };
+
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/orders/`, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Response:', data);
+        // Tutaj możesz obsłużyć odpowiedź, jeśli to konieczne
+      })
+      .catch((error) => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+    console.log('Updated orders:', updatedOrders);
+  };
 
   return (
     <div className="change-order-status-container">
       <Navbar />
-      <div className="container">
-        <Quote quoteText="Did you know that the oldest beer brewery dates back to 1040?" />
-        <div className="heading">
-          <span>CHANGE</span> ORDER STATUS
-        </div>
-        {/* Użyjemy naszego nowego komponentu UserSearchInput */}
-        <UserSearchInput
-          value={searchTerm}
-          onChange={handleInputChange}
-          placeholder="Type Order ID"
+      <Container className="contet">
+        <DropDownInput
+          label="Select Order"
+          options={ordersData.map((order) => ({ label: `Order ${order.order_id}`, value: order.order_id.toString() }))}
+          onChange={handleOrderChange}
         />
-        {/* Wyświetlamy tabelę */}
-        <Table
-          data={filteredOrders}
-          columns={columns}
-          updateButtonText="Update Order"
-        />
-      </div>
+        <OrderList orders={filteredOrders} onUpdateOrder={handleUpdateOrder} />
+        <SubmitButton buttonText="Submit" onClick={handleSubmitChanges} />
+      </Container>
       <Footer />
     </div>
   );
