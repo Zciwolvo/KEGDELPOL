@@ -1,57 +1,47 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
 import OrderStatus from '../Components/Order';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import UserSearchInput from '../Components/UserSearchInput';
 import DropDownInput from '../Components/DropDownInputDriver';
 import ButtonSelect from '../Components/ButtonsOrders';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
-//DODAC TO SAMO CO PRZY DRIVERS ORDER DriverUI czyli pobieranie z bazy danych orderów
-const getTotalPrice = (order) => {
-  return order.items.reduce((total, item) => total + item.quantity * item.price, 0);
-};
 
 const ReadOrders = () => {
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState(null);
   const [sortBy, setSortBy] = useState('');
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Zastąp poniższe przykładowe dane rzeczywistym wywołaniem API
-    const fetchedOrders = [
-      {
-        status: 'Processing',
-        createdAt: '2023-07-01T14:48:00.000Z',
-        deliveryDate: '2023-07-05T14:48:00.000Z',
-        items: [
-          { name: 'Item1', quantity: 2, price: 25.00 },
-          { name: 'Item2', quantity: 1, price: 15.00 },
-        ],
-      },
-      {
-        status: 'Shipped',
-        createdAt: '2023-05-02T14:48:00.000Z',
-        deliveryDate: '2023-05-06T14:48:00.000Z',
-        items: [
-          { name: 'Item3', quantity: 1, price: 45.00 },
-          { name: 'Item4', quantity: 3, price: 10.00 },
-        ],
-      },
-      {
-        status: 'Shipped',
-        createdAt: '2023-05-012T14:48:00.000Z',
-        deliveryDate: '2023-05-06T14:48:00.000Z',
-        items: [
-          { name: 'Item3', quantity: 1, price: 10.00 },
-          { name: 'Item4', quantity: 3, price: 10.00 },
-        ],
-      },
-    ];
+    // Pobieranie danych z endpointu "/order/orders"
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders')
+      .then(response => response.json())
+      .then(data => {
+        // Filtrujemy i modyfikujemy dane, aby zawierały tylko potrzebne informacje
+        const modifiedOrders = data.map(order => ({
+          status: order.status,
+          createdAt: order.order_date,
+          deliveryDate: order.delivery_date,
+          items: [],
+        }));
+        setOrders(modifiedOrders);
+      })
+      .catch(error => console.error('Error fetching orders:', error));
 
-    // Ustawienie stanu zamówień na pobrane dane
-    setOrders(fetchedOrders);
+    // Pobieranie danych z endpointu "/employee/get_all_products"
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/employee/get_all_products')
+      .then(response => response.json())
+      .then(data => {
+        setProducts(data);
+      })
+      .catch(error => console.error('Error fetching products:', error));
   }, []);
+
+  const getTotalPrice = (order) => {
+    return order.items.reduce((total, item) => total + item.quantity * item.price, 0);
+  };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -66,16 +56,12 @@ const ReadOrders = () => {
   };
 
   const handleTotalCost = (totalCost) => {
-    // Możemy zrobić coś z całkowitą ceną, ale w tym przypadku nie jest to potrzebne
     console.log('Total cost:', totalCost);
   };
 
   const filteredOrders = orders.filter(order => {
     const matchesStatus = !filterStatus || order.status === filterStatus;
-    const matchesSearch = order.items.some(item =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    return matchesStatus && matchesSearch;
+    return matchesStatus;
   });
 
   const sortedOrders = filteredOrders.sort((a, b) => {
@@ -95,7 +81,7 @@ const ReadOrders = () => {
 
   return (
     <div className="container">
-        <Navbar />
+      <Navbar />
       <h1 className="text-center my-4">Orders List</h1>
       <UserSearchInput
         value={searchTerm}
@@ -109,7 +95,14 @@ const ReadOrders = () => {
         onChange={handleSortByChange}
       />
       {sortedOrders.map((order, index) => (
-        <OrderStatus key={index} order={order} onTotalCost={handleTotalCost} />
+        <div key={index}>
+          <OrderStatus order={order} onTotalCost={handleTotalCost} />
+          <ul>
+            {order.items.map((item, idx) => (
+              <li key={idx}>{item.name} - {item.price}</li>
+            ))}
+          </ul>
+        </div>
       ))}
       <Footer />
     </div>
