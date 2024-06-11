@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './DropDownInput.css';
 
-const DropDownInput = ({ label, options, onChange }) => {
+const DropDownInputDriver = ({ label, options, onChange }) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleOptionChange = (event) => {
@@ -19,12 +19,12 @@ const DropDownInput = ({ label, options, onChange }) => {
         className="dropdown-select"
       >
         <option value="">Choose an option</option>
-        {options && options.map((option, index) => (
-          <option key={index} value={option.value}>{option.label}</option>
+        {options.map((option, index) => (
+          <option key={index} value={option}>{option}</option>
         ))}
       </select>
     </div>
   );
 };
 
-export default DropDownInput;
+export default DropDownInputDriver;

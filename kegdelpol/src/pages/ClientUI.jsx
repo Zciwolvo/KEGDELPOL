@@ -4,12 +4,20 @@ import Footer from '../Components/Footer';
 import MoveTo from '../Components/MoveTo';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ClientUI.css';
+import { useNavigate } from 'react-router-dom';
+import LogoutButton from '../Components/LogoutButton';
 
 const ClientUI = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    navigate("/login");
+  };
   return (
     <div className="client-ui-container d-flex flex-column min-vh-100">
       <Navbar />
       <div className="content-client-ui d-flex flex-column justify-content-center align-items-center flex-grow-1">
+      <div className="item-2"><LogoutButton className="logout-button" onLogout={handleLogout}/></div>
         <div className="choose-action-client text-center font-weight-bold">
           Choose your action
         </div>

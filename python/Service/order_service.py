@@ -11,7 +11,7 @@ class OrderService:
     def add_order(self, new_order):
         self.order_repo.add_order(new_order)
 
-    def get_orders(self, client_id):
+    def get_orders_by_client_id(self, client_id):
         return self.order_repo.get_orders_by_client_id(client_id)
 
     def delete_order(self, order_id):

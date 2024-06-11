@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
-import DropDownInput from "../Components/DropDownInput";
+import DropDownInput from "../Components/DropDownInputDriver";
 import OrderList from "../Components/OrderList";
 import { Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./DriverUI.css";
 import SubmitButton from "../Components/SubmitButton";
+import LogoutButton from "../Components/LogoutButton";
+import { useNavigate } from "react-router-dom";
 
-const ordersData = [];
-//ORDER LIST ZMIENIĆ DODAĆ ID
 const DriverUI = () => {
-  const [filteredOrders, setFilteredOrders] = useState(ordersData);
-  const [updatedOrders, setUpdatedOrders] = useState(ordersData);
+  const [ordersData, setOrdersData] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
+  const [updatedOrders, setUpdatedOrders] = useState([]);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    navigate("/login");
+  };
 
   useEffect(() => {
     fetchOrders();
@@ -28,8 +34,7 @@ const DriverUI = () => {
       })
       .then((data) => {
         console.log("Orders:", data);
-        ordersData = data;
-        // Assuming data is an array of orders, you can set it to state
+        setOrdersData(data);
         setFilteredOrders(data);
         setUpdatedOrders(data);
       })
@@ -38,9 +43,9 @@ const DriverUI = () => {
       });
   };
 
-  const handleOrderChange = (orderName) => {
-    if (orderName) {
-      setFilteredOrders(ordersData.filter((order) => order.name === orderName));
+  const handleOrderChange = (orderId) => {
+    if (orderId) {
+      setFilteredOrders(ordersData.filter((order) => order.order_id === parseInt(orderId)));
     } else {
       setFilteredOrders(ordersData);
     }
@@ -49,26 +54,23 @@ const DriverUI = () => {
   const handleUpdateOrder = (updatedOrder) => {
     setUpdatedOrders((prevOrders) =>
       prevOrders.map((order) =>
-        order.name === updatedOrder.name ? updatedOrder : order
+        order.order_id === updatedOrder.order_id ? updatedOrder : order
       )
     );
   };
 
   const handleSubmitChanges = () => {
-    const orderID = 123; // ID zamówienia do zaktualizowania
-
+    const token = localStorage.getItem('jwt');
     const requestOptions = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
-      body: JSON.stringify(updatedOrders), // Wysyłamy zaktualizowane zamówienia
+      body: JSON.stringify({ status: "newStatus" }), // Zakładam, że wysyłasz status
     };
-
-    fetch(
-      `https://www.igorgawlowicz.pl/kegdelpol/order/orders/${orderID}`,
-      requestOptions
-    )
+  
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/orders/`, requestOptions) // Zastąp 1 rzeczywistym order_id
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -77,7 +79,6 @@ const DriverUI = () => {
       })
       .then((data) => {
         console.log("Response:", data);
-        // Tutaj możesz obsłużyć odpowiedź, jeśli to konieczne
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -88,10 +89,11 @@ const DriverUI = () => {
   return (
     <div className="driver-ui">
       <Navbar />
-      <Container className="content">
+      <Container className="conten">
+      <div className="item-2"><LogoutButton className="logout-button" onLogout={handleLogout}/></div>
         <DropDownInput
           label="Select Order"
-          options={ordersData.map((order) => order.name)}
+          options={ordersData.map((order) => order.order_id.toString())}
           onChange={handleOrderChange}
         />
         <OrderList orders={filteredOrders} onUpdateOrder={handleUpdateOrder} />

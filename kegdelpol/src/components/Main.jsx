@@ -3,11 +3,15 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "./Main.css";
 import ConfirmButton from "./ConfirmButton";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode';
+
 
 const Main = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,12 +30,26 @@ const Main = () => {
     const data = await response.json();
 
     if (response.status === 200) {
+      const decodedToken = jwtDecode(data.token);
+      const role = decodedToken.role;
+
       setToken(data.token);
-      localStorage.setItem("jwt", JSON.stringify(token));
+      localStorage.setItem("jwt", data.token);
+
+      if (role === "employee") {
+        navigate("/employeeUI");
+      } else if (role === "customer") {
+        navigate("/clientUI");
+      } else if (role === "driver") {
+        navigate("/driverUI");
+      } else {
+        console.error("Unknown role");
+      }
     } else {
       console.log("fail");
       console.log(JSON.stringify({ username, password }));
     }
+    
   };
   return (
     <div className="page-container">
