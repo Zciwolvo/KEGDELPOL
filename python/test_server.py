@@ -4,7 +4,7 @@ from MicroService import auth_microservice, client_microservice, driver_microser
 from Model.database import init_db
 
 user = "tester"
-password = "S4LxxySlFG$"
+password = "micro4321"
 
 def create_app():
     app = Flask(__name__)

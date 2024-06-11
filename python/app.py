@@ -6,6 +6,8 @@ from Model.database import init_db
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://IgorGawlowicz:micro4321@IgorGawlowicz.mysql.pythonanywhere-services.com/IgorGawlowicz$kegdelpol'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 299
+app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
 
 db = SQLAlchemy(app)
 app.config['db'] = db

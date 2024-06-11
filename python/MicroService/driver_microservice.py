@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, current_app
 from Service.driver_service import DriverService
 import jwt
+from fastapi.encoders import jsonable_encoder
 
 driver_microservice = Blueprint('driver_microservice', __name__)
 
@@ -32,7 +33,7 @@ def get_orders():
 
     driver_service = driver_microservice.driver_service
     orders = driver_service.get_orders_for_driver(username)
-    return jsonify({'orders': orders}), 200
+    return jsonable_encoder({'orders': orders}), 200
 
 @driver_microservice.route('/orders/<int:order_id>', methods=['PUT'])
 def update_order_status(order_id):

@@ -9,7 +9,7 @@ class AuthService:
         self.secret_key = 'secret'
 
     def authenticate_user(self, username, password):
-        user = self.auth_repo.get_user_by_username(username)
+        user = self.auth_repo.get_user_by_username(username)    
         if user and check_password_hash(user.password, password):
             return True
         return False
@@ -27,3 +27,17 @@ class AuthService:
     def register_user(self, username, password, role):
         hashed_password = generate_password_hash(password)
         return self.auth_repo.create_user(username, hashed_password, role)
+
+    def get_auth_id_from_token(self, token):
+        try:
+            data = jwt.decode(token, self.secret_key, algorithms=['HS256'])
+            username = data['username']
+            user = self.auth_repo.get_user_by_username(username)
+            if user:
+                return user.auth_id
+            else:
+                raise Exception("User not found")
+        except jwt.ExpiredSignatureError:
+            raise Exception("Token expired")
+        except jwt.InvalidTokenError:
+            raise Exception("Invalid token")
