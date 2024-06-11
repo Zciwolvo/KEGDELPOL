@@ -11,6 +11,8 @@ class DriverMicroserviceTestCase(unittest.TestCase):
         cls.app, cls.db = create_app()
         cls.app_context = push_app_context(cls.app)
         cls.client = cls.app.test_client()
+        with current_app.app_context():
+            current_app.config['SECRET_KEY'] = 'secret'
 
     @classmethod
     def tearDownClass(cls):

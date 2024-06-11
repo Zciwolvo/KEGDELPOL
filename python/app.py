@@ -6,6 +6,7 @@ from Model.database import init_db
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://IgorGawlowicz:micro4321@IgorGawlowicz.mysql.pythonanywhere-services.com/IgorGawlowicz$kegdelpol'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'secret'
 
 db = SQLAlchemy(app)
 app.config['db'] = db

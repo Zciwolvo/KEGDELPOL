@@ -31,7 +31,7 @@ def add_order():
 
 # Get orders by client ID
 @order_microservice.route('/client/<int:client_id>', methods=['GET'])
-def get_orders(client_id):
+def get_orders_by_client_id(client_id):
     order_service = order_microservice.order_service
     orders = order_service.get_orders(client_id)
     return jsonify(orders), 200
