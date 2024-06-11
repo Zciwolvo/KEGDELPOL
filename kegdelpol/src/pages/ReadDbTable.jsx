@@ -20,11 +20,11 @@ const Page = () => {
   };
 
   const fetchUsers = () => {
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/users/users')
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/auth/get_all_users')
       .then(response => response.json())
       .then(data => {
         setTableData(data);
-        setTableColumns(['Id', 'Username', 'Role']);
+        setTableColumns(['Id', 'Login', 'Role']);
       })
       .catch(error => console.error('Error fetching users:', error));
   };
@@ -40,7 +40,7 @@ const Page = () => {
   };
 
   const fetchVehicles = () => {
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/vehicle/vehicles')
+    fetch('https://www.igorgawlowicz.pl/kegdelpol/employee/get_all_vehicles')
       .then(response => response.json())
       .then(data => {
         setTableData(data);

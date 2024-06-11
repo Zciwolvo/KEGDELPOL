@@ -3,12 +3,38 @@ import StatusButton from './StatusButton';
 import { ListGroupItem, Row, Col } from 'react-bootstrap';
 import './OrderItem.css';
 
-const OrderItem = ({ order, onUpdateOrder }) => {
+const OrderItem = ({ order }) => {
   const [status, setStatus] = useState(order.status);
 
   const handleStatusChange = (newStatus) => {
     setStatus(newStatus);
-    onUpdateOrder({ ...order, status: newStatus });
+    updateOrderStatus(newStatus);
+  };
+
+  const updateOrderStatus = (newStatus) => {
+    const token = localStorage.getItem('jwt');
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ status: newStatus }),
+    };
+
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/orders/${order.order_id}`, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Order updated:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
   };
 
   useEffect(() => {
