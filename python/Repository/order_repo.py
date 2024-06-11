@@ -1,4 +1,5 @@
 from Model.order import Order
+from Model.order_detail import OrderDetail
 
 class OrderRepository:
     def __init__(self, db):
@@ -9,6 +10,10 @@ class OrderRepository:
 
     def add_order(self, new_order):
         self.db.session.add(new_order)
+        self.db.session.commit()
+        
+    def add_detail(self, new_order_detail):
+        self.db.session.add(new_order_detail)
         self.db.session.commit()
 
     def delete_order(self, order_id):
@@ -24,6 +29,9 @@ class OrderRepository:
 
     def get_all_orders(self):
         return self.db.session.query(Order).all()
+    
+    def get_order(self):
+        return self.db.session.query(Order.order_id).order_by(Order.order_id.desc()).first()[0]
 
     def update_order_status(self, order_id, driver_username, new_status):
         order = self.db.session.query(Order).filter_by(order_id=order_id, driver_id=driver_username).first()
@@ -37,4 +45,4 @@ class OrderRepository:
         return self.db.session.query(Order).filter(Order.client_id == client_id).all()
 
     def get_order_details(self, order_id):
-        return self.db.session.query(Order).filter(Order.order_id == order_id).first()
+        return self.db.session.query(OrderDetail).filter(OrderDetail.order_detail_id == order_id).first()

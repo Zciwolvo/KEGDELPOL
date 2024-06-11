@@ -27,7 +27,6 @@ class EmployeeMicroserviceTestCase(unittest.TestCase):
     @patch('Service.employee_service.EmployeeService.add_vehicle')
     def test_add_vehicle_success(self, mock_add_vehicle):
         vehicle_data = {
-            'vehicle_id': 1,
             'type': 'Truck',
             'capacity': 10000,
             'registration_info': 'ABC-123'
@@ -49,7 +48,6 @@ class EmployeeMicroserviceTestCase(unittest.TestCase):
 
     def test_add_vehicle_missing_fields(self):
         incomplete_data = {
-            'vehicle_id': 1,
             'type': 'Truck'
         }
         response = self.client.post('/employee/vehicles', json=incomplete_data)

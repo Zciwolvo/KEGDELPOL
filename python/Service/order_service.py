@@ -10,8 +10,11 @@ class OrderService:
 
     def add_order(self, new_order):
         self.order_repo.add_order(new_order)
+        
+    def add_order_detail(self, order_detail):
+        self.order_repo.add_detail(order_detail)
 
-    def get_orders(self, client_id):
+    def get_orders_by_client_id(self, client_id):
         return self.order_repo.get_orders_by_client_id(client_id)
 
     def delete_order(self, order_id):
@@ -31,6 +34,9 @@ class OrderService:
 
     def order_details(self, order_id):
         return self.order_detail_repo.get_order_details_by_order_id(order_id)
+    
+    def get_order(self):
+        return self.order_detail_repo.get_order()
 
     def modify_order(self, order_id, order_data):
         self.order_repo.modify_order(order_id, order_data)

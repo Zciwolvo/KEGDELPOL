@@ -3,29 +3,60 @@ import StatusButton from './StatusButton';
 import { ListGroupItem, Row, Col } from 'react-bootstrap';
 import './OrderItem.css';
 
-const OrderItem = ({ order, onUpdateOrder }) => {
+const OrderItem = ({ order }) => {
   const [status, setStatus] = useState(order.status);
 
   const handleStatusChange = (newStatus) => {
     setStatus(newStatus);
-    onUpdateOrder({ ...order, status: newStatus });
+    updateOrderStatus(newStatus);
+  };
+
+  const updateOrderStatus = (newStatus) => {
+    const token = localStorage.getItem('jwt');
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ status: newStatus }),
+    };
+
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/orders/${order.order_id}`, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Order updated:", data);
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
   };
 
   useEffect(() => {
     setStatus(order.status); // Ensure status sync when order changes
   }, [order]);
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <ListGroupItem className="order-item">
       <Row>
         <Col md={3}>
-          <div><strong>{order.name}</strong></div>
+          <div><strong>Order ID: {order.order_id}</strong></div>
         </Col>
         <Col md={3}>
-          <div>Order Date: <br /> {order.orderDate}</div>
+          <div>Order Date: <br /> {formatDate(order.order_date)}</div>
         </Col>
         <Col md={3}>
-          <div>Delivery Date: <br /> {order.deliveryDate}</div>
+          <div>Delivery Date: <br /> {formatDate(order.delivery_date)}</div>
         </Col>
         <Col md={3}>
           <Row>

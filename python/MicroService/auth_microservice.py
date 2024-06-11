@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, current_app
 from Service.auth_service import AuthService
-from flask_sqlalchemy import SQLAlchemy
 import jwt
+from fastapi.encoders import jsonable_encoder
 
 auth_microservice = Blueprint('auth_microservice', __name__)
 
@@ -52,3 +52,22 @@ def check_authorization():
     else:
         return jsonify({'message': 'Not authorized'}), 403
 
+@auth_microservice.route('/get_auth_id_and_role', methods=['POST'])
+def get_auth_id():
+    auth_service = auth_microservice.auth_service
+    token = request.headers.get('Authorization').split()[1]
+    try:
+        auth_id, auth_role = auth_service.get_auth_id_from_token(token)
+        return jsonable_encoder({'auth_id': auth_id, 'role': auth_role}), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 401
+    
+
+@auth_microservice.route('/get_all_users', methods=['GET'])
+def get_all_users():
+    auth_service = auth_microservice.auth_service
+    try:
+        users = auth_service.get_all_users()
+        return jsonable_encoder(users), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
