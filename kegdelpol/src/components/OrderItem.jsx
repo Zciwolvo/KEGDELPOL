@@ -15,17 +15,22 @@ const OrderItem = ({ order, onUpdateOrder }) => {
     setStatus(order.status); // Ensure status sync when order changes
   }, [order]);
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <ListGroupItem className="order-item">
       <Row>
         <Col md={3}>
-          <div><strong>{order.name}</strong></div>
+          <div><strong>Order ID: {order.order_id}</strong></div>
         </Col>
         <Col md={3}>
-          <div>Order Date: <br /> {order.orderDate}</div>
+          <div>Order Date: <br /> {formatDate(order.order_date)}</div>
         </Col>
         <Col md={3}>
-          <div>Delivery Date: <br /> {order.deliveryDate}</div>
+          <div>Delivery Date: <br /> {formatDate(order.delivery_date)}</div>
         </Col>
         <Col md={3}>
           <Row>

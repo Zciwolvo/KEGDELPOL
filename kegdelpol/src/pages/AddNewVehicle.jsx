@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import InputField from '../Components/InputField'; // Importujemy komponent InputField
-import DropDownInput from '../Components/DropDownInput';
+import DropDownInput from '../Components/DropDownInputDriver';
 import ConfirmButton from '../Components/ConfirmButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AddNewVehicle.css';
