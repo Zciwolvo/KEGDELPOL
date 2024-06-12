@@ -21,6 +21,7 @@ const OrderItem = ({ order }) => {
       },
       body: JSON.stringify({ status: newStatus }),
     };
+    console.log(JSON.stringify({ status: newStatus }));
 
     fetch(`https://www.igorgawlowicz.pl/kegdelpol/order/orders/${order.order_id}`, requestOptions)
       .then((response) => {
