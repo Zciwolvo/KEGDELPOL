@@ -84,7 +84,7 @@ const CreateOrder = () => {
     const totalPrice = totalCost; // Całkowita cena
 
     const dataToSend = {
-      customer_id: customerId, // Przekazanie customer_id
+      auth_id: customerId, // Dodaj auth_id do wysyłanych danych
       product_id: itemId, // Przekazanie itemId
       quantity: quantity, // Przekazanie quantity
       total_price: totalPrice // Przekazanie total_price
@@ -97,6 +97,7 @@ const CreateOrder = () => {
       },
       body: JSON.stringify(dataToSend),
     };
+    console.log(JSON.stringify(dataToSend));
 
     // Wysłanie danych na serwer
     fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders', requestOptions)

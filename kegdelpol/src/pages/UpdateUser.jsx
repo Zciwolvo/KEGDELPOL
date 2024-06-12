@@ -73,10 +73,11 @@ const UpdateUser = () => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ id, role: newRole }),
+      body: JSON.stringify({role: newRole }),
     };
+    console.log(JSON.stringify({role: newRole }));
 
-    fetch(`https://www.igorgawlowicz.pl/kegdelpol/user/users/${id}`, requestOptions)
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/auth/modify/${id}`, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
