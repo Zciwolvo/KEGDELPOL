@@ -5,6 +5,7 @@ import DropDownInput from '../Components/DropDownInput';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AssignTheDriverUI.css';
 import ConfirmButton from '../Components/ConfirmButton';
+import Quote from '../Components/Quote';
 
 const AssignTheDriverUI = () => {
   const [selectedDriver, setSelectedDriver] = useState('');
@@ -111,7 +112,8 @@ const AssignTheDriverUI = () => {
   return (
     <div className="container">
       <Navbar />
-      <div className="flexbox-container">
+      
+        <Quote quoteText="Did you know that beer intake protects the body against radiation?" />
         <div className="heading">
           <span>ASSIGN</span> THE DRIVER
         </div>
@@ -120,7 +122,7 @@ const AssignTheDriverUI = () => {
           <DropDownInput label="Select Order" options={ordersData} onChange={handleOrderChange} />
         </div>
         <ConfirmButton buttonText="CONFIRM" onClick={handleSubmit} />
-      </div>
+      
       <Footer />
     </div>
   );

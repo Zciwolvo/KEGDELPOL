@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import InputField from '../Components/InputField';
 import SubmitButton from '../Components/SubmitButton';
+import Quote from '../Components/Quote';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AddNewItem = () => {
@@ -54,10 +55,11 @@ const AddNewItem = () => {
   };
 
   return (
-    <div>
+    <div className="add-new-item-container">
       <Navbar />
-      <div className="container mt-4">
-        <h1>Add New Item</h1>
+      <div className="container">
+        <Quote quoteText="Did you know that there are several beer spas in the Czech Republic?"/>
+        <div className="heading"><span>ADD</span> NEW ITEM</div>
         <InputField label="Name" id="itemName" placeholder="Enter name" onChange={handleNameChange} />
         <InputField label="Price" id="itemPrice" type="number" placeholder="Enter price" onChange={handlePriceChange} />
         <InputField label="Description" id="itemDescription" placeholder="Enter description" onChange={handleDescriptionChange} />

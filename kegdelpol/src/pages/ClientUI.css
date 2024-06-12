@@ -1,26 +1,29 @@
+body{
+  min-height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+}
 
-.content-client-ui {
-  flex-grow: 1;
+.client-ui {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 80px; /* Dodaj padding, aby uniknąć nachodzenia na navbar */
-  position: relative;
+  padding-top: 150px;
+ 
 }
 
-.choose-action-client {
-  font-size: 50px; /* Dostosuj rozmiar czcionki według potrzeb */
-  margin-bottom: 30px; /* Zmniejsz odległość między napisem a obrazkami */
+.client-grid-elements {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(auto-fit, minmax(auto,1fr, 1fr));
+  gap: 20vh; /* Set the gap between rows */
+
+  grid-template-areas:
+  ". item-1 item-2"
+  "item-3 item-4 item-5"
+  "item-6 item-7 item-8";
 }
 
-.centered-images-client {
-  display: flex;
-  justify-content: center;
-  gap: 50px; /* Dodaj odstęp między obrazkami */
-  flex-wrap: wrap; /* Pozwól na zawijanie się elementów na mniejszych ekranach */
-  width: 100%; /* Upewnij się, że obrazy są wyśrodkowane */
-}
+
 
 @media (max-width: 768px) {
   .content-client-ui {

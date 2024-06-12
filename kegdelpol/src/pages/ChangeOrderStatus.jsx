@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import DropDownInput from '../Components/DropDownInput'; // Użyjemy tego samego komponentu DropDownInput co w DriverUI
 import OrderList from '../Components/OrderList';
+import Quote from '../Components/Quote';
 import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ChangeOrderStatus.css'; // Importujemy styl CSS dla ChangeOrderStatus
@@ -92,15 +93,18 @@ const ChangeOrderStatus = () => {
   return (
     <div className="change-order-status-container">
       <Navbar />
-      <Container className="contet">
+      
+      <div className="container">
+      <Quote quoteText="Did you know that small consumption of beer reduces the risk of ulcers?"/>
+      <div className="heading"><span>CHANGE</span> ORDER STATUS</div>
         <DropDownInput
           label="Select Order"
           options={ordersData.map((order) => ({ label: `Order ${order.order_id}`, value: order.order_id.toString() }))}
           onChange={handleOrderChange}
         />
         <OrderList orders={filteredOrders} onUpdateOrder={handleUpdateOrder} />
-        <SubmitButton buttonText="Submit" onClick={handleSubmitChanges} />
-      </Container>
+        <SubmitButton buttonText="SUBMIT" onClick={handleSubmitChanges} />
+      </div>
       <Footer />
     </div>
   );

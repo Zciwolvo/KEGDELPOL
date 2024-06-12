@@ -65,11 +65,12 @@ const RegistrationPage = () => {
         <div className="heading">
           <span>REGISTER</span> NEW ACCOUNT
         </div>
-        <DropDownInput label="User Type" options={['Employee', 'Driver', 'Customer']} onChange={handleUserTypeChange} />
-
-        <InputField label="Username" id="username" placeholder="Enter username" value={username} onChange={handleUsernameChange} />
-        <InputField label="Password" id="password" placeholder="Enter password" type="password" value={password} onChange={handlePasswordChange} />
-
+        <div className="registration-flexbox">
+            <DropDownInput label="User Type" options={['Employee', 'Driver', 'Customer']} onChange={handleUserTypeChange} />
+            <InputField label="Username" id="username" placeholder="Enter username" value={username} onChange={handleUsernameChange} />
+            <InputField label="Password" id="password" placeholder="Enter password" type="password" value={password} onChange={handlePasswordChange} />
+        </div>
+        
         <SubmitButton buttonText="Confirm" onClick={handleRegister} />
       </div>
       <Footer />
