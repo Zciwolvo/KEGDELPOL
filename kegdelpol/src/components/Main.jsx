@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "./Main.css";
@@ -9,12 +9,38 @@ const Main = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
+  const [role, setRole] = useState("");
 
+  useEffect(() => {
+    // Get role from localStorage
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      setRole(storedRole);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (role) {
+      switch (role.toUpperCase()) {
+        case "EMPLOYEE":
+          navigate("/employeeUI");
+          break;
+        case "CUSTOMER":
+          navigate("/clientUI");
+          break;
+        case "DRIVER":
+          navigate("/driverUI");
+          break;
+        default:
+          console.error("Unknown role");
+      }
+    }
+  }, [role, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setErrorMessage('');
+    setErrorMessage("");
 
     // Logowanie użytkownika
     const loginResponse = await fetch(
@@ -30,7 +56,7 @@ const Main = () => {
 
     if (!loginResponse.ok) {
       console.error("Login failed");
-      setErrorMessage('Invalid username or password');
+      setErrorMessage("Invalid username or password");
       return;
     }
 
@@ -64,11 +90,11 @@ const Main = () => {
     localStorage.setItem("role", role);
 
     // Przekierowanie na odpowiedni interfejs użytkownika w zależności od roli
-    if (role === "Employee") {
+    if (role.toUpperCase() === "EMPLOYEE") {
       navigate("/employeeUI");
-    } else if (role === "Customer") {
+    } else if (role.toUpperCase() === "CUSTOMER") {
       navigate("/clientUI");
-    } else if (role === "Driver") {
+    } else if (role.toUpperCase() === "DRIVER") {
       navigate("/driverUI");
     } else {
       console.error("Unknown role");
