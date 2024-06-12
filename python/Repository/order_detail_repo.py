@@ -8,4 +8,5 @@ class OrderDetailRepository:
         self.db.session.commit()
 
     def get_order_details(self, order_id):
-        return self.db.session.query(OrderDetail).filter(OrderDetail.order_id == order_id).all()
+        orders = self.db.session.query(OrderDetail.order_id, OrderDetail.order_detail_id, OrderDetail.product_id, OrderDetail.quantity, OrderDetail.total_price).filter(OrderDetail.order_id == order_id).all()
+        return [dict(order._asdict()) for order in orders]

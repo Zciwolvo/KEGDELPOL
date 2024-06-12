@@ -19,7 +19,7 @@ def add_order():
         return jsonify({'error': 'Invalid or missing JSON data'}), 400
 
     new_order = Order(
-        client_id=data['customer_id'],
+        customer_id=data['customer_id'],
     )
     
     
@@ -30,7 +30,7 @@ def add_order():
     order_id = get_order()
     
     new_detail = OrderDetail(
-        order_id = order_id,
+        order_id = order_id[0],
         product_id = data['product_id'],
         quantity = data["quantity"],
         total_price = data["total_price"]
@@ -44,7 +44,7 @@ def add_order():
 @order_microservice.route('/client/<int:client_id>', methods=['GET'])
 def get_orders_by_client_id(client_id):
     order_service = order_microservice.order_service
-    orders = order_service.get_orders(client_id)
+    orders = order_service.get_orders_by_client_id(client_id)
     return jsonable_encoder(orders), 200
 
 # Delete order

@@ -12,7 +12,7 @@ class OrderDetail(Base):
     __tablename__ = 'order_detail'
 
     order_detail_id = Column(Integer, primary_key=True)
-    order_id = Column(Integer, ForeignKey('order.order_id'))
-    product_id = Column(Integer, ForeignKey('product.product_id'))
+    order_id = Column(Integer)
+    product_id = Column(Integer)
     quantity = Column(Integer)
     total_price = Column(Decimal)

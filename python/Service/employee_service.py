@@ -20,7 +20,7 @@ class EmployeeService:
         return self.order_repo.get_order_details(order_id)
     
     def get_products(self):
-        return self.product_repo.get_all_orders()
+        return self.product_repo.get_all_products()
     
     def add_product(self, product_data):
         self.product_repo.add_product(product_data)

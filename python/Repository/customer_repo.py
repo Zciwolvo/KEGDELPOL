@@ -6,7 +6,8 @@ class CustomerRepository:
         self.db = db
 
     def get_orders_by_client_id(self, client_id):
-        return self.db.session.query(Order).filter(Order.customer_id == client_id).all()
+        orders = self.db.session.query(Order.customer_id, Order.delivery_date, Order.order_date, Order.order_id, Order.status, Order.weight).filter(Order.customer_id == client_id).all()
+        return [dict(order._asdict()) for order in orders]
 
     def add_user(self, new_user):
         self.db.session.add(new_user)

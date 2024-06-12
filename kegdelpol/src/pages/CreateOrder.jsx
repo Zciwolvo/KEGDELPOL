@@ -1,59 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
-import DropDownInput from '../Components/DropDownInputDriver';
-import SubmitButton from '../Components/SubmitButton';
-import InputQuantity from '../Components/InputQuantity';
-import ItemList from '../Components/ItemList';
+import React, { useState, useEffect } from "react";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
+import DropDownInput from "../Components/DropDownInputDriver";
+import SubmitButton from "../Components/SubmitButton";
+import InputQuantity from "../Components/InputQuantity";
+import ItemList from "../Components/ItemList";
 
 const CreateOrder = () => {
-  const [selectedItem, setSelectedItem] = useState('');
+  const [selectedItem, setSelectedItem] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [totalCost, setTotalCost] = useState(0);
-  const [itemId, setItemId] = useState(null);
+  const [itemId, setItemId] = useState(null); // Przechowuje tylko id wybranego przedmiotu
   const [addItemClicked, setAddItemClicked] = useState(false);
   const [availableItems, setAvailableItems] = useState([]);
-  const [customerId, setCustomerId] = useState(null);
-  const [orderItems, setOrderItems] = useState([]);
+  const [customerId, setCustomerId] = useState(null); // Przechowuje id klienta
 
   useEffect(() => {
-    const customerIdFromStorage = localStorage.getItem('auth_id');
+    // Pobranie customer_id z local storage
+    const customerIdFromStorage = localStorage.getItem("auth_id");
     setCustomerId(customerIdFromStorage);
 
-    const token = localStorage.getItem('jwt');
+    // Pobranie danych z serwera z uwzględnieniem tokena JWT
+    const token = localStorage.getItem("jwt"); // Pobranie tokena JWT z localStorage
 
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/employee/get_all_products', {
-      method: 'GET',
+    fetch("https://www.igorgawlowicz.pl/kegdelpol/employee/get_all_products", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Dodanie tokena do nagłówka
+      },
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      setAvailableItems(data);
-    })
-    .catch(error => console.error('Error fetching items:', error));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setAvailableItems(data);
+      })
+      .catch((error) => console.error("Error fetching items:", error));
   }, []);
 
   const handleItemChange = (item) => {
     const selectedItemData = availableItems.find((i) => i.name === item);
     if (selectedItemData) {
       setSelectedItem(item);
-      setItemId(selectedItemData.product_id);
+      setItemId(selectedItemData.product_id); // Ustawienie itemId na product_id
+      // Aktualizacja ceny tylko jeśli selectedItemData istnieje
       setTotalCost(selectedItemData.price * quantity);
     }
   };
 
   const handleQuantityChange = (value) => {
     setQuantity(parseInt(value));
+    // Sprawdź, czy itemId nie jest null przed aktualizacją ceny
     if (itemId !== null) {
-      const selectedItemData = availableItems.find((i) => i.product_id === itemId);
+      const selectedItemData = availableItems.find(
+        (i) => i.product_id === itemId
+      );
       if (selectedItemData) {
         setTotalCost(selectedItemData.price * parseInt(value));
       }
@@ -61,51 +66,56 @@ const CreateOrder = () => {
   };
 
   const handleAddItem = () => {
-    const selectedItemData = availableItems.find((item) => item.name === selectedItem);
+    // Zaktualizuj tylko itemId
+    const selectedItemData = availableItems.find(
+      (item) => item.name === selectedItem
+    );
     if (selectedItemData) {
-      setOrderItems(prevItems => [
-        ...prevItems,
-        { id: selectedItemData.product_id, name: selectedItemData.name, quantity: quantity, price: selectedItemData.price }
-      ]);
+      setItemId(selectedItemData.product_id);
       setAddItemClicked(true);
     }
   };
 
-  const handleRemoveItem = (index) => {
-    setOrderItems(prevItems => prevItems.filter((_, i) => i !== index));
+  const handleRemoveItem = () => {
+    // Usuń wybrany przedmiot
+    setItemId(null);
+    setAddItemClicked(false);
   };
 
   const handleSendItemsList = () => {
+    // Przygotowanie danych do wysłania na serwer
+    const totalPrice = totalCost; // Całkowita cena
+
     const dataToSend = {
-      auth_id: customerId,
-      items: orderItems.map(item => ({
-        product_id: item.id,
-        quantity: item.quantity,
-        total_price: item.price * item.quantity
-      }))
+      customer_id: customerId, // Dodaj auth_id do wysyłanych danych
+      product_id: itemId, // Przekazanie itemId
+      quantity: quantity, // Przekazanie quantity
+      total_price: totalPrice, // Przekazanie total_price
     };
 
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(dataToSend),
     };
     console.log(JSON.stringify(dataToSend));
 
-    fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders', requestOptions)
-      .then(response => {
+    // Wysłanie danych na serwer
+    fetch("https://www.igorgawlowicz.pl/kegdelpol/order/orders", requestOptions)
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then(data => {
-        console.log('Response:', data);
+      .then((data) => {
+        console.log("Response:", data);
+        // Możesz obsłużyć odpowiedź serwera tutaj
       })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
       });
   };
 
@@ -115,6 +125,7 @@ const CreateOrder = () => {
       <div className="container mt-4">
         <h1>Create New Order</h1>
         <div className="mb-3">
+          {/* Sprawdź, czy availableItems nie jest puste */}
           {availableItems.length > 0 && (
             <DropDownInput
               label="Select Item"
@@ -130,11 +141,19 @@ const CreateOrder = () => {
           <p>Total: ${totalCost}</p>
           <SubmitButton buttonText="Add Item" onClick={handleAddItem} />
         </div>
-        {addItemClicked && (
+        {addItemClicked && itemId !== null && (
           <>
-            <ItemList items={orderItems} onRemoveItem={handleRemoveItem} />
+            {/* Przekazanie tylko itemId do ItemList */}
+            <ItemList
+              items={[{ id: itemId, name: selectedItem, quantity: quantity }]}
+              availableItems={availableItems}
+              onRemoveItem={handleRemoveItem}
+            />
 
-            <SubmitButton buttonText="Send Items List" onClick={handleSendItemsList} />
+            <SubmitButton
+              buttonText="Send Items List"
+              onClick={handleSendItemsList}
+            />
           </>
         )}
       </div>

@@ -28,6 +28,13 @@ class AuthService:
         hashed_password = generate_password_hash(password)
         return self.auth_repo.create_user(username, hashed_password, role)
 
+    def change_user_role(self, user_id, new_role):
+        user = self.auth_repo.get_user_by_id(user_id)
+        if user:
+            self.auth_repo.update_user_role(user_id, new_role)
+        else:
+            raise Exception("User not found")
+        
     def get_auth_id_from_token(self, token):
         try:
             data = jwt.decode(token, self.secret_key, algorithms=['HS256'])

@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, current_app
 from Service.employee_service import EmployeeService
 from Model.vehicle import Vehicle
 from Model.product import Product
+from fastapi.encoders import jsonable_encoder
 
 employee_microservice = Blueprint('employee_microservice', __name__)
 
@@ -36,9 +37,9 @@ def add_vehicle():
 
 @employee_microservice.route('/get_all_vehicles', methods=['GET'])
 def get_all_vehicles():
-    employee_microservice = employee_microservice.employee_service
+    employee_service = employee_microservice.employee_service
     try:
-        vehicles = employee_microservice.get_all_vehicles()
+        vehicles = employee_service.get_all_vehicles()
         return jsonable_encoder(vehicles), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 500
@@ -46,9 +47,9 @@ def get_all_vehicles():
     
 @employee_microservice.route('/get_all_products', methods=['GET'])
 def get_all_products():
-    employee_microservice = employee_microservice.employee_service
+    employee_service = employee_microservice.employee_service
     try:
-        products = employee_microservice.get_all_products()
+        products = employee_service.get_products()
         return jsonable_encoder(products), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 500

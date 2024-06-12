@@ -1,12 +1,14 @@
 from Repository.customer_repo import CustomerRepository
 from Repository.vehicle_repo import VehicleRepository
 from Repository.order_repo import OrderRepository
+from Repository.order_detail_repo import OrderDetailRepository
 
 class OrderService:
     def __init__(self, db):
         self.customer_repo = CustomerRepository(db)
         self.vehicle_repo = VehicleRepository(db)
         self.order_repo = OrderRepository(db)
+        self.order_detail_repo = OrderDetailRepository(db)
 
     def add_order(self, new_order):
         self.order_repo.add_order(new_order)
@@ -25,18 +27,18 @@ class OrderService:
         if not existing_order:
             raise ValueError("Order not found")
 
-        existing_order.client_id = data.get('client_id', existing_order.client_id)
-        existing_order.product_id = data.get('product_id', existing_order.product_id)
-        existing_order.quantity = data.get('quantity', existing_order.quantity)
-        existing_order.total_price = data.get('total_price', existing_order.total_price)
+        existing_order.status = data.get('status', existing_order.status)
 
         self.order_repo.update_order(existing_order)
+        
+    def get_order(self):
+        return self.order_repo.get_order()
 
     def order_details(self, order_id):
         return self.order_detail_repo.get_order_details_by_order_id(order_id)
     
-    def get_order(self):
-        return self.order_detail_repo.get_order()
+    def get_order_details(self, order_id):
+        return self.order_detail_repo.get_order_details(order_id)
 
     def modify_order(self, order_id, order_data):
         self.order_repo.modify_order(order_id, order_data)

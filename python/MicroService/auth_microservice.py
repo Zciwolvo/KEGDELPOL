@@ -40,6 +40,21 @@ def register():
     user = auth_service.register_user(username, password, role)
     return jsonify({'message': 'User registered successfully'}), 201
 
+@auth_microservice.route('/modify/<int:user_id>', methods=['PUT'])
+def change_role(user_id):
+    auth_service = auth_microservice.auth_service
+    data = request.get_json()
+    new_role = data.get('role')
+
+    if not new_role:
+        return jsonify({'message': 'Role is missing'}), 400
+
+    try:
+        auth_service.change_user_role(user_id, new_role)
+        return jsonify({'message': 'Role updated successfully'}), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
 @auth_microservice.route('/check_authorization', methods=['POST'])
 def check_authorization():
     auth_service = auth_microservice.auth_service

@@ -9,7 +9,9 @@ class VehicleRepository:
         self.db.session.commit()
 
     def get_all_vehicles(self):
-        with self.Session() as session:
-            return session.query(Vehicle.vehicle_id, Vehicle.type, Vehicle.capacity, Vehicle.registration_info).all()
+        vehicles = self.db.session.query(
+            Vehicle.vehicle_id, Vehicle.type, Vehicle.capacity, Vehicle.registration_info
+        ).all()
+        return [dict(vehicle._asdict()) for vehicle in vehicles]
         
         
