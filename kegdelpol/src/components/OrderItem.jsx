@@ -22,7 +22,7 @@ const OrderItem = ({ order }) => {
       body: JSON.stringify({ status: newStatus }),
     };
 
-    fetch(`https://www.igorgawlowicz.pl/kegdelpol/orders/${order.order_id}`, requestOptions)
+    fetch(`https://www.igorgawlowicz.pl/kegdelpol/order/orders/${order.order_id}`, requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
