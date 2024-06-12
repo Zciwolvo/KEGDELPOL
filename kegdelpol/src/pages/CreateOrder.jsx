@@ -10,24 +10,23 @@ const CreateOrder = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [totalCost, setTotalCost] = useState(0);
-  const [itemId, setItemId] = useState(null); // Przechowuje tylko id wybranego przedmiotu
+  const [itemId, setItemId] = useState(null);
   const [addItemClicked, setAddItemClicked] = useState(false);
   const [availableItems, setAvailableItems] = useState([]);
-  const [customerId, setCustomerId] = useState(null); // Przechowuje id klienta
+  const [customerId, setCustomerId] = useState(null);
+  const [orderItems, setOrderItems] = useState([]);
 
   useEffect(() => {
-    // Pobranie customer_id z local storage
     const customerIdFromStorage = localStorage.getItem('auth_id');
     setCustomerId(customerIdFromStorage);
-  
-    // Pobranie danych z serwera z uwzględnieniem tokena JWT
-    const token = localStorage.getItem('jwt'); // Pobranie tokena JWT z localStorage
-  
+
+    const token = localStorage.getItem('jwt');
+
     fetch('https://www.igorgawlowicz.pl/kegdelpol/employee/get_all_products', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` // Dodanie tokena do nagłówka
+        'Authorization': `Bearer ${token}`
       }
     })
     .then(response => {
@@ -41,21 +40,18 @@ const CreateOrder = () => {
     })
     .catch(error => console.error('Error fetching items:', error));
   }, []);
-  
 
   const handleItemChange = (item) => {
     const selectedItemData = availableItems.find((i) => i.name === item);
     if (selectedItemData) {
       setSelectedItem(item);
-      setItemId(selectedItemData.product_id); // Ustawienie itemId na product_id
-      // Aktualizacja ceny tylko jeśli selectedItemData istnieje
+      setItemId(selectedItemData.product_id);
       setTotalCost(selectedItemData.price * quantity);
     }
   };
 
   const handleQuantityChange = (value) => {
     setQuantity(parseInt(value));
-    // Sprawdź, czy itemId nie jest null przed aktualizacją ceny
     if (itemId !== null) {
       const selectedItemData = availableItems.find((i) => i.product_id === itemId);
       if (selectedItemData) {
@@ -65,29 +61,28 @@ const CreateOrder = () => {
   };
 
   const handleAddItem = () => {
-    // Zaktualizuj tylko itemId
     const selectedItemData = availableItems.find((item) => item.name === selectedItem);
     if (selectedItemData) {
-      setItemId(selectedItemData.product_id);
+      setOrderItems(prevItems => [
+        ...prevItems,
+        { id: selectedItemData.product_id, name: selectedItemData.name, quantity: quantity, price: selectedItemData.price }
+      ]);
       setAddItemClicked(true);
     }
   };
 
-  const handleRemoveItem = () => {
-    // Usuń wybrany przedmiot
-    setItemId(null);
-    setAddItemClicked(false);
+  const handleRemoveItem = (index) => {
+    setOrderItems(prevItems => prevItems.filter((_, i) => i !== index));
   };
 
   const handleSendItemsList = () => {
-    // Przygotowanie danych do wysłania na serwer
-    const totalPrice = totalCost; // Całkowita cena
-
     const dataToSend = {
-      auth_id: customerId, // Dodaj auth_id do wysyłanych danych
-      product_id: itemId, // Przekazanie itemId
-      quantity: quantity, // Przekazanie quantity
-      total_price: totalPrice // Przekazanie total_price
+      auth_id: customerId,
+      items: orderItems.map(item => ({
+        product_id: item.id,
+        quantity: item.quantity,
+        total_price: item.price * item.quantity
+      }))
     };
 
     const requestOptions = {
@@ -99,7 +94,6 @@ const CreateOrder = () => {
     };
     console.log(JSON.stringify(dataToSend));
 
-    // Wysłanie danych na serwer
     fetch('https://www.igorgawlowicz.pl/kegdelpol/order/orders', requestOptions)
       .then(response => {
         if (!response.ok) {
@@ -109,7 +103,6 @@ const CreateOrder = () => {
       })
       .then(data => {
         console.log('Response:', data);
-        // Możesz obsłużyć odpowiedź serwera tutaj
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -122,7 +115,6 @@ const CreateOrder = () => {
       <div className="container mt-4">
         <h1>Create New Order</h1>
         <div className="mb-3">
-          {/* Sprawdź, czy availableItems nie jest puste */}
           {availableItems.length > 0 && (
             <DropDownInput
               label="Select Item"
@@ -138,10 +130,9 @@ const CreateOrder = () => {
           <p>Total: ${totalCost}</p>
           <SubmitButton buttonText="Add Item" onClick={handleAddItem} />
         </div>
-        {addItemClicked && itemId !== null && (
+        {addItemClicked && (
           <>
-            {/* Przekazanie tylko itemId do ItemList */}
-            <ItemList items={[{ id: itemId, name: selectedItem, quantity: quantity }]} availableItems={availableItems} onRemoveItem={handleRemoveItem} />
+            <ItemList items={orderItems} onRemoveItem={handleRemoveItem} />
 
             <SubmitButton buttonText="Send Items List" onClick={handleSendItemsList} />
           </>
