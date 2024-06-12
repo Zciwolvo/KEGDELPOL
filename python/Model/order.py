@@ -12,7 +12,7 @@ class Order(Base):
     __tablename__ = 'order'
 
     order_id = Column(Integer, primary_key=True)
-    customer_id = Column(Integer, ForeignKey('customer.customer_id'))
+    customer_id = Column(Integer)
     order_date = Column(DateTime)
     delivery_date = Column(DateTime)
     status = Column(String)

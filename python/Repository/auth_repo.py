@@ -19,4 +19,18 @@ class AuthRepository:
 
     def get_all_users(self):
         with self.Session() as session:
-            return session.query(Authorization.auth_id, Authorization.login, Authorization.role).all()
+            users = session.query(Authorization.auth_id, Authorization.login, Authorization.role).all()
+            return [dict(user._asdict()) for user in users]
+        
+    def get_user_by_id(self, user_id):
+        with self.Session() as session:
+            return session.query(Authorization).filter_by(auth_id=user_id).first()
+
+    def update_user_role(self, user_id, new_role):
+        with self.Session() as session:
+            user = session.query(Authorization).filter_by(auth_id=user_id).first()
+            if user:
+                user.role = new_role
+                session.commit()
+            else:
+                raise Exception("User not found")
