@@ -43,7 +43,7 @@ const AssignTheDriverUI = () => {
         console.error("There was a problem with the fetch operation:", error);
       });
   };
-  
+
   const fetchDrivers = () => {
     const token = localStorage.getItem('jwt'); // Pobranie tokena JWT z localStorage
     fetch("https://www.igorgawlowicz.pl/kegdelpol/driver/get_all_drivers", {
@@ -61,8 +61,8 @@ const AssignTheDriverUI = () => {
         console.log("Drivers:", data);
         // Assuming data is an array of drivers
         const formattedDrivers = data.map((driver) => ({
-          label: driver.name,
-          value: driver.driver_id,
+          label: driver.license_info, // Używamy license_info jako label
+          value: driver.employee_id, // Używamy employee_id jako value
         }));
         setDriversData(formattedDrivers);
       })
@@ -70,7 +70,6 @@ const AssignTheDriverUI = () => {
         console.error("There was a problem with the fetch operation:", error);
       });
   };
-  
 
   const handleDriverChange = (value) => {
     setSelectedDriver(value);
