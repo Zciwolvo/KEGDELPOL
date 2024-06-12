@@ -54,17 +54,18 @@ const DriverUI = () => {
   return (
     <div className="driver-ui">
       <Navbar />
-      <Container className="contet">
-        <div className="item-2">
-          <LogoutButton className="logout-button" onLogout={handleLogout} />
-        </div>
+      <div className="container">
+        <div className="driver-flex">
+              <div className="action">Choose your action</div>
+              <LogoutButton className="logout-button" onLogout={handleLogout} />
+          </div>
         <DropDownInput
           label="Select Order"
           options={ordersData.map((order) => order.order_id.toString())}
           onChange={handleOrderChange}
         />
         <OrderList orders={filteredOrders} />
-      </Container>
+      </div>
       <Footer />
     </div>
   );

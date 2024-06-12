@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import UserSearchInput from '../Components/UserSearchInput';
 import DropDownInput from '../Components/DropDownInputDriver';
 import ButtonSelect from '../Components/ButtonsOrders';
+import Quote from '../Components/Quote';
 
 const ReadOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -102,9 +103,11 @@ const ReadOrders = () => {
   });
 
   return (
-    <div className="container">
+    <div className="read-orders-container">
       <Navbar />
-      <h1 className="text-center my-4">Orders List</h1>
+      <div className="container">
+      <Quote quoteText="Did you know that The economy of the United States benefits from beer sales?" />
+      <div className="heading"><span>ORDERS</span> LIST</div>
       <UserSearchInput
         value={searchTerm}
         onChange={handleSearchChange}
@@ -128,6 +131,8 @@ const ReadOrders = () => {
       ))}
       <Footer />
     </div>
+    </div>
+    
   );
 };
 

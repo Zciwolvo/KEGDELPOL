@@ -16,17 +16,16 @@ const ClientUI = () => {
     navigate("/login");
   };
   return (
-    <div className="client-ui-container d-flex flex-column min-vh-100">
+    <div className="client-ui">
       <Navbar />
-      <div className="content-client-ui d-flex flex-column justify-content-center align-items-center flex-grow-1">
+      <div className="client-grid-elements">
+      
+      <div className="item-1">Choose your action</div>
       <div className="item-2"><LogoutButton className="logout-button" onLogout={handleLogout}/></div>
-        <div className="choose-action-client text-center font-weight-bold">
-          Choose your action
-        </div>
-        <div className="centered-images-client d-flex justify-content-center flex-wrap gap-5">
-          <MoveTo imageSrc="/shoppingcart.svg" title="Create orders" to="/CreateOrder" />
-          <MoveTo imageSrc="/order.svg" title="Orders" to="/ReadOrders" />
-        </div>
+      <div className="item-3"><MoveTo imageSrc="/shoppingcart.svg" title="Create orders" to="/CreateOrder" /></div>
+      <div className="item-4"><MoveTo imageSrc="/order.svg" title="Orders" to="/ReadOrders" /></div>
+      <div className="item-5"><MoveTo imageSrc="/box-item.svg" title="Add New Item" to ="/AddNewItem"/></div>
+        
       </div>
       <Footer />
     </div>

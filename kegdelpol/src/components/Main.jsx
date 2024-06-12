@@ -104,9 +104,9 @@ const Main = () => {
   return (
     <div className="page-container">
       <Navbar />
-      <div className="content-wrap">
+      <div className="container">
         <div className="main-container">
-          <h1>LOG IN TO YOUR ACCOUNT</h1>
+          <div className="heading"><span>LOG</span> IN TO YOUR ACCOUNT</div>
           <form className="login-form">
             <div className="input-container">
               <label htmlFor="login">Login</label>

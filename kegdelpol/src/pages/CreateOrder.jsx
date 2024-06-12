@@ -5,6 +5,7 @@ import DropDownInput from "../Components/DropDownInputDriver";
 import SubmitButton from "../Components/SubmitButton";
 import InputQuantity from "../Components/InputQuantity";
 import ItemList from "../Components/ItemList";
+import Quote from "../Components/Quote";
 
 const CreateOrder = () => {
   const [selectedItem, setSelectedItem] = useState("");
@@ -120,12 +121,14 @@ const CreateOrder = () => {
   };
 
   return (
-    <div>
+    <div className="create-order-container">
       <Navbar />
-      <div className="container mt-4">
-        <h1>Create New Order</h1>
-        <div className="mb-3">
+      <div className="container">
+        <Quote quoteText="Did you know that Germany collects over 1,000 tons of trash after the Oktoberfest?" />
+        <div className="heading"><span>CREATE</span> NEW ORDER</div>
+        
           {/* Sprawdź, czy availableItems nie jest puste */}
+          <div className="order-flexbox">
           {availableItems.length > 0 && (
             <DropDownInput
               label="Select Item"
@@ -140,9 +143,10 @@ const CreateOrder = () => {
           />
           <p>Total: ${totalCost}</p>
           <SubmitButton buttonText="Add Item" onClick={handleAddItem} />
-        </div>
+          </div>
         {addItemClicked && itemId !== null && (
           <>
+          <div className="price-flexbox">
             {/* Przekazanie tylko itemId do ItemList */}
             <ItemList
               items={[{ id: itemId, name: selectedItem, quantity: quantity }]}
@@ -150,11 +154,15 @@ const CreateOrder = () => {
               onRemoveItem={handleRemoveItem}
             />
 
-            <SubmitButton
+            <SubmitButton 
+              className="submit-flex"
               buttonText="Send Items List"
               onClick={handleSendItemsList}
             />
+            
+          </div>
           </>
+          
         )}
       </div>
       <Footer />
