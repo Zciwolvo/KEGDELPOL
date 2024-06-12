@@ -73,8 +73,9 @@ const Page = () => {
         return response.json();
       })
       .then(data => {
+        console.log("Fetched vehicles:", data);
         setTableData(data);
-        setTableColumns(['Id', 'VehicleType', 'Capacity', 'Registration']);
+        setTableColumns(['Capacity', 'Registration', 'Type', 'Id']);
         console.log(data);
       })
       .catch(error => console.error('Error fetching vehicles:', error));

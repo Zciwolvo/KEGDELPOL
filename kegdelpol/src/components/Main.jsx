@@ -9,9 +9,12 @@ const Main = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
 
     // Logowanie użytkownika
     const loginResponse = await fetch(
@@ -27,6 +30,7 @@ const Main = () => {
 
     if (!loginResponse.ok) {
       console.error("Login failed");
+      setErrorMessage('Invalid username or password');
       return;
     }
 
@@ -100,6 +104,7 @@ const Main = () => {
                 required
               />
             </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
             <ConfirmButton buttonText="Sign in" onClick={handleLogin} />
           </form>
         </div>

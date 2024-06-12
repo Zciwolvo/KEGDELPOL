@@ -1,4 +1,3 @@
-import React from 'react';
 import './InputField.css';
 
 const InputField = ({ label, id, type = "text", placeholder, value, onChange }) => {
